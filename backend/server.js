@@ -18,7 +18,7 @@ const connect = () => {
 
 //error handling
 app.use((err, req, res, next) => {
-    const status = err.status || 5000;
+    const status = err.status || process.env.PORT
     const message = err.message || "somthing went wrong";
 
     return res.status(status).json({
@@ -34,7 +34,7 @@ app.use((err, req, res, next) => {
 
 
 //port connecting
-app.listen(5000, ()=>{
+app.listen(process.env.PORT, ()=>{
     connect();
     console.log("port is running");
 })
