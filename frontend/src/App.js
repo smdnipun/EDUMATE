@@ -1,11 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-import { Common } from './components/common';
+import React from 'react';
+import {BrowserRouter,Route,Routes} from 'react-router-dom';
+import { Navbar } from './components/common/Navbar';
+import { Footer } from './components/common/footer';
 
 function App() {
   return (
     <div className="App">
-     <Common/>
+     <Navbar/>
+     <BrowserRouter>
+        <Routes>
+            {/* admin */}
+
+            {/* client */}
+
+        </Routes>
+     </BrowserRouter>
+     <Footer/>
     </div>
   );
 }
