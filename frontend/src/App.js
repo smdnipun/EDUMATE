@@ -3,23 +3,31 @@ import {BrowserRouter,Route,Routes} from 'react-router-dom';
 import { Navbar } from './components/common/Navbar';
 import { Footer } from './components/common/footer';
 import { UploadNote } from './components/client/teacher/UploadNote.js';
+import { UploadLink } from './components/client/teacher/UploadLink.js';
+import { ViewLinks } from './components/client/teacher/viewLinks';
+
 
 function App() {
   return (
-    <div className="App">
-     <Navbar/>
-     <UploadNote/>
-     <BrowserRouter>
+    <div className='App'>
+      <Navbar />
+      {/* <UploadNote/> */}
+      <BrowserRouter>
         <Routes>
-            {/* admin */}
+          {/* admin */}
 
-            {/* client */}
+          {/* client */}
 
+          {/* teacher */}
+          <Route exact path='/addlink' element={<UploadLink />} />
+          <Route exact path='/viewlink' element={<ViewLinks />} />
+
+          {/* student */}
         </Routes>
-     </BrowserRouter>
-     {/* <Footer/> */}
+      </BrowserRouter>
+      {/* <Footer/> */}
     </div>
-  );
+  )
 }
 
 export default App;
