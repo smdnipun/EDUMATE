@@ -2,6 +2,7 @@ import exprees from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import studentanswersRoutes from './router/StudentAnswers.router.js';
+import linkRoutes from './router/Link.routes.js';
 
 const app = exprees();
 dotenv.config();
@@ -35,6 +36,7 @@ app.use((err, req, res, next) => {
 app.use(exprees.json());
 
 app.use('/studentanswers', studentanswersRoutes);
+app.use('/link',linkRoutes);
 
 
 //port connecting
