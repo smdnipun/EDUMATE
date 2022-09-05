@@ -1,2 +1,2 @@
 # EDUMATE
-Education Website fro Student
+Education Website for Student
