@@ -7,26 +7,35 @@ import { StudentAnswersUpload } from './components/client/student/StudentAnswers
 import Home from './components/client/Home';
 import { ExamTimeTable } from './components/client/student/examtimetable/ExamTimeTable';
 import { FeedBack } from './components/client/student/feedback/FeedBack';
+import { UploadLink } from './components/client/teacher/UploadLink.js';
+import { ViewLinks } from './components/client/teacher/viewLinks';
 
 function App() {
   return (
     <div className="App">
-     <Navbar/>
-     {/* <Home/> */}
-     <BrowserRouter>
+      <Navbar />
+      {/* <UploadNote/> */}
+      <BrowserRouter>
+
         <Routes>
-            {/* admin */}
+          {/* admin */}
 
             {/* client */}
             <Route exact path={'/studentanswersheetUpload'} element={<StudentAnswersUpload/>}/>
             <Route exact path ={'/examtimetable'} element={<ExamTimeTable/>}/>
             <Route exact path={'/feedback'} element={<FeedBack/>}/>
+          {/* client */}
 
+          {/* teacher */}
+          <Route exact path='/addlink' element={<UploadLink />} />
+          <Route exact path='/viewlink' element={<ViewLinks />} />
+
+          {/* student */}
         </Routes>
-     </BrowserRouter>
-     {/* <Footer/> */}
+      </BrowserRouter>
+      {/* <Footer/> */}
     </div>
-  );
+  )
 }
 
 export default App;
