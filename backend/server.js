@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import studentanswersRoutes from './router/StudentAnswers.router.js';
 import linkRoutes from './router/Link.routes.js';
+import streamrouter from './router/Streams.routes.js';
+import subjectrouter from './router/Subject.routes.js';
 
 const app = exprees();
 dotenv.config();
@@ -37,7 +39,8 @@ app.use(exprees.json());
 
 app.use('/studentanswers', studentanswersRoutes);
 app.use('/link',linkRoutes);
-
+app.use('/stream', streamrouter);
+app.use('/subject', subjectrouter);
 
 //port connecting
 app.listen(process.env.PORT, ()=>{

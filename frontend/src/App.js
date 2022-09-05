@@ -9,6 +9,10 @@ import { ExamTimeTable } from './components/client/student/examtimetable/ExamTim
 import { FeedBack } from './components/client/student/feedback/FeedBack';
 import { UploadLink } from './components/client/teacher/UploadLink.js';
 import { ViewLinks } from './components/client/teacher/viewLinks';
+import AddStreams from './components/admin/streams/AddStreams';
+import AddSubjects from './components/admin/streams/AddSubjects';
+import ViewStreams from './components/admin/streams/ViewStreams';
+import ViewSubjects from './components/admin/streams/ViewSubjects';
 
 function App() {
   return (
@@ -19,12 +23,15 @@ function App() {
 
         <Routes>
           {/* admin */}
+            <Route exact path={'/addstream'} element={<AddStreams />} />
+            <Route exact path={'/addsubject'} element={<AddSubjects />} />
+            <Route exact path={'/getstream'} element={<ViewStreams />} />
+            <Route exact path={'/getsubject'} element={<ViewSubjects />} />
 
             {/* client */}
             <Route exact path={'/studentanswersheetUpload'} element={<StudentAnswersUpload/>}/>
             <Route exact path ={'/examtimetable'} element={<ExamTimeTable/>}/>
             <Route exact path={'/feedback'} element={<FeedBack/>}/>
-          {/* client */}
 
           {/* teacher */}
           <Route exact path='/addlink' element={<UploadLink />} />
@@ -33,7 +40,6 @@ function App() {
           {/* student */}
         </Routes>
       </BrowserRouter>
-      {/* <Footer/> */}
     </div>
   )
 }
