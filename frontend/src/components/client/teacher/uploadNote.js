@@ -1,5 +1,5 @@
 import React from 'react'
-import './uploadNote.css'
+
 
 export const UploadNote = () => {
 
@@ -10,43 +10,42 @@ export const UploadNote = () => {
   return (
     <div className='container mt-5'>
       <div className='mt-5 pt-4'>
-       <h1 className='text-center mt-5'>Bugs</h1>
-       <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2'>
-       <div className='mx-5 mt-5'>
-          <h1 className='mr-5'>Upload file</h1>
-          <button className='mt-5'>Upload</button>
-        </div>
-        <div className='mx-5 my-4' style={hr}/>
-        <div className='mx-5 mt-5'>
-        <form>
-          <select class='form-control'>
-                <option>Default select</option>
+        <h1 className='text-center mt-5'>Bugs</h1>
+        <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2'>
+          <div className='mx-5 mt-5'>
+            <h1 className='mr-5'>Upload file</h1>
+            <input type='file' id='myFile' name='filename' />
+          </div>
+          <div className='mx-5 my-4' style={hr} />
+          <div className='mx-5 mt-5'>
+            <form>
+              <select className='form-control'>
+                <option>Select a subject</option>
               </select>
               <br />
               <br />
 
-              <div class='form-group'>
+              <div className='form-group'>
                 <input
                   type='text'
                   class='form-control'
                   id='formGroupExampleInput'
-                  placeholder='Example input'
+                  placeholder='Lesson name'
                 />
               </div>
               <br />
               <br />
-              <div class='form-group'>
+              <div className='form-group'>
                 <input
-                  type='text'
+                  type='number'
                   class='form-control'
                   id='formGroupExampleInput2'
-                  placeholder='Another input'
+                  placeholder='Grade'
                 />
               </div>
             </form>
-         </div>
-
-      </div>
+          </div>
+        </div>
       </div>
     </div>
   )

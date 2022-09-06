@@ -2,9 +2,12 @@ import exprees from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
-import studentanswersRoutes from './router/StudentAnswers.router.js'
 import authRoute from './router/auth.js'
 import userRoute from './router/user.routes.js'
+import studentanswersRoutes from './router/StudentAnswers.router.js'
+import linkRoutes from './router/Link.routes.js'
+import streamrouter from './router/Streams.routes.js'
+import subjectrouter from './router/Subject.routes.js'
 
 const app = exprees()
 dotenv.config()
@@ -45,6 +48,9 @@ app.use(exprees.json())
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)
 app.use('/studentanswers', studentanswersRoutes)
+app.use('/link', linkRoutes)
+app.use('/stream', streamrouter)
+app.use('/subject', subjectrouter)
 
 //port connecting
 app.listen(process.env.PORT, () => {

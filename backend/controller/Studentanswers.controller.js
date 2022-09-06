@@ -16,7 +16,11 @@ export const CreateStudentAnswers = async (req, res, next) => {
 };
 
 //Update Industry
+<<<<<<< HEAD
         // next(err);
+=======
+       
+>>>>>>> 75a637e2daf099b11a82a9d38ed0449efe058f92
 export const UpdateStudentAnswers = async(req, res, next) => {
     try {
             const updaStudentAnswers = await studentanswers.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
