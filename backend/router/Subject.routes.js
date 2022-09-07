@@ -1,5 +1,5 @@
 import express from 'express';
-import { createSubject, updateSubject, deleteSubject, getSubjects } from '../controller/Subject.controler.js';
+import { createSubject, updateSubject, deleteSubject, getSubjects, getSubjectById } from '../controller/Subject.controler.js';
 
 const subjectrouter = express.Router();
 
@@ -14,5 +14,8 @@ subjectrouter.delete('/:id', deleteSubject)
 
 //GET ALL
 subjectrouter.get('/', getSubjects)
+
+//get by id
+subjectrouter.get('/get/:id', getSubjectById)
 
 export default subjectrouter;

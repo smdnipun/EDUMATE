@@ -1,5 +1,5 @@
 import express from 'express';
-import { createStreams, updateStream, deleteStream, getStreams } from '../controller/Stream.controler.js';
+import { createStreams, updateStream, deleteStream, getStreams, getStreamById } from '../controller/Stream.controler.js';
 
 const streamrouter = express.Router();
 
@@ -14,6 +14,9 @@ streamrouter.delete('/:id', deleteStream)
 
 //GET ALL
 streamrouter.get('/', getStreams)
+
+//GET BY ID
+streamrouter.get('/get/:id', getStreamById)
 
 export default streamrouter;
 

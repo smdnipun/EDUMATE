@@ -27,6 +27,16 @@ export const updateSubject = async (req, res, next) => {
     }
   }
 
+  //get stream by id
+  export const getSubjectById = async (req, res, next) => {
+    try {
+      const subject = await SubjectModel.findById(req.params.id)
+      res.status(200).json(subject)
+    } catch (err) {
+      next(err)
+    }
+  }
+
   //delete stream
 
   export const deleteSubject = async (req, res, next) => {
