@@ -9,6 +9,7 @@ import { ExamTimeTable } from './components/client/student/examtimetable/ExamTim
 import { FeedBack } from './components/client/student/feedback/FeedBack'
 import { UploadLink } from './components/client/teacher/UploadLink.js'
 import { ViewLinks } from './components/client/teacher/viewLinks'
+import { Updatelink } from './components/client/teacher/Updatelink'
 import AddStreams from './components/admin/streams/AddStreams'
 import AddSubjects from './components/admin/streams/AddSubjects'
 import ViewStreams from './components/admin/streams/ViewStreams'
@@ -43,7 +44,7 @@ function App() {
           {/* teacher */}
           <Route exact path='/addlink' element={<UploadLink />} />
           <Route exact path='/viewlink' element={<ViewLinks />} />
-
+          <Route exact path='/updatelink/:id' element={<Updatelink />} />
           {/* student */}
         </Routes>
       </BrowserRouter>
