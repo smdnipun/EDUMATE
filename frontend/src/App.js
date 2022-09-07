@@ -14,6 +14,7 @@ import AddStreams from './components/admin/streams/AddStreams'
 import AddSubjects from './components/admin/streams/AddSubjects'
 import ViewStreams from './components/admin/streams/ViewStreams'
 import ViewSubjects from './components/admin/streams/ViewSubjects'
+import Login from './components/common/login'
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
       {/* <UploadNote/> */}
       <BrowserRouter>
         <Routes>
+          {/*common*/}
+          <Route exact path={'/login'} element={<Login />} />
+
           {/* admin */}
           <Route exact path={'/addstream'} element={<AddStreams />} />
           <Route exact path={'/addsubject'} element={<AddSubjects />} />
