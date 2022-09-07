@@ -13,6 +13,9 @@ import AddStreams from './components/admin/streams/AddStreams';
 import AddSubjects from './components/admin/streams/AddSubjects';
 import ViewStreams from './components/admin/streams/ViewStreams';
 import ViewSubjects from './components/admin/streams/ViewSubjects';
+import UpdateStreams from './components/admin/streams/UpdateStreams';
+import UpdateSubjects from './components/admin/streams/UpdateSubjects';
+import AdminHome from './components/admin/AdminHome';
 
 function App() {
   return (
@@ -23,10 +26,14 @@ function App() {
 
         <Routes>
           {/* admin */}
+            <Route exact path={'/adminhome'} element={<AdminHome />} />
             <Route exact path={'/addstream'} element={<AddStreams />} />
             <Route exact path={'/addsubject'} element={<AddSubjects />} />
             <Route exact path={'/getstream'} element={<ViewStreams />} />
             <Route exact path={'/getsubject'} element={<ViewSubjects />} />
+            <Route exact path={'/editstrm/:_id'} element={<UpdateStreams />} />
+            <Route exact path= {'editsubj/:_id'} element={<UpdateSubjects />}></Route>
+
 
             {/* client */}
             <Route exact path={'/studentanswersheetUpload'} element={<StudentAnswersUpload/>}/>
