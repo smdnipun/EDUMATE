@@ -14,7 +14,7 @@ import AddStreams from './components/admin/streams/AddStreams'
 import AddSubjects from './components/admin/streams/AddSubjects'
 import ViewStreams from './components/admin/streams/ViewStreams'
 import ViewSubjects from './components/admin/streams/ViewSubjects'
-import Login from './components/common/login'
+// import Login from './components/common/login'
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/*common*/}
-          <Route exact path={'/login'} element={<Login />} />
+          {/* <Route exact path={'/login'} element={<Login />} /> */}
 
           {/* admin */}
           <Route exact path={'/addstream'} element={<AddStreams />} />
@@ -32,12 +32,8 @@ function App() {
           <Route exact path={'/getstream'} element={<ViewStreams />} />
           <Route exact path={'/getsubject'} element={<ViewSubjects />} />
 
-          {/* client */}
-          <Route
-            exact
-            path={'/studentanswersheetUpload'}
-            element={<StudentAnswersUpload />}
-          />
+          {/* student  */}
+          <Route exact path={'/studentanswersheetUpload'} element={<StudentAnswersUpload />}/>
           <Route exact path={'/examtimetable'} element={<ExamTimeTable />} />
           <Route exact path={'/feedback'} element={<FeedBack />} />
 
@@ -45,7 +41,7 @@ function App() {
           <Route exact path='/addlink' element={<UploadLink />} />
           <Route exact path='/viewlink' element={<ViewLinks />} />
           <Route exact path='/updatelink/:id' element={<Updatelink />} />
-          {/* student */}
+  
         </Routes>
       </BrowserRouter>
     </div>

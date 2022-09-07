@@ -1,12 +1,22 @@
 import studentanswers from '../model/Studentanswers.model.js';
+import multer from 'multer';
 
+//multer and file location
+export const Upload = multer({storage : multer.diskStorage({
+    destination : (req, file, callback) => {
+        callback(null, 'StudentAnswers')
+    },
+    filename : (req, file, callback) => {
+        callback(null, file.originalname)
+    },
+})});
 
 //Create Industry
 export const CreateStudentAnswers = async (req, res, next) => {
     try {
         const newStudentAnswers = new studentanswers({ 
             name : req.body.name,
-            // image: req.file.originalname,
+            image: req.file.originalname,
          });
         await newStudentAnswers.save()
         res.status(200).json("Student Answers has been created.....");
