@@ -18,7 +18,7 @@ export const register = async (req, res, next) => {
     })
 
     await newUser.save()
-    res.status(200).send('User has been created')
+    res.status(200).json('User has been created')
   } catch (err) {
     next(err)
   }
@@ -47,7 +47,7 @@ export const login = async (req, res, next) => {
         httpOnly: true,
       })
       .status(200)
-      .json({ ...otherDetails })
+      .json({details: { ...otherDetails }, isAdmin})
   } catch (err) {
     next(err)
   }
