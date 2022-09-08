@@ -13,17 +13,25 @@ import AddStreams from './components/admin/streams/AddStreams'
 import AddSubjects from './components/admin/streams/AddSubjects'
 import ViewStreams from './components/admin/streams/ViewStreams'
 import ViewSubjects from './components/admin/streams/ViewSubjects'
-import Login from './components/common/login'
+import Main from './components/common/userReg/Main.js'
+import SignIn from './components/common/userReg/SignIn.js'
+import SignUp from './components/common/userReg/SignUp.js'
+import Profile from './components/common/Profile/Profile.js'
+import Update from './components/common/Profile/Update'
 
 function App() {
   return (
     <div className='App'>
-      <Navbar />
+      {/* <Navbar /> */}
       {/* <UploadNote/> */}
       <BrowserRouter>
         <Routes>
           {/*common*/}
-          <Route exact path={'/login'} element={<Login />} />
+          <Route exact path={'/main'} element={<Main />} />
+          <Route exact path={'/login'} element={<SignIn />} />
+          <Route exact path={'/register'} element={<SignUp />} />
+          <Route exact path={'/profile'} element={<Profile />} />
+          <Route exact path={'/updateProfile'} element={<Update />} />
 
           {/* admin */}
           <Route exact path={'/addstream'} element={<AddStreams />} />

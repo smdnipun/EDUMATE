@@ -43,7 +43,6 @@ export const StudentAnswersUpload = () => {
                  </div>
                </form>
             </div>
-   
          </div>
          </div>
        </div>

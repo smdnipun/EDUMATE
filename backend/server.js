@@ -8,6 +8,7 @@ import studentanswersRoutes from './router/StudentAnswers.router.js'
 import linkRoutes from './router/Link.routes.js'
 import streamrouter from './router/Streams.routes.js'
 import subjectrouter from './router/Subject.routes.js'
+import cors from 'cors'
 
 const app = exprees()
 dotenv.config()
@@ -30,19 +31,20 @@ mongoose.connection.on('disconnected', () => {
 
 //error handling
 app.use((err, req, res, next) => {
-  const status = err.status || process.env.PORT
-  const message = err.message || 'somthing went wrong'
-
-  return res.status(status).json({
+  const errorStatus = err.status || 5000
+  const errorMessage = err.message || 'Something went wrong!!!'
+  return res.status(errorStatus).json({
     success: false,
-    message: message,
-    status: status,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
   })
 })
 
 //middleware
 app.use(cookieParser())
 app.use(exprees.json())
+app.use(cors())
 
 //admin pass - admin123
 app.use('/api/auth', authRoute)
