@@ -4,11 +4,12 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import authRoute from './router/auth.js'
 import userRoute from './router/user.routes.js'
-import studentanswersRoutes from './router/StudentAnswers.router.js'
+import studentanswersRoutes from './router/StudentAnswers.routes.js'
 import linkRoutes from './router/Link.routes.js'
 import streamrouter from './router/Streams.routes.js'
 import subjectrouter from './router/Subject.routes.js'
 import cors from 'cors'
+import subjectfeedback from './router/subjectfeedback.routes.js'
 
 const app = exprees()
 dotenv.config()
@@ -53,6 +54,9 @@ app.use('/studentanswers', studentanswersRoutes)
 app.use('/link', linkRoutes)
 app.use('/stream', streamrouter)
 app.use('/subject', subjectrouter)
+app.use('/subjectfeedback', subjectfeedback)
+
+app.use('/StudentAnswers', exprees.static('StudentAnswers'));
 
 //port connecting
 app.listen(process.env.PORT, () => {
