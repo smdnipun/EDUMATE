@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import axios from 'axios'
+import { NavLink } from 'react-router-dom'
 
 export const ViewLinks = () => {
     const [data, setData] = useState([])
@@ -19,6 +20,11 @@ export const ViewLinks = () => {
             console.log(res.data)
         })
     }
+
+    const deleteLink = (id) => {
+        axios.delete(`link/${id}`)
+    }
+
     useEffect(() => {
         loadData();
     },[])
@@ -47,12 +53,17 @@ export const ViewLinks = () => {
                   <TableCell>{row.time}</TableCell>
                   <TableCell>{row.link}</TableCell>
                   <TableCell>
-                    <Button variant='outlined'>
+                    <Button
+                      variant='outlined'
+                      onClick={() => {
+                        deleteLink(row._id)
+                      }}
+                    >
                       Delete
                     </Button>
-                    <Button variant='contained' >
-                      Send
-                    </Button>
+                          <NavLink to={`/updatelink/${row._id}`}>
+                      <Button variant='contained'>Send</Button>
+                    </NavLink>
                   </TableCell>
                 </TableRow>
               ))}
