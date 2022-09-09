@@ -36,31 +36,48 @@ export default function ViewStreams  () {
     },[])
 
     return (
-    <div>
-      <div className='container' style={{marginLeft:'10%',marginRight:'10%', marginTop:'10%'}}>
-      <h3 className='navi'>Subjects</h3> 
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Subject Name</th>
-                <th scope="col">Update</th>
-                <th scope="col">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-            {data.map((row)=>{
-              return(
-                <tr>
-                <td>{row.subjectname}</td>
-                <td> <Link to={`/editsubj/${row._id}`}><button class="btn btn-primary">Update</button></Link></td>
-                <td><button class="btn btn-primary" onClick={() => { deleteSubject(row._id)}}>Delete</button></td>
-
-              </tr>
-              )
-            })}
-            </tbody>
-          </table>
-      </div>
+    <div style={{height:"100%",maxWidth:"100%", width:"100%", marginTop:"15%"}}>
+        <div style={{width:"10%",float:"left",paddingLeft:"10%"}}>
+                  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+                    <div class="position-sticky">
+                      <div style={{width:"50%", marginTop:"15%"}}>
+                        <a href="addsubject" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                          <i class="fas fa-chart-area fa-fw me-3"></i><span>Add Subjects</span>
+                        </a>
+                        <a href="addstream" class="list-group-item list-group-item-action py-2 ripple active">
+                          <i class="fas fa-chart-area fa-fw me-3"></i><span>Add Streams</span>
+                        </a>
+                        <a href="getsubject" class="list-group-item list-group-item-action py-2 ripple"><i
+                            class="fas fa-lock fa-fw me-3"></i><span>View Subjects</span></a>
+                        <a href="getstream" class="list-group-item list-group-item-action py-2 ripple"><i
+                            class="fas fa-chart-line fa-fw me-3"></i><span>View Streams</span></a>         
+                      </div>
+                    </div>
+                  </nav>
+               </div>
+              <div className='container' style={{float:"right",paddingRight:"30%", width:"70%"}}>
+                  <h3 className='navi'>Subjects</h3> 
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Subject Name</th>
+                            <th scope="col">Update</th>
+                            <th scope="col">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {data.map((row)=>{
+                          return(
+                            <tr>
+                            <td>{row.subjectname}</td>
+                            <td> <Link to={`/editsubj/${row._id}`}><button class="btn btn-primary">Update</button></Link></td>
+                            <td><button class="btn btn-primary" onClick={() => { deleteSubject(row._id)}}>Delete</button></td>
+                          </tr>
+                          )
+                        })}
+                        </tbody>
+                      </table>
+              </div>
     </div>
     )
 }
