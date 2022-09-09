@@ -13,7 +13,6 @@ export const createStreams = async (req, res, next) =>{
     }
 }
 
-
 //update stream
 
 export const updateStream = async (req, res, next) => {
@@ -28,6 +27,16 @@ export const updateStream = async (req, res, next) => {
       next(err)
     }
   }
+
+  //get stream by id
+  export const getStreamById = async (req, res, next) => {
+    try {
+      const stream = await StreamModel.findById(req.params.id)
+      res.status(200).json(stream)
+    } catch (err) {
+      next(err)
+    }
+  } 
 
   //delete stream
 
