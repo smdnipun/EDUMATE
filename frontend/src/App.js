@@ -19,15 +19,26 @@ import UpdateSubjects from './components/admin/streams/UpdateSubjects';
 import AdminHome from './components/admin/AdminHome';
 import { ViewNote } from './components/client/teacher/ViewNote'
 import { UpdateNote } from './components/client/teacher/UpdateNote'
-// import Login from './components/common/login'
+import Main from './components/common/userReg/Main.js'
+import SignIn from './components/common/userReg/SignIn.js'
+import SignUp from './components/common/userReg/SignUp.js'
+import Profile from './components/common/Profile/Profile.js'
+import Update from './components/common/Profile/Update'
 
 function App() {
   return (
     <div className='App'>
-      <Navbar />
+      {/* <Navbar /> */}
       {/* <UploadNote/> */}
       <BrowserRouter>
         <Routes>
+          {/*common*/}
+          <Route exact path={'/main'} element={<Main />} />
+          <Route exact path={'/login'} element={<SignIn />} />
+          <Route exact path={'/register'} element={<SignUp />} />
+          <Route exact path={'/profile'} element={<Profile />} />
+          <Route exact path={'/updateProfile'} element={<Update />} />
+
           {/* admin */}
           <Route exact path={'/adminhome'} element={<AdminHome />} />
           <Route exact path={'/addstream'} element={<AddStreams />} />
