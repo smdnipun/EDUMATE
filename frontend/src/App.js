@@ -17,6 +17,8 @@ import ViewSubjects from './components/admin/streams/ViewSubjects'
 import UpdateStreams from './components/admin/streams/UpdateStreams';
 import UpdateSubjects from './components/admin/streams/UpdateSubjects';
 import AdminHome from './components/admin/AdminHome';
+import { ViewNote } from './components/client/teacher/ViewNote'
+import { UpdateNote } from './components/client/teacher/UpdateNote'
 // import Login from './components/common/login'
 
 function App() {
@@ -27,16 +29,24 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* admin */}
-            <Route exact path={'/adminhome'} element={<AdminHome />} />
-            <Route exact path={'/addstream'} element={<AddStreams />} />
-            <Route exact path={'/addsubject'} element={<AddSubjects />} />
-            <Route exact path={'/getstream'} element={<ViewStreams />} />
-            <Route exact path={'/getsubject'} element={<ViewSubjects />} />
-            <Route exact path={'/editstrm/:_id'} element={<UpdateStreams />} />
-            <Route exact path= {'editsubj/:_id'} element={<UpdateSubjects />}></Route>
+          <Route exact path={'/adminhome'} element={<AdminHome />} />
+          <Route exact path={'/addstream'} element={<AddStreams />} />
+          <Route exact path={'/addsubject'} element={<AddSubjects />} />
+          <Route exact path={'/getstream'} element={<ViewStreams />} />
+          <Route exact path={'/getsubject'} element={<ViewSubjects />} />
+          <Route exact path={'/editstrm/:_id'} element={<UpdateStreams />} />
+          <Route
+            exact
+            path={'editsubj/:_id'}
+            element={<UpdateSubjects />}
+          ></Route>
 
           {/* student  */}
-          <Route exact path={'/studentanswersheetUpload'} element={<StudentAnswersUpload />}/>
+          <Route
+            exact
+            path={'/studentanswersheetUpload'}
+            element={<StudentAnswersUpload />}
+          />
           <Route exact path={'/examtimetable'} element={<ExamTimeTable />} />
           <Route exact path={'/feedback'} element={<FeedBack />} />
 
@@ -44,7 +54,9 @@ function App() {
           <Route exact path='/addlink' element={<UploadLink />} />
           <Route exact path='/viewlink' element={<ViewLinks />} />
           <Route exact path='/updatelink/:id' element={<Updatelink />} />
-  
+          <Route exact path='/addNote' element={<UploadNote />} />
+          <Route exact path='/viewNote' element={<ViewNote />} />
+          <Route exact path='/updatenote/:id' element={<UpdateNote />} />
         </Routes>
       </BrowserRouter>
     </div>

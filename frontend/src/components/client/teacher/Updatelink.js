@@ -55,10 +55,8 @@ export const Updatelink = () => {
     <div className='container mt-5'>
       <div className='mt-5 pt-4'>
         <form onSubmit={updateLink}>
-          <h1 className='text-center mt-5'>Bugs</h1>
-          <Alert variant='filled' id='succ' severity='success'>
-            This is a success alert — check it out!
-          </Alert>
+      
+         
 
           <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2'>
             <div className='mx-5 mt-5'>
