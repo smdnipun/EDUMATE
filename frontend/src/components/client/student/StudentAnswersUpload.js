@@ -9,6 +9,8 @@ export const StudentAnswersUpload = () => {
         
      }  
      const [name,setName] = useState('');
+     const [subject,setSubject] = useState('');
+     const [grade,setGrade] = useState('');
      const [file,setFile] = useState([]);
    
      const ImageAdd = (e) => {
@@ -56,7 +58,7 @@ export const StudentAnswersUpload = () => {
         
                    {/* name */}
                   <div className='form-row'>
-                    <label className='form-label'>Name</label><br/>
+                    <label className='form-label'>Subject</label><br/>
                     <input
                       type='text'
                       name={name}
@@ -64,10 +66,47 @@ export const StudentAnswersUpload = () => {
                       className='form-input'
                     />
                   </div>
-
-                  <button type='submit' className='btn btn-primary mt-4'>
-                    submit
-                  </button>
+                     {/* name */}
+                    <div className='form-row'>
+                    <label className='form-label'>Lesson Name</label><br/>
+                    <input
+                      type='text'
+                      name={name}
+                      onChange={(e)=>setName(e.target.value)}
+                      className='form-input'
+                    />
+                  </div>
+                  {/* name */}
+                   <div className='form-row'>
+                    <label className='form-label'>Grade</label><br/>
+                    <input
+                      type='text'
+                      name={name}
+                      onChange={(e)=>setName(e.target.value)}
+                      className='form-input'
+                    />
+                  </div>
+                  <div className='form-row d-flex mt-4'>
+                    <div className=''>
+                      <input
+                        type='text'
+                        name={name}
+                        onChange={(e)=>setName(e.target.value)}
+                        className='form-input'
+                      />
+                    </div>
+                    <div className='ml-3'> 
+                      <input
+                        type='text'
+                        name={name}
+                        onChange={(e)=>setName(e.target.value)}
+                        className='form-input'
+                      />
+                    </div>
+                  </div>
+                  <div className='text-center'>
+                    <button type='submit' className='btn btn-primary my-4'>submit</button>
+                  </div>
     
               </div>
          </div>
