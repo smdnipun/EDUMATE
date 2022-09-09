@@ -15,7 +15,11 @@ export const Upload = multer({storage : multer.diskStorage({
 export const CreateStudentAnswers = async (req, res, next) => {
     try {
         const newStudentAnswers = new studentanswers({ 
-            name : req.body.name,
+            subject : req.body.subject,
+            lname : req.body.lname,
+            grade : req.body.grade,
+            date : req.body.date,
+            time : req.body.time,
             image: req.file.originalname,
          });
         await newStudentAnswers.save()

@@ -22,6 +22,7 @@ import SignIn from './components/common/userReg/SignIn.js'
 import SignUp from './components/common/userReg/SignUp.js'
 import Profile from './components/common/Profile/Profile.js'
 import Update from './components/common/Profile/Update'
+import { SubjectNote } from './components/client/student/subjectnote/SubjectNote'
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route exact path={'/studentanswersheetUpload'} element={<StudentAnswersUpload />}/>
           <Route exact path={'/examtimetable'} element={<ExamTimeTable />} />
           <Route exact path={'/feedback'} element={<FeedBack />} />
+          <Route exact path={'/subjectnotes'} element={<SubjectNote />} />
 
           {/* teacher */}
           <Route exact path='/addlink' element={<UploadLink />} />
