@@ -10,6 +10,8 @@ import streamrouter from './router/Streams.routes.js'
 import subjectrouter from './router/Subject.routes.js'
 import cors from 'cors'
 import subjectfeedback from './router/subjectfeedback.routes.js'
+import teacherRouter from './router/TeacherNote.routes.js'
+
 
 const app = exprees()
 dotenv.config()
@@ -55,8 +57,10 @@ app.use('/link', linkRoutes)
 app.use('/stream', streamrouter)
 app.use('/subject', subjectrouter)
 app.use('/subjectfeedback', subjectfeedback)
+app.use('/teacherNote',teacherRouter)
 
 app.use('/StudentAnswers', exprees.static('StudentAnswers'));
+app.use('/TeacherNotes', exprees.static('TeacherNotes'));
 
 //port connecting
 app.listen(process.env.PORT, () => {

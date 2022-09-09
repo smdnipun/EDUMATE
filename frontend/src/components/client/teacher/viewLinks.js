@@ -30,7 +30,13 @@ export const ViewLinks = () => {
     },[])
 
     return (
-      <div className='container'>
+        
+            <div
+        className=''
+        style={{ marginLeft: '0.5%', marginRight: '0.5%', marginTop: '10%' }}
+      >
+        <div className='border shadow rounded-3 bg-light'>
+          <form className='mx-5 mt-5 mb-5'>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label='simple table'>
             <TableHead>
@@ -62,14 +68,17 @@ export const ViewLinks = () => {
                       Delete
                     </Button>
                           <NavLink to={`/updatelink/${row._id}`}>
-                      <Button variant='contained'>Send</Button>
+                      <Button variant='contained'>Update</Button>
                     </NavLink>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
-        </TableContainer>
+                    </TableContainer>
+                       </form>
+        </div>
       </div>
+      
     )
 }
