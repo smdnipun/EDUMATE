@@ -5,20 +5,20 @@ import jwt from 'jsonwebtoken'
 
 export const register = async (req, res, next) => {
   try {
-    const salt = bcrypt.genSaltSync(10)
-    const hash = bcrypt.hashSync(req.body.password, salt)
+    const user = await User.findOne({ email: req.body.email })
+    if (user != null) {
+      return res.status(200).json('Exists')
+    } else {
+      const salt = bcrypt.genSaltSync(10)
+      const hash = bcrypt.hashSync(req.body.password, salt)
+      const newUser = new User({
+        ...req.body,
+        password: hash,
+      })
 
-    const newUser = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      type: req.body.type,
-      stream: req.body.stream,
-      email: req.body.email,
-      password: hash,
-    })
-
-    await newUser.save()
-    res.status(200).json('User has been created')
+      await newUser.save()
+      res.status(200).json('Created')
+    }
   } catch (err) {
     next(err)
   }
@@ -47,7 +47,7 @@ export const login = async (req, res, next) => {
         httpOnly: true,
       })
       .status(200)
-      .json({details: { ...otherDetails }, isAdmin})
+      .json({ details: { ...otherDetails }, isAdmin })
   } catch (err) {
     next(err)
   }
