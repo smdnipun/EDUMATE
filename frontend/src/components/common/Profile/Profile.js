@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Navbar } from '../Navbar'
 import './profile.css'
 import { ProfileCard } from './ProfileCard'
 
 function Profile() {
+  // var data = JSON.parse(localStorage.getItem('user'))
   return (
     <div className='container'>
       <div className='mb-3 '>
@@ -20,47 +21,51 @@ function Profile() {
           <div className='col-md-8'>
             <div className='card mb-3'>
               <div className='card-body'>
+                {/* <h1>username:{data.firstName}</h1> */}
                 <div className='row'>
                   <div className='col-sm-3'>
                     <h6 className='mb-0'>Full Name</h6>
                   </div>
-                  <div className='col-sm-9 text-secondary'>Kenneth Valdez</div>
+                  <div className='col-sm-9 text-secondary'>Nipun</div>
+                </div>
+                <hr />
+                <div className='row'>
+                  <div className='col-sm-3'>
+                    <h6 className='mb-0'>Last Name</h6>
+                  </div>
+                  <div className='col-sm-9 text-secondary'>Senarath</div>
+                </div>
+                <hr />
+                <div className='row'>
+                  <div className='col-sm-3'>
+                    <h6 className='mb-0'>Role</h6>
+                  </div>
+                  <div className='col-sm-9 text-secondary'>Student</div>
+                </div>
+                <hr />
+                <div className='row'>
+                  <div className='col-sm-3'>
+                    <h6 className='mb-0'>Stream</h6>
+                  </div>
+                  <div className='col-sm-9 text-secondary'>Maths</div>
                 </div>
                 <hr />
                 <div className='row'>
                   <div className='col-sm-3'>
                     <h6 className='mb-0'>Email</h6>
                   </div>
-                  <div className='col-sm-9 text-secondary'>fip@jukmuh.al</div>
-                </div>
-                <hr />
-                <div className='row'>
-                  <div className='col-sm-3'>
-                    <h6 className='mb-0'>Phone</h6>
-                  </div>
-                  <div className='col-sm-9 text-secondary'>(239) 816-9029</div>
-                </div>
-                <hr />
-                <div className='row'>
-                  <div className='col-sm-3'>
-                    <h6 className='mb-0'>Mobile</h6>
-                  </div>
-                  <div className='col-sm-9 text-secondary'>(320) 380-4539</div>
-                </div>
-                <hr />
-                <div className='row'>
-                  <div className='col-sm-3'>
-                    <h6 className='mb-0'>Address</h6>
-                  </div>
                   <div className='col-sm-9 text-secondary'>
-                    Bay Area, San Francisco, CA
+                    it20255824@my.sliit.lk
                   </div>
                 </div>
                 <hr />
                 <div className='row'>
                   <div className='col-sm-12'>
-                    <Link to='/updateProfile' className='btn btn-primary'>
+                    <Link to='/updateProfile' className='btn btn-primary px-3'>
                       Update
+                    </Link>
+                    <Link to='' className='btn mx-5 px-3 btn-danger'>
+                      Delete
                     </Link>
                   </div>
                 </div>

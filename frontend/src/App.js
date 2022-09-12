@@ -14,9 +14,9 @@ import AddStreams from './components/admin/streams/AddStreams'
 import AddSubjects from './components/admin/streams/AddSubjects'
 import ViewStreams from './components/admin/streams/ViewStreams'
 import ViewSubjects from './components/admin/streams/ViewSubjects'
-import UpdateStreams from './components/admin/streams/UpdateStreams';
-import UpdateSubjects from './components/admin/streams/UpdateSubjects';
-import AdminHome from './components/admin/AdminHome';
+import UpdateStreams from './components/admin/streams/UpdateStreams'
+import UpdateSubjects from './components/admin/streams/UpdateSubjects'
+import AdminHome from './components/admin/AdminHome'
 import { ViewNote } from './components/client/teacher/ViewNote'
 import { UpdateNote } from './components/client/teacher/UpdateNote'
 import Main from './components/common/userReg/Main.js'
@@ -33,7 +33,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/*common*/}
-          <Route exact path={'/main'} element={<Main />} />
+          <Route exact path={'/'} element={<Main />} />
           <Route exact path={'/login'} element={<SignIn />} />
           <Route exact path={'/register'} element={<SignUp />} />
           <Route exact path={'/profile'} element={<Profile />} />

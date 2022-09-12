@@ -22,7 +22,7 @@ function Main() {
                 <Link to='/register'>
                   <button
                     type='button'
-                    className='btn btn-primary btn-lg btn-block'
+                    className='btn btn-primary btn-lg btn-block px-5'
                   >
                     Register
                   </button>
@@ -32,7 +32,7 @@ function Main() {
                 <Link to='/login'>
                   <button
                     type='button'
-                    className='btn btn-primary btn-lg btn-block'
+                    className='btn btn-primary btn-lg btn-block px-5'
                   >
                     Login
                   </button>
