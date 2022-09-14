@@ -12,8 +12,7 @@ export const ProfileCard = () => {
             width='150'
           />
           <div className='mt-3'>
-            <h4>John Doe</h4>
-            <p className='text-secondary mb-1'>Full Stack Developer</p>
+            <h4>Nipun Senarath</h4>
             <button className='btn btn-outline-primary'>Message</button>
           </div>
         </div>

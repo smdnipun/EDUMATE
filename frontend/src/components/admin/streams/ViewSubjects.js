@@ -60,6 +60,7 @@ export default function ViewStreams  () {
                     <table class="table">
                         <thead>
                           <tr>
+                          <th scope="col">Stream of the subject</th>
                             <th scope="col">Subject Name</th>
                             <th scope="col">Update</th>
                             <th scope="col">Delete</th>
@@ -69,6 +70,7 @@ export default function ViewStreams  () {
                         {data.map((row)=>{
                           return(
                             <tr>
+                            <td>{row.streamname}</td>
                             <td>{row.subjectname}</td>
                             <td> <Link to={`/editsubj/${row._id}`}><button class="btn btn-primary">Update</button></Link></td>
                             <td><button class="btn btn-primary" onClick={() => { deleteSubject(row._id)}}>Delete</button></td>
