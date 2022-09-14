@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
+import { Navbar } from '../../common/Navbar'
 
 export const ViewLinks = () => {
     const [data, setData] = useState([])
@@ -22,7 +23,8 @@ export const ViewLinks = () => {
     }
 
     const deleteLink = (id) => {
-        axios.delete(`link/${id}`)
+      axios.delete(`link/${id}`)
+      window.location.reload();
     }
 
     useEffect(() => {
@@ -30,7 +32,9 @@ export const ViewLinks = () => {
     },[])
 
     return (
-        
+        <div>
+        <Navbar/>
+     
             <div
         className=''
         style={{ marginLeft: '0.5%', marginRight: '0.5%', marginTop: '10%' }}
@@ -79,6 +83,6 @@ export const ViewLinks = () => {
                        </form>
         </div>
       </div>
-      
+     </div> 
     )
 }
