@@ -16,7 +16,7 @@ router.put('/:id', verifyUser, updateUser)
 router.delete('/:id', verifyUser, deleteUser)
 
 //get
-router.get('/:id', verifyUser, getUser)
+router.get('/:id', getUser)
 
 // get all
 router.get('/', verifyAdmin, getUsers)
