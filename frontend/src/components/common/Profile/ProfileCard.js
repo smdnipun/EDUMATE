@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../../../context/AuthContext'
 
-export const ProfileCard = () => {
+export const ProfileCard = (props) => {
+  const { user } = useContext(AuthContext)
   return (
     <div className='card'>
       <div className='card-body'>
@@ -12,7 +14,10 @@ export const ProfileCard = () => {
             width='150'
           />
           <div className='mt-3'>
-            <h4>Nipun Senarath</h4>
+            <h4>
+              {user.firstName} {user.lastName}
+            </h4>
+            <h6>{user.stream}</h6>
             <button className='btn btn-outline-primary'>Message</button>
           </div>
         </div>

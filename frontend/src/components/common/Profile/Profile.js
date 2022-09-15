@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { AuthContext } from '../../../context/AuthContext'
 import { Navbar } from '../Navbar'
 import './profile.css'
 import { ProfileCard } from './ProfileCard'
 
 function Profile() {
-  // var data = JSON.parse(localStorage.getItem('user'))
+  const { user } = useContext(AuthContext)
+  const userId = user._id
+
+  const deleteProfile = (id) => {
+    axios.delete(`api/users/${id}`)
+  }
   return (
     <div className='container'>
       <div className='mb-3 '>
@@ -15,7 +22,7 @@ function Profile() {
       <div className='main-body my-5'>
         <div className='row gutters-sm mt-5'>
           <div className='col-md-4 mb-3'>
-            <ProfileCard />
+            <ProfileCard params={user} />
           </div>
 
           <div className='col-md-8'>
@@ -26,47 +33,57 @@ function Profile() {
                   <div className='col-sm-3'>
                     <h6 className='mb-0'>Full Name</h6>
                   </div>
-                  <div className='col-sm-9 text-secondary'>Nipun</div>
+                  <div className='col-sm-9 text-secondary'>
+                    {user.firstName} {user.lastName}
+                  </div>
                 </div>
                 <hr />
                 <div className='row'>
                   <div className='col-sm-3'>
-                    <h6 className='mb-0'>Last Name</h6>
+                    <h6 className='mb-0'>Date Of Birth</h6>
                   </div>
-                  <div className='col-sm-9 text-secondary'>Senarath</div>
+                  <div className='col-sm-9 text-secondary'>
+                    {user.dateOfBirth}
+                  </div>
                 </div>
                 <hr />
                 <div className='row'>
                   <div className='col-sm-3'>
                     <h6 className='mb-0'>Role</h6>
                   </div>
-                  <div className='col-sm-9 text-secondary'>Student</div>
+                  <div className='col-sm-9 text-secondary'>{user.type}</div>
                 </div>
                 <hr />
                 <div className='row'>
                   <div className='col-sm-3'>
                     <h6 className='mb-0'>Stream</h6>
                   </div>
-                  <div className='col-sm-9 text-secondary'>Maths</div>
+                  <div className='col-sm-9 text-secondary'>{user.stream}</div>
                 </div>
                 <hr />
                 <div className='row'>
                   <div className='col-sm-3'>
                     <h6 className='mb-0'>Email</h6>
                   </div>
-                  <div className='col-sm-9 text-secondary'>
-                    it20255824@my.sliit.lk
-                  </div>
+                  <div className='col-sm-9 text-secondary'>{user.email}</div>
                 </div>
                 <hr />
                 <div className='row'>
                   <div className='col-sm-12'>
-                    <Link to='/updateProfile' className='btn btn-primary px-3'>
+                    <Link
+                      to={`/updateProfile/${userId}`}
+                      className='btn btn-primary px-3'
+                    >
                       Update
                     </Link>
-                    <Link to='' className='btn mx-5 px-3 btn-danger'>
+                    <button
+                      className='btn mx-5 px-3 btn-danger'
+                      onClick={() => {
+                        deleteProfile(userId)
+                      }}
+                    >
                       Delete
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
