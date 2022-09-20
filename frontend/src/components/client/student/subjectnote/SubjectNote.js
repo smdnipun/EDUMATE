@@ -12,7 +12,7 @@ export const SubjectNote = () => {
   })
   return (
     <div>
-      <div className='text-center' style={{marginTop:"5%",marginLeft:"15%"}}>
+      <div className='text-center' style={{marginTop:"8%",marginLeft:"15%"}}>
         <h1 className='mb-5'>Maths</h1>
       <div className='row gx-1 row-cols- row-cols-md-3'>
                     {item.map((datas) => {

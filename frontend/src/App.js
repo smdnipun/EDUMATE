@@ -29,7 +29,7 @@ import { SubjectNote } from './components/client/student/subjectnote/SubjectNote
 function App() {
   return (
     <div className='App'>
-      {/* <Navbar /> */}
+      <Navbar />
       {/* <UploadNote/> */}
       <BrowserRouter>
         <Routes>
@@ -39,6 +39,7 @@ function App() {
           <Route exact path={'/register'} element={<SignUp />} />
           <Route exact path={'/profile'} element={<Profile />} />
           <Route exact path={'/updateProfile'} element={<Update />} />
+          {/* <Route exact path={'/'} element={<Navbar />} /> */}
 
           {/* admin */}
           <Route exact path={'/adminhome'} element={<AdminHome />} />
