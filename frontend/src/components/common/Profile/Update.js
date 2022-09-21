@@ -1,8 +1,57 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { AuthContext } from '../../../context/AuthContext'
 import { Navbar } from '../Navbar'
 import { ProfileCard } from './ProfileCard'
 
 function Update() {
+  const [id, setId] = useState()
+  const [firstName, setFname] = useState()
+  const [lastName, setLname] = useState()
+  const [type, setType] = useState()
+  const [stream, setStream] = useState()
+  const [dob, setDob] = useState()
+  const [data, setData] = useState([])
+
+  const params = useParams()
+  console.log(params)
+
+  useEffect(() => {
+    axios
+      .get(`/api/users/${params.id}`)
+      .then((res) => {
+        setFname(res.data.firstName)
+        setLname(res.data.lastName)
+        setType(res.data.type)
+        setStream(res.data.stream)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  })
+
+  const loadData = async () => {
+    axios
+      .get('/stream/')
+      .then((res) => {
+        setData(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  useEffect(() => {
+    loadData()
+  }, [])
+
+  const handlesubmit = () => {
+    const obj = {}
+
+    axios.put(`api/users/${id}`)
+  }
+
   return (
     <div className='container'>
       <div className='mb-3'>
@@ -19,10 +68,28 @@ function Update() {
             <div class='card-body'>
               <div class='row mb-3'>
                 <div class='col-sm-3'>
-                  <h6 class='mb-0'>Full Name</h6>
+                  <h6 class='mb-0'>First Name</h6>
+                </div>
+                <div class='col-sm-9 text-seconday'>
+                  <input
+                    type='text'
+                    class='form-control'
+                    value={firstName}
+                    onChange={(e) => setFname(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div class='row mb-3'>
+                <div class='col-sm-3'>
+                  <h6 class='mb-0'>Last Name</h6>
                 </div>
                 <div class='col-sm-9 text-secondary'>
-                  <input type='text' class='form-control' value='John Doe' />
+                  <input
+                    type='text'
+                    class='form-control'
+                    value={lastName}
+                    onChange={(e) => setLname(e.target.value)}
+                  />
                 </div>
               </div>
               <div class='row mb-3'>
@@ -33,50 +100,53 @@ function Update() {
                   <input
                     type='text'
                     class='form-control'
-                    value='john@example.com'
+                    value='it20255824@my.sliit.lk'
                   />
                 </div>
               </div>
               <div class='row mb-3'>
                 <div class='col-sm-3'>
-                  <h6 class='mb-0'>Phone</h6>
+                  <h6 class='mb-0'>Role</h6>
                 </div>
                 <div class='col-sm-9 text-secondary'>
                   <input
                     type='text'
                     class='form-control'
-                    value='(239) 816-9029'
+                    value='it20255824@my.sliit.lk'
                   />
                 </div>
               </div>
               <div class='row mb-3'>
                 <div class='col-sm-3'>
-                  <h6 class='mb-0'>Mobile</h6>
+                  <h6 class='mb-0'>Stream</h6>
                 </div>
                 <div class='col-sm-9 text-secondary'>
-                  <input
-                    type='text'
-                    class='form-control'
-                    value='(320) 380-4539'
-                  />
-                </div>
-              </div>
-              <div class='row mb-3'>
-                <div class='col-sm-3'>
-                  <h6 class='mb-0'>Address</h6>
-                </div>
-                <div class='col-sm-9 text-secondary'>
-                  <input
-                    type='text'
-                    class='form-control'
-                    value='Bay Area, San Francisco, CA'
-                  />
+                  <select
+                    id='stream'
+                    name='stream'
+                    className='form-control'
+                    value={stream}
+                    onChange={(e) => setStream(e.target.value)}
+                    required
+                  >
+                    {data.map((stream) => {
+                      return (
+                        <option key={stream._id} value={stream.streamname}>
+                          {stream.streamname}
+                        </option>
+                      )
+                    })}
+                  </select>
                 </div>
               </div>
               <div class='row '>
                 <div class='col-sm-4'></div>
                 <div class='col-sm-8 text-secondary'>
-                  <button type='submit' className='btn btn-primary'>
+                  <button
+                    type='submit'
+                    className='btn btn-primary'
+                    onClick={handlesubmit}
+                  >
                     Save Changes
                   </button>
                 </div>

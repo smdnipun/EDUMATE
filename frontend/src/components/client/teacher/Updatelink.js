@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Alert from '@mui/material/Alert'
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
+import { Navbar } from '../../common/Navbar'
 
 export const Updatelink = () => {
 
-
+    const navigate = useNavigate()
     const hr = {
       borderLeft: '6px solid green',
-      height: '300px',
+      height: '400px',
     }
 
     const params = useParams();
@@ -43,7 +44,9 @@ export const Updatelink = () => {
 
     const updateLink = () => {
         
-        axios.put(`/link/${params.id}`,add)
+      axios.put(`/link/${params.id}`, add)
+      alert('Succsessfully Updated')
+      navigate('/viewlink')
     }
 
     useEffect(() => {
@@ -52,108 +55,111 @@ export const Updatelink = () => {
 
 
   return (
-    <div className='container mt-5'>
-      <div className='mt-5 pt-4'>
-        <form onSubmit={updateLink}>
-      
-         
-
-          <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2'>
-            <div className='mx-5 mt-5'>
-              <h1 className='mr-5'>Upload link</h1>
-              <input
-                type='text'
-                class='form-control'
-                id='link'
-                name='link'
-                placeholder='place the link'
-                value={link}
-                onChange={(e) => {
-                  setLink(e.target.value)
-                }}
-              />
-              <br />
-              <br />
-              <button
-                type='submit'
-                id='upload'
-                class='btn btn-secondary btn-lg'
-              >
-                Update
-              </button>
-            </div>
-            <div className='mx-5 my-4' style={hr} />
-            <div className='mx-5 mt-5'>
-              <form>
-                <select
-                  className='form-control'
-                  value={subject}
+    <div>
+      <Navbar />
+      <div className='container mt-5'>
+        <div className='mt-5 pt-4'>
+          <form onSubmit={updateLink}>
+            <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2 py=5'>
+              <div className='mx-5 mt-5'>
+                <h1 className='mr-5'>Update link</h1>
+                <input
+                  type='text'
+                  class='form-control'
+                  id='link'
+                  name='link'
+                  placeholder='place the link'
+                  value={link}
                   onChange={(e) => {
-                    setSubject(e.target.value)
+                    setLink(e.target.value)
                   }}
+                />
+                <br />
+                <br />
+                <button
+                  type='submit'
+                  id='upload'
+                  class='btn btn-secondary btn-lg'
                 >
-                  <option>Select a subject</option>
-                  <option>test</option>
-                </select>
-                <br />
-                <br />
+                  Update
+                </button>
+              </div>
+              <div className='mx-5 my-4' style={hr} />
+              <div className='mx-5 mt-5 pb-4'>
+                <form>
+                  <select
+                    className='form-control'
+                    value={subject}
+                    onChange={(e) => {
+                      setSubject(e.target.value)
+                    }}
+                  >
+                    <option>Select a subject</option>
+                    <option>Select a subject</option>
+                    <option>Combined maths</option>
+                    <option>Biology</option>
+                    <option>Physics</option>
+                  </select>
+                  <br />
+                  <br />
 
-                <div className='form-group'>
-                  <input
-                    type='text'
-                    class='form-control'
-                    id='formGroupExampleInput'
-                    placeholder='Lesson name'
-                    value={lesson_name}
-                    onChange={(e) => {
-                      setLesson(e.target.value)
-                    }}
-                  />
-                </div>
-                <br />
-                <br />
-                <div className='form-group'>
-                  <input
-                    type='number'
-                    class='form-control'
-                    id='formGroupExampleInput2'
-                    placeholder='Grade'
-                    value={grade}
-                    onChange={(e) => {
-                      setGrade(e.target.value)
-                    }}
-                  />
-                </div>
-                <br />
-                <br />
-                <div className='form-group'>
-                  <input
-                    type='date'
-                    class='form-control'
-                    id='formGroupExampleInput2'
-                    value={date}
-                    onChange={(e) => {
-                      setDate(e.target.value)
-                    }}
-                  />
-                </div>
-                <br />
-                <br />
-                <div className='form-group'>
-                  <input
-                    type='time'
-                    class='form-control'
-                    id='formGroupExampleInput2'
-                    value={time}
-                    onChange={(e) => {
-                      setTime(e.target.value)
-                    }}
-                  />
-                </div>
-              </form>
+                  <div className='form-group'>
+                    <input
+                      type='text'
+                      class='form-control'
+                      id='formGroupExampleInput'
+                      placeholder='Lesson name'
+                      value={lesson_name}
+                      onChange={(e) => {
+                        setLesson(e.target.value)
+                      }}
+                    />
+                  </div>
+                  <br />
+                  <br />
+                  <div className='form-group'>
+                    <input
+                      type='number'
+                      class='form-control'
+                      id='formGroupExampleInput2'
+                      placeholder='Grade'
+                      value={grade}
+                      onChange={(e) => {
+                        setGrade(e.target.value)
+                      }}
+                    />
+                  </div>
+                  <br />
+                  <br />
+                  <div className='form-group'>
+                    <input
+                      type='date'
+                      class='form-control'
+                      id='formGroupExampleInput2'
+                      value={date}
+                      onChange={(e) => {
+                        setDate(e.target.value)
+                      }}
+                    />
+                  </div>
+                  <br />
+                  <br />
+                  <div className='form-group'>
+                    <input
+                      type='time'
+                      class='form-control'
+                      id='formGroupExampleInput2'
+                      value={time}
+                      onChange={(e) => {
+                        setTime(e.target.value)
+                      }}
+                    />
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   )
