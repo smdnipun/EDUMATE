@@ -24,6 +24,7 @@ import SignIn from './components/common/userReg/SignIn.js'
 import SignUp from './components/common/userReg/SignUp.js'
 import Profile from './components/common/Profile/Profile.js'
 import Update from './components/common/Profile/Update'
+import { ViewStudentPaper } from './components/client/teacher/ViewStudentPaper'
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
           <Route exact path='/addNote' element={<UploadNote />} />
           <Route exact path='/viewNote' element={<ViewNote />} />
           <Route exact path='/updatenote/:id' element={<UpdateNote />} />
+          <Route exact path='/papers' element={<ViewStudentPaper />} />
         </Routes>
       </BrowserRouter>
     </div>
