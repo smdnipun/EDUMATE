@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 function SignUp() {
@@ -12,23 +12,22 @@ function SignUp() {
   const [password, setPassword] = useState('')
   const [rpassword, setRpassword] = useState('')
   const navigate = useNavigate()
-  const [streams, setStreams] = useState([])
+  const [data, setData] = useState([])
 
-  useEffect(() => {
-    loadData()
-  }, [])
-
-  const loadData = () => {
+  const loadData = async () => {
     axios
       .get('stream/')
       .then((res) => {
-        setStream(res.data)
-        console.log(stream)
+        setData(res.data)
       })
       .catch((err) => {
         console.log(err)
       })
   }
+
+  useEffect(() => {
+    loadData()
+  }, [])
 
   const handleSubmit = async () => {
     const data = {
@@ -59,7 +58,6 @@ function SignUp() {
               title: 'Oops...',
               text: 'The User Already Exists !!!',
             })
-            window.location.reload()
           }
         })
         .catch((err) => {
@@ -81,8 +79,11 @@ function SignUp() {
               />
             </div>
             <div className='col-md-8 col-lg-6 col-xl-4 offset-xl-1'>
-              <h3 className='text-center p-5'>Register to Edumate</h3>
+              <h3 className='text-center p-3 mt-4'>Register to Edumate</h3>
               <div className='form-outline mb-1'>
+                <label className='form-label' for='form3Example3'>
+                  First Name
+                </label>
                 <input
                   type='fname'
                   id='fname'
@@ -92,11 +93,11 @@ function SignUp() {
                   onChange={(e) => setFname(e.target.value)}
                   required
                 />
-                <label className='form-label' for='form3Example3'>
-                  First Name
-                </label>
               </div>
               <div className='form-outline mb-1'>
+                <label className='form-label' for='form3Example3'>
+                  Last Name
+                </label>
                 <input
                   type='lname'
                   id='lname'
@@ -106,11 +107,11 @@ function SignUp() {
                   onChange={(e) => setLname(e.target.value)}
                   required
                 />
-                <label className='form-label' for='form3Example3'>
-                  Last Name
-                </label>
               </div>
               <div className='form-outline mb-1'>
+                <label className='form-label' for='form3Example3'>
+                  Type
+                </label>
                 <select
                   id='type'
                   name='type'
@@ -124,11 +125,11 @@ function SignUp() {
                   <option value='Student'>Student</option>
                   <option value='Teacher'>Teacher</option>
                 </select>
-                <label className='form-label' for='form3Example3'>
-                  Type
-                </label>
               </div>
               <div className='form-outline mb-1'>
+                <label className='form-label' for='form3Example3'>
+                  Stream
+                </label>
                 <select
                   id='stream'
                   name='stream'
@@ -138,14 +139,19 @@ function SignUp() {
                   required
                 >
                   <option>--Choose--</option>
-                  <option value='Maths'>Maths</option>
-                  <option value='Biology'>Biology</option>
+                  {data.map((stream) => {
+                    return (
+                      <option key={stream._id} value={stream.streamname}>
+                        {stream.streamname}
+                      </option>
+                    )
+                  })}
                 </select>
-                <label className='form-label' for='form3Example3'>
-                  Stream
-                </label>
               </div>
               <div className='form-outline mb-1'>
+                <label className='form-label' for='form3Example3'>
+                  Email address
+                </label>
                 <input
                   type='email'
                   id='email'
@@ -155,11 +161,11 @@ function SignUp() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                <label className='form-label' for='form3Example3'>
-                  Email address
-                </label>
               </div>
               <div className='form-outline mb-1'>
+                <label className='form-label' for='form3Example4'>
+                  Password
+                </label>
                 <input
                   type='password'
                   id='password'
@@ -169,11 +175,11 @@ function SignUp() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                <label className='form-label' for='form3Example4'>
-                  Password
-                </label>
               </div>
               <div className='form-outline mb-3'>
+                <label className='form-label' for='form3Example4'>
+                  Re-enter Password
+                </label>
                 <input
                   type='password'
                   id='rpassword'
@@ -183,9 +189,6 @@ function SignUp() {
                   onChange={(e) => setRpassword(e.target.value)}
                   required
                 />
-                <label className='form-label' for='form3Example4'>
-                  Re-enter Password
-                </label>
               </div>
 
               <div className='d-flex justify-content-between align-items-center'>

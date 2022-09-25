@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../../context/AuthContext'
 import Swal from 'sweetalert2'
 
-function SignIn() {
+function SignIn(props) {
   const [credentials, setCredentials] = useState({
     email: undefined,
     password: undefined,
@@ -21,13 +21,18 @@ function SignIn() {
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 2000,
+    timer: 1000,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     },
   })
+
+  if (props.logout) {
+    localStorage.removeItem('user')
+    window.location = '/login'
+  }
 
   const handleClick = async (e) => {
     e.preventDefault()

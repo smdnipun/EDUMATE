@@ -76,3 +76,16 @@ export const GetTeacherNotes = async (req, res, next) => {
     next(err)
   }
 }
+
+//Get all Industry
+export const GetTeacherNotessubject = async (req, res, next) => {
+  try {
+    const getTeacherNotes = await TeacherNotesModel.find({subject:req.body.subject} && {grade : req.body.grade},function(result){
+      res.json(result);
+    })
+
+    res.status(200).json(getTeacherNotes)
+  } catch (err) {
+    next(err)
+  }
+}
