@@ -4,9 +4,23 @@ const studentanswersschema = new mongoose.Schema({
     image : {
         type : String,
     },
-    name : {
+    subject : {
         type : String,
-    }
+    },
+    lname : {
+        type : String,
+    },
+    grade : {
+        type : String,
+    },
+    date : {
+        type : String,
+    },
+    time : {
+        type : String,
+    },
+    
+    
 });
 
 export default mongoose.model('studentanswers',studentanswersschema);
