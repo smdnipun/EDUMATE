@@ -1,7 +1,6 @@
 import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { AuthContext } from '../../../context/AuthContext'
 import { Navbar } from '../Navbar'
 import { ProfileCard } from './ProfileCard'
 
@@ -15,7 +14,6 @@ function Update() {
   const [data, setData] = useState([])
 
   const params = useParams()
-  console.log(params)
 
   useEffect(() => {
     axios
@@ -64,63 +62,64 @@ function Update() {
             <ProfileCard />
           </div>
 
-          <div class='card'>
-            <div class='card-body'>
-              <div class='row mb-3'>
-                <div class='col-sm-3'>
-                  <h6 class='mb-0'>First Name</h6>
+          <div className='card'>
+            <div className='card-body'>
+              <div className='row mb-3'>
+                <div className='col-sm-3'>
+                  <h6 className='mb-0'>First Name</h6>
                 </div>
                 <div class='col-sm-9 text-seconday'>
                   <input
                     type='text'
-                    class='form-control'
+                    className='form-control'
                     value={firstName}
                     onChange={(e) => setFname(e.target.value)}
                   />
                 </div>
               </div>
-              <div class='row mb-3'>
-                <div class='col-sm-3'>
-                  <h6 class='mb-0'>Last Name</h6>
+              <div className='row mb-3'>
+                <div className='col-sm-3'>
+                  <h6 className='mb-0'>Last Name</h6>
                 </div>
-                <div class='col-sm-9 text-secondary'>
+                <div className='col-sm-9 text-secondary'>
                   <input
                     type='text'
-                    class='form-control'
+                    className='form-control'
                     value={lastName}
                     onChange={(e) => setLname(e.target.value)}
                   />
                 </div>
               </div>
-              <div class='row mb-3'>
-                <div class='col-sm-3'>
-                  <h6 class='mb-0'>Email</h6>
+              <div className='row mb-3'>
+                <div className='col-sm-3'>
+                  <h6 className='mb-0'>Date Of Birth</h6>
                 </div>
-                <div class='col-sm-9 text-secondary'>
+                <div className='col-sm-9 text-secondary'>
+                  {/* <DatePicker
+                    type='text'
+                    className='form-control'
+                    value={dob}
+                    onClick={(e) => setDob(e.target.value)}
+                  /> */}
+                </div>
+              </div>
+              <div className='row mb-3'>
+                <div className='col-sm-3'>
+                  <h6 className='mb-0'>Role</h6>
+                </div>
+                <div className='col-sm-9 text-secondary'>
                   <input
                     type='text'
-                    class='form-control'
+                    className='form-control'
                     value='it20255824@my.sliit.lk'
                   />
                 </div>
               </div>
-              <div class='row mb-3'>
-                <div class='col-sm-3'>
-                  <h6 class='mb-0'>Role</h6>
+              <div className='row mb-3'>
+                <div className='col-sm-3'>
+                  <h6 className='mb-0'>Stream</h6>
                 </div>
-                <div class='col-sm-9 text-secondary'>
-                  <input
-                    type='text'
-                    class='form-control'
-                    value='it20255824@my.sliit.lk'
-                  />
-                </div>
-              </div>
-              <div class='row mb-3'>
-                <div class='col-sm-3'>
-                  <h6 class='mb-0'>Stream</h6>
-                </div>
-                <div class='col-sm-9 text-secondary'>
+                <div className='col-sm-9 text-secondary'>
                   <select
                     id='stream'
                     name='stream'
@@ -139,9 +138,9 @@ function Update() {
                   </select>
                 </div>
               </div>
-              <div class='row '>
-                <div class='col-sm-4'></div>
-                <div class='col-sm-8 text-secondary'>
+              <div className='row '>
+                <div className='col-sm-4'></div>
+                <div className='col-sm-8 text-secondary'>
                   <button
                     type='submit'
                     className='btn btn-primary'

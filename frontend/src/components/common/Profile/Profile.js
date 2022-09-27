@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../../../context/AuthContext'
 import { Navbar } from '../Navbar'
@@ -9,9 +9,12 @@ import { ProfileCard } from './ProfileCard'
 function Profile() {
   const { user } = useContext(AuthContext)
   const userId = user._id
+  const navigate = useNavigate()
 
-  const deleteProfile = (id) => {
-    axios.delete(`api/users/${id}`)
+  const deleteProfile = async (id) => {
+    await axios.delete(`api/users/${id}`).then((res) => {
+      navigate('/login')
+    })
   }
   return (
     <div className='container'>

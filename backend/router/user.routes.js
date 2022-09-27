@@ -10,10 +10,10 @@ import { verifyAdmin, verifyToken, verifyUser } from '../utils/verifyToken.js'
 const router = express.Router()
 
 //update
-router.put('/:id', verifyUser, updateUser)
+router.put('/:id', updateUser)
 
 //delete
-router.delete('/:id', verifyUser, deleteUser)
+router.delete('/:id', deleteUser)
 
 //get
 router.get('/:id', getUser)
