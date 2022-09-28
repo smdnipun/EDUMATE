@@ -26,9 +26,9 @@ import Profile from './components/common/Profile/Profile.js'
 import Update from './components/common/Profile/Update'
 import { ViewStudentPaper } from './components/client/teacher/ViewStudentPaper'
 import { AuthContext } from './context/AuthContext'
-import { MarkPaper } from './components/client/teacher/MarkPaper'
-import { UpdateMark } from './components/client/teacher/UpdateMark'
-import { ViewComments } from './components/client/teacher/ViewComments'
+import { MarkPaper } from './components/client/teacher/MarkPaper.js'
+import { UpdateMark } from './components/client/teacher/UpdateMark.js'
+import { ViewComments } from './components/client/teacher/ViewComments.js'
 
 function App() {
   const ProtectedRoute = ({ children }) => {
