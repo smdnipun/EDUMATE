@@ -1,10 +1,16 @@
-import express from 'express';
-import { createSubject, updateSubject, deleteSubject, getSubjects, getSubjectById } from '../controller/Subject.controler.js';
+import express from 'express'
+import {
+  createSubject,
+  updateSubject,
+  deleteSubject,
+  getSubjects,
+  getSubjectById,
+} from '../controller/Subject.controler.js'
 
-const subjectrouter = express.Router();
+const subjectrouter = express.Router()
 
 //create
-subjectrouter.post ('/add', createSubject);
+subjectrouter.post('/add', createSubject)
 
 //UPDATE
 subjectrouter.put('/:id', updateSubject)
@@ -18,4 +24,4 @@ subjectrouter.get('/', getSubjects)
 //get by id
 subjectrouter.get('/get/:id', getSubjectById)
 
-export default subjectrouter;
+export default subjectrouter

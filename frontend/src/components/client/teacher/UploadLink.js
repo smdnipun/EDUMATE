@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import axios from 'axios'
 import Alert from '@mui/material/Alert'
 import $ from 'jquery'
 import { Navbar } from '../../common/Navbar'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../../context/AuthContext'
 
 export const UploadLink = () => {
 
@@ -20,6 +21,9 @@ export const UploadLink = () => {
   const [time, setTime] = useState()
   const [link, setLink] = useState()
 
+  const { user } = useContext(AuthContext)
+  const userId = user._id
+
   const add = {
     subject,
     lesson_name,
@@ -27,6 +31,7 @@ export const UploadLink = () => {
     date,
     time,
     link,
+    teacher_id:userId
   }
 
   console.log(add)
