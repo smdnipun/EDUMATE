@@ -72,3 +72,14 @@ export const getLinks = async (req, res, next) => {
     next(err)
   }
 }
+
+export const getLinkByTeacherId = async (req, res, next) => {
+
+     let myquery = { teacher_id: Object(req.params.teacher_id) }
+    LinkSchema.find(myquery, function (err, result) {
+      if (err) throw err
+      res.json(result)
+    })
+}
+
+

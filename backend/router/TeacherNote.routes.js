@@ -6,7 +6,8 @@ import {
   GetTeacherNotes,
     GetTeacherNotessubject,
     UpdateNote,
-  Upload
+  Upload,
+  getNoteByTeacherId
 } from '../controller/Note.controller.js'
 
 const router = express.Router()
@@ -25,5 +26,6 @@ router.put('/:id', UpdateNote)
 //get all answers
 router.get('/get', 
 //get all answers
-router.post('/subject', GetTeacherNotessubject));
+  router.post('/subject', GetTeacherNotessubject));
+router.get(`/get/:teacher_id`, getNoteByTeacherId)
 export default router;

@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useState,useContext } from "react"
 import axios from "axios"
 import { Navbar } from '../../common/Navbar'
+import { AuthContext } from '../../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 export const UploadNote = () => {
@@ -8,6 +9,9 @@ export const UploadNote = () => {
   const [lesson_name, setLesson] = useState()
   const [grade, setGrade] = useState()
   const [file, setFile] = useState([])
+
+  const { user } = useContext(AuthContext)
+  const userId = user._id
 
       const navigate = useNavigate()
 
@@ -22,19 +26,20 @@ export const UploadNote = () => {
 
   }
 
+
+
   const Submit = (e) => {
     e.preventDefault()
 
+      
     const formData = new FormData()
 
     formData.append('lesson_name', lesson_name)
     formData.append('file', file)
     formData.append('subject', subject)
     formData.append('grade', grade)
-    
-
-   
-
+    formData.append('teacher_id',userId)
+ 
     axios.post('/teacherNote/add', formData).then((res) => {
       alert('Succsessfully Added')
       navigate('/viewNote')

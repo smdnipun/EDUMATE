@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useContext } from 'react'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -10,12 +10,16 @@ import Button from '@mui/material/Button'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 import { Navbar } from '../../common/Navbar'
+import { AuthContext } from '../../../context/AuthContext'
 
 export const ViewNote = () => {
   const [data, setData] = useState([])
+   const { user } = useContext(AuthContext)
+   const userId = user._id
+
 
   const loadData = () => {
-    axios.get('/teacherNote/get').then((res) => {
+    axios.get(`/teacherNote/get/${userId}`).then((res) => {
       setData(res.data)
       console.log(res.data)
     })

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -8,15 +8,19 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import axios from 'axios'
+import { AuthContext } from '../../../context/AuthContext'
 import { NavLink } from 'react-router-dom'
 import { Navbar } from '../../common/Navbar'
 
 export const ViewLinks = () => {
-    const [data, setData] = useState([])
+  const [data, setData] = useState([])
+  const { user } = useContext(AuthContext)
+  const userId = user._id
 
     const loadData = () => {
         
-        axios.get('link/').then((res) => {
+      axios.get(`link/get/${userId}`).then((res) => {
+          
             setData(res.data);
             console.log(res.data)
         })
