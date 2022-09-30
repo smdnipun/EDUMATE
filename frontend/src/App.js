@@ -4,7 +4,6 @@ import { Navbar } from './components/common/Navbar'
 import { Footer } from './components/common/footer'
 import { UploadNote } from './components/client/teacher/uploadNote.js'
 import { StudentAnswersUpload } from './components/client/student/StudentAnswersUpload'
-import Home from './components/client/Home'
 import { ExamTimeTable } from './components/client/student/examtimetable/ExamTimeTable'
 import { FeedBack } from './components/client/student/feedback/FeedBack'
 import { UploadLink } from './components/client/teacher/UploadLink.js'
@@ -26,6 +25,11 @@ import Profile from './components/common/Profile/Profile.js'
 import Update from './components/common/Profile/Update'
 import { ViewStudentPaper } from './components/client/teacher/ViewStudentPaper'
 import { AuthContext } from './context/AuthContext'
+import UserManagement from './components/admin/UserManagement'
+import ForgetPwd from './components/common/Profile/ForgetPwd'
+import UpdateUser from './components/admin/UpdateUser'
+import AddUser from './components/admin/AddUser'
+import AddAdmin from './components/admin/AddAdmin'
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -79,6 +83,21 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            exact
+            path={'/forgetPwd/:id'}
+            element={
+              <ProtectedRoute>
+                <ForgetPwd />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* user admin */}
+          <Route exact path={'/viewuser'} element={<UserManagement />} />
+          <Route exact path={'/updateuser/:id'} element={<UpdateUser />} />
+          <Route exact path={'/adduser'} element={<AddUser />} />
+          <Route exact path={'/addadmin'} element={<AddAdmin />} />
 
           {/* admin */}
           <Route

@@ -41,7 +41,14 @@ function SignIn(props) {
       await axios
         .post('http://localhost:5000/api/auth/login', credentials)
         .then((res) => {
-          if (res.data.isAdmin) {
+          if (res.data.details.type === 'sAdmin') {
+            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
+            navigate('/viewuser')
+            Toast.fire({
+              icon: 'success',
+              title: 'Signed in successfully',
+            })
+          } else if (res.data.details.type === 'Admin') {
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
             navigate('/profile')
             Toast.fire({

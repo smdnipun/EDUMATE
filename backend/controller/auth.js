@@ -52,3 +52,34 @@ export const login = async (req, res, next) => {
     next(err)
   }
 }
+
+export const updatePassword = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ id: req.params.id })
+    // if (!user) return next(createError(404, 'User not found!'))
+
+    const isPasswordCorrect = await bcrypt.compare(
+      req.body.oldPassword,
+      user.password
+    )
+    if (!isPasswordCorrect) return next(createError(200, 'Wrong Password'))
+
+    const salt = bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(req.body.newPassword, salt)
+    const obj = {
+      password: hash,
+    }
+    await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: obj,
+      },
+      {
+        new: true,
+      }
+    )
+    res.status(200).json('Password Reset')
+  } catch (err) {
+    next(err)
+  }
+}

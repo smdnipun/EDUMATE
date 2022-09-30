@@ -45,3 +45,27 @@ export const getUsers = async (req, res, next) => {
     next(err)
   }
 }
+
+//get User by type
+export const getUserByType = async (req, res, next) => {
+  try {
+    const user = await User.find({ type: req.params.type })
+    res.status(200).json(user)
+  } catch (err) {
+    next(err)
+  }
+}
+
+// export const countByUser = async (req, res, next) => {
+//   const firtName = req.query.name.split(',')
+//   try {
+//     const list = await Promise.all(
+//       cities.map((city) => {
+//         return Hotel.countDocuments({ city: city })
+//       })
+//     )
+//     res.status(200).json(list)
+//   } catch (err) {
+//     next(err)
+//   }
+// }

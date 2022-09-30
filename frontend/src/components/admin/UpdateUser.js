@@ -1,20 +1,21 @@
+import React, { useEffect } from 'react'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Navbar } from '../Navbar'
-import Navigation from '../Navigation/Navigation'
-import { ProfileCard } from './ProfileCard'
+import { useState } from 'react'
+import AdminNav from '../common/Navigation/AdminNav'
 import Swal from 'sweetalert2'
 
-function Update() {
+function UpdateUser() {
+  const params = useParams()
+  const [data, setData] = useState({})
+  const [streams, setStreams] = useState([])
   const [firstName, setFname] = useState()
   const [lastName, setLname] = useState()
+  const [type, setType] = useState()
   const [stream, setStream] = useState()
+  const [email, setEmail] = useState()
   const [dob, setDob] = useState()
-  const [data, setData] = useState([])
   const navigate = useNavigate()
-
-  const params = useParams()
 
   useEffect(() => {
     loadData()
@@ -25,25 +26,35 @@ function Update() {
     axios
       .get(`/api/users/${params.id}`)
       .then((res) => {
+        setData(res.data)
         setFname(res.data.firstName)
         setLname(res.data.lastName)
+        setType(res.data.type)
         setStream(res.data.stream)
-        setDob(res.data.dateOfBirth)
+        setEmail(res.data.email)
+        console.log(res.data)
       })
       .catch((err) => {
         console.log(err)
       })
   }
-
-  const loadStream = async () => {
+  const loadStream = () => {
     axios
       .get('/stream/')
       .then((res) => {
-        setData(res.data)
+        setStreams(res.data)
+        console.log(res.data)
       })
       .catch((err) => {
         console.log(err)
       })
+  }
+  const setprofileData = () => {
+    setFname(data.firstName)
+    setLname(data.lastName)
+    setType(data.type)
+    setStream(data.stream)
+    setEmail(data.email)
   }
 
   const handlesubmit = () => {
@@ -51,27 +62,27 @@ function Update() {
       .put(`/api/users/${params.id}`, {
         firstName: firstName,
         lastName: lastName,
+        type: type,
         stream: stream,
-        dateOfBirth: dob,
+        email: email,
       })
       .then((res) => {
-        Swal.fire('Done!', 'Successfully Updated', 'success')
-        navigate('/logout')
+        Swal.fire('Congrats!', 'Successfully Added', 'success')
+        navigate('/viewuser')
       })
   }
 
   return (
     <div>
-      <Navigation />
+      <AdminNav />
       <div className='container'>
         <div className='main-body my-5'>
           <div className='row gutters-sm mt-5'>
-            <div className='my-2' style={{ marginLeft: '30%', width: '40%' }}>
-              <ProfileCard />
-            </div>
-
             <div className='card'>
               <div className='card-body'>
+                <div className='d-flex justify-content-center pb-3'>
+                  <h1>Update User Details</h1>
+                </div>
                 <div className='row mb-3'>
                   <div className='col-sm-3'>
                     <h6 className='mb-0'>First Name</h6>
@@ -100,15 +111,21 @@ function Update() {
                 </div>
                 <div className='row mb-3'>
                   <div className='col-sm-3'>
-                    <h6 className='mb-0'>Date Of Birth</h6>
+                    <h6 className='mb-0'>Role</h6>
                   </div>
                   <div className='col-sm-9 text-secondary'>
-                    <input
-                      type='date'
-                      className='form-control'
-                      value={dob}
-                      onChange={(e) => setDob(e.target.value)}
-                    />
+                    <select
+                      id='type'
+                      name='type'
+                      className='form-control form-control-md'
+                      placeholder='Choose'
+                      value={type}
+                      onChange={(e) => setType(e.target.value)}
+                      required
+                    >
+                      <option value='Student'>Student</option>
+                      <option value='Teacher'>Teacher</option>
+                    </select>
                   </div>
                 </div>
                 <div className='row mb-3'>
@@ -119,12 +136,13 @@ function Update() {
                     <select
                       id='stream'
                       name='stream'
-                      className='form-control'
+                      className='form-control form-control-md'
                       value={stream}
                       onChange={(e) => setStream(e.target.value)}
                       required
                     >
-                      {data.map((stream) => {
+                      <option value={data.stream}>{data.stream}</option>
+                      {streams.map((stream) => {
                         return (
                           <option key={stream._id} value={stream.streamname}>
                             {stream.streamname}
@@ -132,6 +150,19 @@ function Update() {
                         )
                       })}
                     </select>
+                  </div>
+                </div>
+                <div className='row mb-3'>
+                  <div className='col-sm-3'>
+                    <h6 className='mb-0'>Email</h6>
+                  </div>
+                  <div className='col-sm-9 text-secondary'>
+                    <input
+                      type='text'
+                      className='form-control  form-control-md'
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
                   </div>
                 </div>
                 <div className='row '>
@@ -155,4 +186,4 @@ function Update() {
   )
 }
 
-export default Update
+export default UpdateUser
