@@ -5,11 +5,12 @@ import { Navbar } from '../../common/Navbar'
 import { AuthContext } from '../../../context/AuthContext'
 import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
+import Swal from 'sweetalert2'
 
 export const MarkPaper = () => {
   const hr = {
     borderLeft: '6px solid green',
-    height: '400px',
+    height: '500px',
   }
 
   const [note, setNote] = useState([])
@@ -17,6 +18,7 @@ export const MarkPaper = () => {
   const [comment, setComment] = useState()
   const [status, setStatus] = useState('')
   const params = useParams()
+
 
   const { user } = useContext(AuthContext)
   const userId = user._id
@@ -26,6 +28,9 @@ export const MarkPaper = () => {
       setNote(res.data)
     })
   }
+  
+
+
   useEffect(() => {
     loadData()
   }, [])
@@ -43,7 +48,9 @@ export const MarkPaper = () => {
       status: event.target.value,
     }
 
-    axios.put(`/StudentAnswers/${params.id}`, data)
+    axios.put(`/StudentAnswers/${params.id}`, data).then(() => {
+
+    })
 
   }
 
@@ -57,15 +64,29 @@ export const MarkPaper = () => {
     markedBy: userId,
   }
   console.log(status)
-  const addMarks = () => {
-    if (status !== 'Marked' ) {
-      alert('please change the status to marked')
+
+  const addMarks = async() => {
+    if (status !== 'Marked'  ) {
+     Swal.fire({
+       icon: 'error',
+       title: 'Oops...',
+       text: 'Something went wrong!',
+     })
     }
     else if (mark>100 || mark<0 ) {
-      alert('please enter number between 0 and 100')
+     
+      Swal.fire({
+        icon: 'error',
+        title: 'please enter number between 0 and 100'
+      })
       } else {
-        axios.post('/mark/add/', data)
+       await axios.post('/mark/add/', data)
         // alert('succesfully marked')
+            Swal.fire({
+              icon: 'success',
+              title: 'Marks added',
+              timer: 1500,
+            })
       }
   
    
@@ -79,23 +100,27 @@ export const MarkPaper = () => {
           <form onSubmit={addMarks}>
             <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2 py=5'>
               <div className='mx-5 mt-5'>
-                <h1 className='mr-5'>Paper Marking</h1>
-
+                &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+                &nbsp; &nbsp;&nbsp;
+                <h1 className='mx-5'> Paper Marking </h1>
+                <br />
+                <br />
                 <input
                   type='number'
+                  style={{ width: '385px' }}
                   className='form-control mb-5 mt-5 '
                   id='mark'
                   name='mark'
-                  placeholder='place the mark'
+                  placeholder='                         place the mark'
                   required
                   value={mark}
                   onChange={(e) => {
                     setMark(e.target.value)
                   }}
                 />
-
                 <button
                   type='submit'
+                  style={{ width: '300px', height: '50px' }}
                   className='btn btn-secondary btn-lg mx-5 mt-5'
                 >
                   Mark
@@ -109,11 +134,12 @@ export const MarkPaper = () => {
                     <br />
                     <br />
                     <label>Status</label>
-                    <br/>
+                    <br />
                     <Select
+                      style={{ width: '200px' }}
                       value={status}
                       onChange={updateStatus}
-                      displayEmpty
+                      SelectDisplayProps
                       inputProps={{ 'aria-label': 'Without label' }}
                     >
                       <MenuItem value='None'>None</MenuItem>
@@ -125,9 +151,10 @@ export const MarkPaper = () => {
                   <br />
                   <br />
                   <br />
-                  <div className='form-group align-self-stretch'>
+                  <div className='form-group'>
                     <textarea
                       type='text'
+                      style={{ width: '340px', height: '170px' }}
                       class='form-control'
                       required
                       id='formGroupExampleInput'

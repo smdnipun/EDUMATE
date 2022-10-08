@@ -50,7 +50,7 @@ app.use('/teacherNote', teacherRouter)
 app.use('/StudentAnswers', exprees.static('StudentAnswers'))
 app.use('/TeacherNotes', exprees.static('TeacherNotes'))
 app.use('/mark', markRouter)
-app.use('/comment',commentRouter)
+app.use('/comment', commentRouter)
 
 //error handling
 app.use((err, req, res, next) => {
