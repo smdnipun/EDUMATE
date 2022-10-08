@@ -91,9 +91,12 @@ export const ViewStudentPaper = () => {
                           <br />
                           <br />
                           <CardActions>
-                          
                             <NavLink to={`/markpapers/${data._id}`}>
-                              <Button variant='outlined' size='large'>
+                              <Button
+                                style={{ width: '115px' ,height:'65px' }}
+                                variant='outlined'
+                                size='large'
+                              >
                                 Mark
                               </Button>
                             </NavLink>

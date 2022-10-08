@@ -29,6 +29,7 @@ import { AuthContext } from './context/AuthContext'
 import { MarkPaper } from './components/client/teacher/MarkPaper.js'
 import { UpdateMark } from './components/client/teacher/UpdateMark.js'
 import { ViewComments } from './components/client/teacher/ViewComments.js'
+import { NotesReport } from './components/client/teacher/NotesReport'
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -124,6 +125,7 @@ function App() {
           <Route exact path='/markpapers/:id' element={<MarkPaper />} />
           <Route exact path='/viewmark' element={<UpdateMark />} />
           <Route exact path='/viewComments' element={<ViewComments/>} />
+            <Route exact path='/notereport' element={<NotesReport/>} />
         </Routes>
       </BrowserRouter>
     </div>

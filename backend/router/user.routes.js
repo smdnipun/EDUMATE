@@ -21,4 +21,5 @@ router.get('/:id', getUser)
 // get all
 router.get('/', verifyAdmin, getUsers)
 
+
 export default router

@@ -99,3 +99,13 @@ export const getNoteByTeacherId = async (req, res, next) => {
     res.json(result)
   })
 }
+
+
+
+export const getSubject = async (req, res, next) => {
+
+
+  const marks = await TeacherNotesModel.find().select({ subject: 1, _id: 0 })
+
+  res.status(200).json(marks)
+}

@@ -6,7 +6,9 @@ import {
   getMark,
   getMarks,
   getMarkByStudentId,
-  getMarkByTeacherId
+  getMarkByTeacherId,
+  // getCountofMark,
+
 } from '../controller/Mark.controller.js'
 
 const router = express.Router()
@@ -25,6 +27,7 @@ router.get('/', getMarks)
 
 router.get('/get/:student_id', getMarkByStudentId)
 router.get('/getto/:markedBy', getMarkByTeacherId)
+// router.get('/count', getCountofMark)
 
 
 export default router
