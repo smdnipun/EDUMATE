@@ -61,3 +61,8 @@ export const getUsers = async (req, res, next) => {
     next(err)
   }
 }
+
+export const getType = async (req, res, next) => {
+  const users = await User.find().select({ type: 1, _id: 0 })
+  res.status(200).json(users)
+}

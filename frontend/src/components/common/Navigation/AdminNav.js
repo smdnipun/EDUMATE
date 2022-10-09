@@ -12,21 +12,19 @@ function AdminNav() {
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='me-auto'>
-            <Nav.Link href='/viewuser'>Home</Nav.Link>
+            <Nav.Link href='/admin/home'>Home</Nav.Link>
             <Nav.Link href='/adduser'>Add User</Nav.Link>
             <Nav.Link href='/addadmin'>Add Admin</Nav.Link>
             <NavDropdown title='Details' id='collasible-nav-dropdown'>
-              <NavDropdown.Item href='#action/3.1'>
-                User Details
-              </NavDropdown.Item>
-              <NavDropdown.Item href='#action/3.2'>
+              <NavDropdown.Item href='/viewuser'>User Details</NavDropdown.Item>
+              {/* <NavDropdown.Item href='#action/3.2'>
                 Admin Details
               </NavDropdown.Item>
-              <NavDropdown.Item href='#action/3.3'>Something</NavDropdown.Item>
-              <NavDropdown.Divider />
+              <NavDropdown.Item href='#action/3.3'>Something</NavDropdown.Item> */}
+              {/* <NavDropdown.Divider />
               <NavDropdown.Item href='#action/3.4'>
                 Separated link
-              </NavDropdown.Item>
+              </NavDropdown.Item> */}
             </NavDropdown>
           </Nav>
           <Nav>

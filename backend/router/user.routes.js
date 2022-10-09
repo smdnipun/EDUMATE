@@ -1,6 +1,7 @@
 import express from 'express'
 import {
   deleteUser,
+  getType,
   getUser,
   getUsers,
   updateUser,
@@ -21,9 +22,10 @@ router.get('/:id', getUser)
 // get all
 router.get('/', getUsers)
 
+router.get('/get/type', getType)
+
 //get user by type
 // router.get('/', getUserByType)
 // router.get('/search/:firstName', getUserByName)
-
 
 export default router
