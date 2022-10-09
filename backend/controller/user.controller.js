@@ -37,10 +37,26 @@ export const getUser = async (req, res, next) => {
 }
 
 //get All
+// export const getUsers = async (req, res, next) => {
+//   try {
+//     const users = await User.find()
+//     res.status(200).json(users)
+//   } catch (err) {
+//     next(err)
+//   }
+// }
+
 export const getUsers = async (req, res, next) => {
   try {
+    const { q } = req.query
     const users = await User.find()
-    res.status(200).json(users)
+    const keys = ['firstName', 'lastName', 'type', 'stream', 'email']
+    const search = (data) => {
+      return data.filter((item) =>
+        keys.some((key) => item[key].toLowerCase().includes(q))
+      )
+    }
+    q ? res.json(search(users).slice(0, 10)) : res.json(users.slice(0, 10))
   } catch (err) {
     next(err)
   }

@@ -41,7 +41,14 @@ function SignIn(props) {
       await axios
         .post('http://localhost:5000/api/auth/login', credentials)
         .then((res) => {
-          if (res.data.isAdmin) {
+          if (res.data.details.type === 'sAdmin') {
+            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
+            navigate('/viewuser')
+            Toast.fire({
+              icon: 'success',
+              title: 'Signed in successfully',
+            })
+          } else if (res.data.details.type === 'Admin') {
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
             navigate('/profile')
             Toast.fire({
@@ -95,11 +102,11 @@ function SignIn(props) {
                   {error && <strong>{error.message}</strong>}
                 </p>
               </div>
-              <div className='form-outline mb-4'>
+              <div className='form-outline mb-3'>
                 <input
                   type='email'
                   id='email'
-                  className='form-control form-control-lg'
+                  className='form-control form-control-lg mb-1'
                   placeholder='Enter a valid email address'
                   onChange={handleChange}
                   required
@@ -112,7 +119,7 @@ function SignIn(props) {
                 <input
                   type='password'
                   id='password'
-                  className='form-control form-control-lg'
+                  className='form-control form-control-lg mb-1'
                   placeholder='Enter password'
                   onChange={handleChange}
                   required
@@ -125,13 +132,13 @@ function SignIn(props) {
               <div className='d-flex justify-content-between align-items-center'>
                 <button
                   type='submit'
-                  className='btn btn-primary btn-lg'
+                  className='btn btn-primary px-4'
                   disabled={loading}
                   onClick={handleClick}
                 >
                   Login
                 </button>
-                <a href='#!' className='text-body'>
+                <a href='/forgotPassword' className='text-body'>
                   Forgot password?
                 </a>
               </div>
