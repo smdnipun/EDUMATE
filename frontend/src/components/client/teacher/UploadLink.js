@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState,useContext,useEffect } from 'react'
 import axios from 'axios'
 import Alert from '@mui/material/Alert'
 import $ from 'jquery'
 import { Navbar } from '../../common/Navbar'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../../context/AuthContext'
+import Swal from 'sweetalert2'
 
 export const UploadLink = () => {
 
@@ -19,6 +21,21 @@ export const UploadLink = () => {
   const [date, setDate] = useState()
   const [time, setTime] = useState()
   const [link, setLink] = useState()
+    const [stream, setStream] = useState([])
+
+  const { user } = useContext(AuthContext)
+  const userId = user._id
+
+  const loadStream = () => {
+    axios.get('stream/').then((res) => {
+      setStream(res.data)
+    })
+  }
+
+  
+  useEffect(() => {
+    loadStream()
+  }, [])
 
   const add = {
     subject,
@@ -27,13 +44,18 @@ export const UploadLink = () => {
     date,
     time,
     link,
+    teacher_id:userId
   }
 
   console.log(add)
 
   const upload = () => {
     axios.post('link/add', add)
-    alert('Succsessfully Added')
+     Swal.fire({
+       icon: 'success',
+       title: 'Link added',
+     
+     })
     navigate('/viewlink')
 
     //  $(document).ready(function() {
@@ -50,26 +72,30 @@ export const UploadLink = () => {
         <div className='mt-5 pt-4'>
           <form onSubmit={upload}>
             <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2 py=5'>
-              <div className='mx-5 mt-5'>
+              <div className='mx-2 mt-5'>
+                &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+                &nbsp; &nbsp;&nbsp;
                 <h1 className='mr-5'>Upload link</h1>
-
+                <br />
+                <br />
                 <input
                   type='text'
-                  class='form-control mb-5 '
+                  style={{ width: '385px' }}
+                  class='form-control mb-5 mt-5'
                   id='link'
                   name='link'
-                  placeholder='place the link'
+                  placeholder='                         place the link'
                   required
                   value={link}
                   onChange={(e) => {
                     setLink(e.target.value)
                   }}
                 />
-
                 <button
                   type='submit'
+                  style={{ width: '300px', height: '50px' }}
                   id='upload'
-                  class='btn btn-secondary btn-lg '
+                  class='btn btn-secondary btn-lg  mx-5 mt-5 '
                 >
                   Upload
                 </button>
@@ -78,17 +104,21 @@ export const UploadLink = () => {
               <div className='mx-5 mt-5 pb-4'>
                 <form>
                   <select
+                    id='stream'
+                    name='stream'
                     className='form-control'
                     value={subject}
-                    onChange={(e) => {
-                      setSubject(e.target.value)
-                    }}
+                    onChange={(e) => setSubject(e.target.value)}
+                    required
                   >
-                    <option>Select a subject</option>
-                    <option>Select a subject</option>
-                    <option>Combined maths</option>
-                    <option>Biology</option>
-                    <option>Physics</option>
+                    <option>Stream</option>
+                    {stream.map((stream) => {
+                      return (
+                        <option key={stream._id} value={stream.streamname}>
+                          {stream.streamname}
+                        </option>
+                      )
+                    })}
                   </select>
                   <br />
                   <br />
@@ -109,7 +139,7 @@ export const UploadLink = () => {
                   <br />
                   <br />
                   <div className='form-group'>
-                    <input
+                    <select
                       type='number'
                       class='form-control'
                       required
@@ -119,7 +149,11 @@ export const UploadLink = () => {
                       onChange={(e) => {
                         setGrade(e.target.value)
                       }}
-                    />
+                    >
+                      <option>Grade</option>
+                      <option value={12}>12</option>
+                      <option value={13}>13</option>
+                    </select>
                   </div>
                   <br />
                   <br />

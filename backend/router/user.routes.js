@@ -25,4 +25,5 @@ router.get('/', getUsers)
 // router.get('/', getUserByType)
 // router.get('/search/:firstName', getUserByName)
 
+
 export default router

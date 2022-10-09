@@ -33,6 +33,10 @@ import AddAdmin from './components/admin/AddAdmin'
 import OTPverification from './components/common/userReg/OTPverification'
 import ForgetPassword from './components/common/userReg/ForgetPassword'
 import './components/common/userReg/main.css'
+import { MarkPaper } from './components/client/teacher/MarkPaper.js'
+import { UpdateMark } from './components/client/teacher/UpdateMark.js'
+import { ViewComments } from './components/client/teacher/ViewComments.js'
+import { NotesReport } from './components/client/teacher/NotesReport'
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -135,21 +139,17 @@ function App() {
           <Route exact path={'/feedback'} element={<FeedBack />} />
 
           {/* teacher */}
-          <Route
-            exact
-            path='/addlink'
-            element={
-              <TeacherProtectedRoutes>
-                <UploadLink />
-              </TeacherProtectedRoutes>
-            }
-          />
+          <Route exact path='/addlink' element={<UploadLink />} />
           <Route exact path='/viewlink' element={<ViewLinks />} />
           <Route exact path='/updatelink/:id' element={<Updatelink />} />
           <Route exact path='/addNote' element={<UploadNote />} />
           <Route exact path='/viewNote' element={<ViewNote />} />
           <Route exact path='/updatenote/:id' element={<UpdateNote />} />
           <Route exact path='/papers' element={<ViewStudentPaper />} />
+          <Route exact path='/markpapers/:id' element={<MarkPaper />} />
+          <Route exact path='/viewmark' element={<UpdateMark />} />
+          <Route exact path='/viewComments' element={<ViewComments/>} />
+            <Route exact path='/notereport' element={<NotesReport/>} />
         </Routes>
       </BrowserRouter>
     </div>

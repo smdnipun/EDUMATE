@@ -16,6 +16,10 @@ const teacherNotesSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  teacher_id: {
+    type: String,
+    required:true,
+  },
 })
 
 export default mongoose.model('teacherNotes', teacherNotesSchema)
