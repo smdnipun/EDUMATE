@@ -56,7 +56,7 @@ export const login = async (req, res, next) => {
 export const updatePassword = async (req, res, next) => {
   try {
     const user = await User.findOne({ id: req.params.id })
-    // if (!user) return next(createError(404, 'User not found!'))
+    if (!user) return next(createError(200, 'User not found!'))
 
     const isPasswordCorrect = await bcrypt.compare(
       req.body.oldPassword,
@@ -79,6 +79,46 @@ export const updatePassword = async (req, res, next) => {
       }
     )
     res.status(200).json('Password Reset')
+  } catch (err) {
+    next(err)
+  }
+}
+
+export const verifyEmail = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ email: req.body.email })
+    if (user != null) {
+      let obj = {
+        message: 'Exist',
+        id: user._id,
+        name: user.firstName,
+      }
+      return res.status(200).json(obj)
+    } else {
+      return res.status(200).json({ message: 'failed' })
+    }
+  } catch (err) {
+    next(err)
+  }
+}
+
+export const forgetPassword = async (req, res, next) => {
+  try {
+    const salt = bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(req.body.newPassword, salt)
+    const obj = {
+      password: hash,
+    }
+    await User.findByIdAndUpdate(
+      req.body.id,
+      {
+        $set: obj,
+      },
+      {
+        new: true,
+      }
+    )
+    res.status(200).json('Password Updated')
   } catch (err) {
     next(err)
   }

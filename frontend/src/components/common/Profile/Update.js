@@ -47,17 +47,25 @@ function Update() {
   }
 
   const handlesubmit = () => {
-    axios
-      .put(`/api/users/${params.id}`, {
-        firstName: firstName,
-        lastName: lastName,
-        stream: stream,
-        dateOfBirth: dob,
+    if (firstName === '' && lastName === '' && stream === '' && dob === '') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Warning',
+        text: 'Please fill all the details!!!',
       })
-      .then((res) => {
-        Swal.fire('Done!', 'Successfully Updated', 'success')
-        navigate('/logout')
-      })
+    } else {
+      axios
+        .put(`/api/users/${params.id}`, {
+          firstName: firstName,
+          lastName: lastName,
+          stream: stream,
+          dateOfBirth: dob,
+        })
+        .then((res) => {
+          Swal.fire('Done!', 'Successfully Updated', 'success')
+          navigate('/logout')
+        })
+    }
   }
 
   return (

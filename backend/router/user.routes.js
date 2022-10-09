@@ -2,7 +2,6 @@ import express from 'express'
 import {
   deleteUser,
   getUser,
-  getUserByType,
   getUsers,
   updateUser,
 } from '../controller/user.controller.js'
@@ -23,6 +22,7 @@ router.get('/:id', getUser)
 router.get('/', getUsers)
 
 //get user by type
-// router.get('/:type', getUserByType)
+// router.get('/', getUserByType)
+// router.get('/search/:firstName', getUserByName)
 
 export default router

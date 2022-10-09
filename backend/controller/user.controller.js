@@ -46,25 +46,30 @@ export const getUsers = async (req, res, next) => {
   }
 }
 
-//get User by type
-export const getUserByType = async (req, res, next) => {
-  try {
-    const user = await User.find({ type: req.params.type })
-    res.status(200).json(user)
-  } catch (err) {
-    next(err)
-  }
-}
-
-// export const countByUser = async (req, res, next) => {
-//   const firtName = req.query.name.split(',')
+// //get User by type
+// export const getUserByType = async (req, res, next) => {
 //   try {
-//     const list = await Promise.all(
-//       cities.map((city) => {
-//         return Hotel.countDocuments({ city: city })
-//       })
-//     )
-//     res.status(200).json(list)
+//     const user = await User.find({ type: req.params.type })
+//     res.status(200).json(user)
+//   } catch (err) {
+//     next(err)
+//   }
+// }
+
+// export const getUserByName = async (req, res, next) => {
+//   let myquery = { firstName: Object(req.params.firstName) }
+
+//   User.find(myquery, function (err, result) {
+//     if (err) throw err
+
+//     res.json(result)
+//   })
+// }
+
+// export const getUserByName = async (req, res, next) => {
+//   try {
+//     const user = await User.find({ firstName: req.params.firstName })
+//     res.status(200).json(user)
 //   } catch (err) {
 //     next(err)
 //   }

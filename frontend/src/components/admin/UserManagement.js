@@ -15,6 +15,7 @@ import AdminNav from '../common/Navigation/AdminNav.js'
 function UserManagement() {
   const [data, setData] = useState([])
   const navigate = useNavigate()
+  const [searchItem, setSearchItem] = useState('')
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
@@ -37,6 +38,17 @@ function UserManagement() {
     })
   }
 
+    // useEffect(() => {
+    //   console.log(searchItem)
+    // }, [searchItem])
+
+  // const searchData = () => {
+  //   axios.get(`http://localhost:5000/api/users?firstname=${searchItem}`)
+  //     .then((res) => {
+  //       setData(res.data)
+  //   })
+  // }
+
   const deleteProfile = async (id) => {
     await axios.delete(`http://localhost:5000/api/users/${id}`).then((res) => {
       window.location.reload()
@@ -51,7 +63,15 @@ function UserManagement() {
       </div>
 
       <div className='container mt-4'>
-        <input type='text' className='form-control' placeholder='Search...' />
+        <input
+          type='text'
+          className='form-control'
+          placeholder='Search...'
+          value={searchItem}
+          onChange={(e) => {
+            setSearchItem(e.target.value)
+          }}
+        />
         <div className='mt-2'>
           <Paper sx={{ width: '100%' }}>
             <TableContainer sx={{ maxHeight: 600 }}>

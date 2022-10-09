@@ -30,6 +30,9 @@ import ForgetPwd from './components/common/Profile/ForgetPwd'
 import UpdateUser from './components/admin/UpdateUser'
 import AddUser from './components/admin/AddUser'
 import AddAdmin from './components/admin/AddAdmin'
+import OTPverification from './components/common/userReg/OTPverification'
+import ForgetPassword from './components/common/userReg/ForgetPassword'
+import './components/common/userReg/main.css'
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -65,6 +68,8 @@ function App() {
           <Route exact path={'/login'} element={<SignIn />} />
           <Route exact path={'/logout'} element={<SignIn logout={true} />} />
           <Route exact path={'/register'} element={<SignUp />} />
+          <Route exact path={'/forgotPassword'} element={<OTPverification />} />
+          <Route exact path={'/resetPassword'} element={<ForgetPassword />} />
           <Route
             exact
             path={'/profile'}
