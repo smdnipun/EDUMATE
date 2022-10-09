@@ -32,7 +32,6 @@ function UpdateUser() {
         setType(res.data.type)
         setStream(res.data.stream)
         setEmail(res.data.email)
-        console.log(res.data)
       })
       .catch((err) => {
         console.log(err)
@@ -43,7 +42,6 @@ function UpdateUser() {
       .get('/stream/')
       .then((res) => {
         setStreams(res.data)
-        console.log(res.data)
       })
       .catch((err) => {
         console.log(err)

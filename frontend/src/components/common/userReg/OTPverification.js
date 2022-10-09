@@ -73,9 +73,9 @@ function OTPverification() {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Your work has been saved',
+            title: 'OTP is sent your Email. Please Check!',
             showConfirmButton: false,
-            timer: 1500,
+            timer: 3000,
           })
         },
         function (error) {

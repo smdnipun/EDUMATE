@@ -19,33 +19,22 @@ function UserManagement() {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage)
-  }
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value)
-    setPage(0)
-  }
-
   useEffect(() => {
-    loadData()
-  }, [])
+    // fetchData()
+    const fetchData = async () => {
+      await axios
+        .get(`http://localhost:5000/api/users?q=${searchItem}`)
+        .then((res) => {
+          setData(res.data)
+        })
+    }
+    // if (searchItem.length === 0 || searchItem.length > 1)
+    fetchData()
+  }, [searchItem])
 
-  const loadData = async () => {
-    axios.get('http://localhost:5000/api/users/').then((res) => {
-      setData(res.data)
-    })
-  }
-
-    // useEffect(() => {
-    //   console.log(searchItem)
-    // }, [searchItem])
-
-  // const searchData = () => {
-  //   axios.get(`http://localhost:5000/api/users?firstname=${searchItem}`)
-  //     .then((res) => {
-  //       setData(res.data)
+  // const fetchData = async () => {
+  //   axios.get('http://localhost:5000/api/users/').then((res) => {
+  //     setData(res.data)
   //   })
   // }
 
@@ -55,23 +44,35 @@ function UserManagement() {
     })
   }
 
+  //pagination
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage)
+  }
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value)
+    setPage(0)
+  }
+
   return (
     <div>
       <AdminNav />
-      <div className='d-flex justify-content-center pt-3'>
-        <h1>User Details</h1>
-      </div>
 
       <div className='container mt-4'>
-        <input
-          type='text'
-          className='form-control'
-          placeholder='Search...'
-          value={searchItem}
-          onChange={(e) => {
-            setSearchItem(e.target.value)
-          }}
-        />
+        <div className='d-flex justify-content-right pb-3'>
+          <h2>User Details</h2>
+        </div>
+        <div className='col-12 col-md-3'>
+          <input
+            type='text'
+            className='form-control'
+            placeholder='Search...'
+            value={searchItem}
+            onChange={(e) => {
+              setSearchItem(e.target.value.toLowerCase())
+            }}
+          />
+        </div>
         <div className='mt-2'>
           <Paper sx={{ width: '100%' }}>
             <TableContainer sx={{ maxHeight: 600 }}>
@@ -82,20 +83,35 @@ function UserManagement() {
               >
                 <TableHead>
                   <TableRow>
-                    <TableCell className='font-weight-bold'>
-                      First Name
+                    <TableCell>
+                      <p className='fw-bold fs-6 m-0'>First Name</p>
                     </TableCell>
-                    <TableCell>Last Name</TableCell>
-                    <TableCell>Role</TableCell>
-                    <TableCell>Stream</TableCell>
-                    <TableCell>Date of Birth</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Action</TableCell>
+                    <TableCell>
+                      <p className='fw-bold fs-6 m-0'>Last Name</p>
+                    </TableCell>
+                    <TableCell>
+                      <p className='fw-bold fs-6 m-0'>Role</p>
+                    </TableCell>
+                    <TableCell>
+                      <p className='fw-bold fs-6 m-0'>Stream</p>
+                    </TableCell>
+                    <TableCell>
+                      <p className='fw-bold fs-6 m-0'>Date of Birth</p>
+                    </TableCell>
+                    <TableCell>
+                      <p className='fw-bold fs-6 m-0'>Email</p>
+                    </TableCell>
+                    <TableCell>
+                      <p className='fw-bold fs-6 m-0'>Action</p>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {data
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    // .filter((fname) =>
+                    //   fname.firstName.toLowerCase().includes(searchItem)
+                    // )
                     .map((row) => (
                       <TableRow>
                         <TableCell>{row.firstName}</TableCell>
