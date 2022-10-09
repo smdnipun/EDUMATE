@@ -9,12 +9,11 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import TablePagination from '@mui/material/TablePagination'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import AdminNav from '../common/Navigation/AdminNav.js'
 
 function UserManagement() {
   const [data, setData] = useState([])
-  const navigate = useNavigate()
   const [searchItem, setSearchItem] = useState('')
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
