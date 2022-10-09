@@ -17,3 +17,7 @@
 body {
   overflow-y: hidden;
 }
+.report-box {
+  width: 60vh;
+  height: 65vh;
+}

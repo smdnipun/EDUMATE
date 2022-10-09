@@ -1,7 +1,5 @@
 import React, { useState,useContext,useEffect } from 'react'
 import axios from 'axios'
-import Alert from '@mui/material/Alert'
-import $ from 'jquery'
 import { Navbar } from '../../common/Navbar'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../../context/AuthContext'
