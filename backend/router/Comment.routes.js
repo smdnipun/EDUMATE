@@ -5,7 +5,7 @@ import {
   deleteComment,
   getComment,
   getComments,
-  getCommentByTeacherId,
+  getCommentByNoteId,
 } from '../controller/Comment.controller.js'
 const router = express.Router()
 //CREATE
@@ -21,6 +21,6 @@ router.get('/:id', getComment)
 
 router.get('/', getComments)
 
-router.get('/get/:teacher_id', getCommentByTeacherId)
+router.get('/get/:note_id', getCommentByNoteId)
 
 export default router

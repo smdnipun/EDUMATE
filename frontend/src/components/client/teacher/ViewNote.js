@@ -90,8 +90,13 @@ export const ViewNote = () => {
                             >
                               Delete
                             </Button>
+                            &nbsp; &nbsp;&nbsp;
                             <NavLink to={`/updatenote/${row._id}`}>
                               <Button variant='contained'>Update</Button>
+                            </NavLink>
+                            &nbsp; &nbsp;&nbsp;
+                            <NavLink to={`/viewComments/${row._id}`}>
+                              <Button variant='contained'>View Comments</Button>
                             </NavLink>
                           </TableCell>
                         </TableRow>

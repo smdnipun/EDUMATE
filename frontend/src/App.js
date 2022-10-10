@@ -150,7 +150,7 @@ function App() {
           <Route exact path='/papers' element={<ViewStudentPaper />} />
           <Route exact path='/markpapers/:id' element={<MarkPaper />} />
           <Route exact path='/viewmark' element={<UpdateMark />} />
-          <Route exact path='/viewComments' element={<ViewComments />} />
+          <Route exact path='/viewComments/:id' element={<ViewComments />} />
           <Route exact path='/notereport' element={<NotesReport />} />
         </Routes>
       </BrowserRouter>

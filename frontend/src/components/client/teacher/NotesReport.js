@@ -11,6 +11,7 @@ import {
   Legend,
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
+import Navigation from '../../common/Navigation/Navigation'
 
 export const NotesReport = () => {
   
@@ -95,14 +96,19 @@ export const NotesReport = () => {
 
   
   return (
-     <div className="container">
-    <div className='col-xl-8'>
-    <div className='card shadow'>
-    <div className='card-header bg-light font-weight-bold text-gray-800 text-center'>NOTE REPORT</div>
-   
-     
-      <Bar options={options} data={ data} />
+    <div>
+      <Navigation/>
+      <div className='container'>
+        <div className='col-xl-8'>
+          <div className='card shadow'>
+            <div className='card-header bg-light font-weight-bold text-gray-800 text-center'>
+              NOTE REPORT
+            </div>
+
+            <Bar options={options} data={data} />
+          </div>
         </div>
-        </div></div>
+      </div>
+    </div>
   )
 }
