@@ -72,8 +72,8 @@ export const getComments = async (req, res, next) => {
   }
 }
 
-export const getCommentByTeacherId = async (req, res, next) => {
-  let myquery = { teacher_id: Object(req.params.teacher_id) }
+export const getCommentByNoteId = async (req, res, next) => {
+  let myquery = { note_id: Object(req.params.note_id) }
   CommentModel.find(myquery, function (err, result) {
     if (err) throw err
     res.json(result)

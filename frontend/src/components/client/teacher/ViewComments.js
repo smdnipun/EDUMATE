@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import Alert from '@mui/material/Alert'
 import { useParams, useNavigate } from 'react-router-dom'
@@ -15,19 +15,16 @@ export const ViewComments = () => {
     height: '300px',
   }
 
+  const [comment, setComment] = useState([])
+
   const params = useParams()
   console.log(params)
-    const [comment, setComment] = useState([])
-          const { user } = useContext(AuthContext)
-          const userId = user._id
 
   const getLink = () => {
-    axios.get(`/comment/get/${userId}`).then((res) => {
-     setComment(res.data)
+    axios.get(`/comment/get/${params.id}`).then((res) => {
+      setComment(res.data)
     })
   }
-
-
 
   useEffect(() => {
     getLink()
@@ -42,7 +39,7 @@ export const ViewComments = () => {
             <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2'>
               <div className='mx-5 mt-5'>
                 <h1 className='mr-5'>Upload Note</h1>
-              
+
                 <br />
                 <br />
                 <br />
@@ -58,26 +55,20 @@ export const ViewComments = () => {
               <div className='mx-5 mt-5'>
                 <Box sx={{ display: 'flex-horizontal' }}>
                   <CssBaseline />
-                                  {comment.map((data) => {
-                    
-                                      return (
-                                        <>
-                                        
-                                          <span class='input-group-text'>
-                                            {data.studentName}
-                                          </span>
-                                          <input
-                                                  type='text'
-                                                  value={data.comment}
-                                            aria-label='First name'
-                                            class='form-control'
-                                          />
-                                        </>
-                                      )
-                    
-                })}
-                 
-                 
+                  {comment.map((data) => {
+                    return (
+                      <>
+                        <span class='input-group-text'>{data.studentName}</span>
+                        <input
+                          type='text'
+                          value={data.comment}
+                          aria-label='First name'
+                          class='form-control'
+                        />
+                      </>
+                    )
+                  })}
+
                   <Box
                     component='main'
                     sx={{ flexGrow: 1, bgcolor: 'white', p: 3 }}
