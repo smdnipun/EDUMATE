@@ -1,12 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { Navbar } from '../../common/Navbar'
 import { AuthContext } from '../../../context/AuthContext'
 import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import Swal from 'sweetalert2'
-
+import Navigation from '../../common/Navigation/Navigation'
 export const MarkPaper = () => {
   const hr = {
     borderLeft: '6px solid green',
@@ -94,7 +93,7 @@ export const MarkPaper = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navigation />
       <div className='container mt-5'>
         <div className='mt-5 pt-4'>
           <form onSubmit={addMarks}>
