@@ -28,14 +28,22 @@ export const UpdateNote = () => {
       setNote(res.data.note)
     })
   }
+    const noteAdd = (e) => {
+      setNote(e.target.files[0])
+    }
 
+    const formData = new FormData()
+  
+  const file=   formData.append('file', note)
+
+  
   const add = {
     subject,
     lesson_name,
     grade,
-     note,
+    file,
   }
-
+  console.log(add)
   const updateLink = () => {
     axios.put(`/link/${params.id}`, add)
     alert('Succsessfully Updated')
@@ -55,7 +63,7 @@ export const UpdateNote = () => {
             <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2'>
               <div className='mx-5 mt-5'>
                 <h1 className='mr-5'>Upload Note</h1>
-                <input
+                {/* <input
                   type='text'
                   class='form-control'
                   id='link'
@@ -65,6 +73,16 @@ export const UpdateNote = () => {
                   onChange={(e) => {
                     setNote(e.target.value)
                   }}
+                /> */}
+
+                <input
+                  type='file'
+                  style={{ width: '385px' }}
+                  multiple
+                  filename='file'
+                  onChange={noteAdd}
+                  className='form-input'
+                  required
                 />
                 <br />
                 <br />
