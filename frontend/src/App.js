@@ -4,7 +4,6 @@ import { Navbar } from './components/common/Navbar'
 import { Footer } from './components/common/footer'
 import { UploadNote } from './components/client/teacher/uploadNote.js'
 import { StudentAnswersUpload } from './components/client/student/StudentAnswersUpload'
-import Home from './components/client/Home'
 import { ExamTimeTable } from './components/client/student/examtimetable/ExamTimeTable'
 import { FeedBack } from './components/client/student/feedback/FeedBack'
 import { UploadLink } from './components/client/teacher/UploadLink.js'
@@ -26,10 +25,19 @@ import Profile from './components/common/Profile/Profile.js'
 import Update from './components/common/Profile/Update'
 import { ViewStudentPaper } from './components/client/teacher/ViewStudentPaper'
 import { AuthContext } from './context/AuthContext'
+import UserManagement from './components/admin/UserManagement'
+import ForgetPwd from './components/common/Profile/ForgetPwd'
+import UpdateUser from './components/admin/UpdateUser'
+import AddUser from './components/admin/AddUser'
+import AddAdmin from './components/admin/AddAdmin'
+import OTPverification from './components/common/userReg/OTPverification'
+import ForgetPassword from './components/common/userReg/ForgetPassword'
+import './components/common/userReg/main.css'
 import { MarkPaper } from './components/client/teacher/MarkPaper.js'
 import { UpdateMark } from './components/client/teacher/UpdateMark.js'
 import { ViewComments } from './components/client/teacher/ViewComments.js'
 import { NotesReport } from './components/client/teacher/NotesReport'
+import UserReport from './components/admin/UserReport'
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -65,6 +73,8 @@ function App() {
           <Route exact path={'/login'} element={<SignIn />} />
           <Route exact path={'/logout'} element={<SignIn logout={true} />} />
           <Route exact path={'/register'} element={<SignUp />} />
+          <Route exact path={'/forgotPassword'} element={<OTPverification />} />
+          <Route exact path={'/resetPassword'} element={<ForgetPassword />} />
           <Route
             exact
             path={'/profile'}
@@ -83,6 +93,22 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            exact
+            path={'/forgetPwd/:id'}
+            element={
+              <ProtectedRoute>
+                <ForgetPwd />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* user admin */}
+          <Route exact path={'/viewuser'} element={<UserManagement />} />
+          <Route exact path={'/updateuser/:id'} element={<UpdateUser />} />
+          <Route exact path={'/adduser'} element={<AddUser />} />
+          <Route exact path={'/addadmin'} element={<AddAdmin />} />
+          <Route exact path={'/admin/home'} element={<UserReport />} />
 
           {/* admin */}
           <Route
@@ -124,8 +150,8 @@ function App() {
           <Route exact path='/papers' element={<ViewStudentPaper />} />
           <Route exact path='/markpapers/:id' element={<MarkPaper />} />
           <Route exact path='/viewmark' element={<UpdateMark />} />
-          <Route exact path='/viewComments' element={<ViewComments/>} />
-            <Route exact path='/notereport' element={<NotesReport/>} />
+          <Route exact path='/viewComments' element={<ViewComments />} />
+          <Route exact path='/notereport' element={<NotesReport />} />
         </Routes>
       </BrowserRouter>
     </div>
