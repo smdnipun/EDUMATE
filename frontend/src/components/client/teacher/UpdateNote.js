@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Alert from '@mui/material/Alert'
 import { useParams,useNavigate } from 'react-router-dom'
-import { Navbar } from '../../common/Navbar'
-
+import Navigation from '../../common/Navigation/Navigation'
 export const UpdateNote = () => {
   
   const navigate = useNavigate()
@@ -18,7 +17,8 @@ export const UpdateNote = () => {
   const [subject, setSubject] = useState()
   const [lesson_name, setLesson] = useState()
   const [grade, setGrade] = useState()
-  const [note, setNote] = useState()
+  const [note,setNote]=useState()
+  const [file, setFile] = useState([])
 
   const getLink = () => {
     axios.get(`/teacherNote/${params.id}`).then((res) => {
@@ -29,23 +29,26 @@ export const UpdateNote = () => {
     })
   }
     const noteAdd = (e) => {
-      setNote(e.target.files[0])
+      setFile(e.target.files[0])
     }
 
     const formData = new FormData()
-  
-  const file=   formData.append('file', note)
+//  formData.append('lesson_name', lesson_name)
+ formData.append('file', file)
+//  formData.append('subject', subject)
+//  formData.append('grade', grade)
 
   
   const add = {
     subject,
     lesson_name,
     grade,
-    file,
+    note,
   }
-  console.log(add)
-  const updateLink = () => {
-    axios.put(`/link/${params.id}`, add)
+  // console.log(formData)
+  const updateNote = (e) => {
+        e.preventDefault()
+    axios.put(`http://localhost:5000/teacherNote/${params.id}`, add)
     alert('Succsessfully Updated')
     navigate('/viewNote')
   }
@@ -56,40 +59,41 @@ export const UpdateNote = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navigation />
       <div className='container mt-5'>
         <div className='mt-5 pt-4'>
-          <form onSubmit={updateLink}>
+          <form onSubmit={updateNote}>
             <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2'>
               <div className='mx-5 mt-5'>
                 <h1 className='mr-5'>Upload Note</h1>
-                {/* <input
+                <br />
+                <br/>
+                <input
                   type='text'
                   class='form-control'
                   id='link'
                   name='link'
+                  disabled
                   placeholder='place the link'
                   value={note}
-                  onChange={(e) => {
-                    setNote(e.target.value)
-                  }}
-                /> */}
+                  
+                />
 
-                <input
+                {/* <input
                   type='file'
                   style={{ width: '385px' }}
                   multiple
                   filename='file'
                   onChange={noteAdd}
                   className='form-input'
-                  required
-                />
+                  
+                /> */}
                 <br />
                 <br />
                 <br />
                 <button
                   type='submit'
-                  id='upload'
+                  id='update'
                   class='btn btn-secondary btn-lg'
                 >
                   Update
@@ -98,12 +102,23 @@ export const UpdateNote = () => {
               <div className='mx-5 my-4' style={hr} />
               <div className='mx-5 mt-5'>
                 <form>
+                  <input
+                    type='text'
+                    className='form-control'
+                    disabled
+                    value={subject}
+                    onChange={(e) => {
+                      setSubject(e.target.value)
+                    }}
+                  />
                   <select
                     className='form-control'
                     value={subject}
                     onChange={(e) => {
                       setSubject(e.target.value)
+                      
                     }}
+                    hidden
                   >
                     <option>Select a subject</option>
                     <option>Select a subject</option>
@@ -111,6 +126,7 @@ export const UpdateNote = () => {
                     <option>Biology</option>
                     <option>Physics</option>
                   </select>
+
                   <br />
                   <br />
 
@@ -129,16 +145,21 @@ export const UpdateNote = () => {
                   <br />
                   <br />
                   <div className='form-group'>
-                    <input
+                    <select
                       type='number'
                       class='form-control'
+                      required
                       id='formGroupExampleInput2'
                       placeholder='Grade'
                       value={grade}
                       onChange={(e) => {
                         setGrade(e.target.value)
                       }}
-                    />
+                    >
+                      <option>Grade</option>
+                      <option value={12}>12</option>
+                      <option value={13}>13</option>
+                    </select>
                   </div>
                 </form>
               </div>

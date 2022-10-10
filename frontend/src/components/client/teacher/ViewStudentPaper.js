@@ -5,7 +5,7 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import { Navbar } from '../../common/Navbar'
+import Navigation from '../../common/Navigation/Navigation'
 import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
@@ -54,7 +54,7 @@ export const ViewStudentPaper = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navigation />
       <div className='container'>
         <div
           className='container'

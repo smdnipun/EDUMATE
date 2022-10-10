@@ -1,6 +1,6 @@
-import { useState,useContext,useEffect } from "react"
-import axios from "axios"
-import { Navbar } from '../../common/Navbar'
+import { useState, useContext, useEffect } from 'react'
+import axios from 'axios'
+import Navigation from '../../common/Navigation/Navigation'
 import { AuthContext } from '../../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
@@ -10,60 +10,55 @@ export const UploadNote = () => {
   const [lesson_name, setLesson] = useState()
   const [grade, setGrade] = useState()
   const [file, setFile] = useState([])
-    const [stream, setStream] = useState([])
+  const [stream, setStream] = useState([])
 
   const { user } = useContext(AuthContext)
   const userId = user._id
 
-      const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const hr = {
     borderLeft: '6px solid green',
     height: '300px',
   }
 
-    const loadStream = () => {
-      axios.get('stream/').then((res) => {
-        setStream(res.data)
-      })
+  const loadStream = () => {
+    axios.get('stream/').then((res) => {
+      setStream(res.data)
+    })
   }
-  
+
   useEffect(() => {
     loadStream()
   }, [])
   const noteAdd = (e) => {
-
-     setFile(e.target.files[0])
-
+    setFile(e.target.files[0])
   }
-
-
 
   const Submit = (e) => {
     e.preventDefault()
 
-      
     const formData = new FormData()
 
     formData.append('lesson_name', lesson_name)
     formData.append('file', file)
     formData.append('subject', subject)
     formData.append('grade', grade)
-    formData.append('teacher_id',userId)
- 
+    formData.append('teacher_id', userId)
+
     axios.post('/teacherNote/add', formData).then((res) => {
-       Swal.fire({
-         icon: 'success',
-         title: 'Note added',
-         timer: 1500,
-       })
+      Swal.fire({
+        icon: 'success',
+        title: 'Note added',
+        timer: 1500,
+      })
       navigate('/viewNote')
     })
   }
 
   return (
     <div>
-      <Navbar />
+      <Navigation />
 
       <div className='container mt-5'>
         <div className='mt-5 pt-4'>

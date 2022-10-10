@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Alert from '@mui/material/Alert'
 import { useParams,useNavigate } from 'react-router-dom';
-import { Navbar } from '../../common/Navbar'
+import Navigation from '../../common/Navigation/Navigation'
 
 export const Updatelink = () => {
 
@@ -56,7 +56,7 @@ export const Updatelink = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navigation />
       <div className='container mt-5'>
         <div className='mt-5 pt-4'>
           <form onSubmit={updateLink}>
@@ -87,9 +87,19 @@ export const Updatelink = () => {
               <div className='mx-5 my-4' style={hr} />
               <div className='mx-5 mt-5 pb-4'>
                 <form>
+                  <input
+                    type='text'
+                    className='form-control'
+                    disabled
+                    value={subject}
+                    onChange={(e) => {
+                      setSubject(e.target.value)
+                    }}
+                  />
                   <select
                     className='form-control'
                     value={subject}
+                    hidden
                     onChange={(e) => {
                       setSubject(e.target.value)
                     }}
@@ -118,16 +128,21 @@ export const Updatelink = () => {
                   <br />
                   <br />
                   <div className='form-group'>
-                    <input
+                    <select
                       type='number'
                       class='form-control'
+                      required
                       id='formGroupExampleInput2'
                       placeholder='Grade'
                       value={grade}
                       onChange={(e) => {
                         setGrade(e.target.value)
                       }}
-                    />
+                    >
+                      <option>Grade</option>
+                      <option value={12}>12</option>
+                      <option value={13}>13</option>
+                    </select>
                   </div>
                   <br />
                   <br />

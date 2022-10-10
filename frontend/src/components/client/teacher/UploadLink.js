@@ -1,6 +1,6 @@
 import React, { useState,useContext,useEffect } from 'react'
 import axios from 'axios'
-import { Navbar } from '../../common/Navbar'
+import Navigation from '../../common/Navigation/Navigation'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../../context/AuthContext'
 import Swal from 'sweetalert2'
@@ -65,7 +65,7 @@ export const UploadLink = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navigation />
       <div className='container mt-5'>
         <div className='mt-5 pt-4'>
           <form onSubmit={upload}>
