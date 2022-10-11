@@ -18,7 +18,6 @@ export const MarkPaper = () => {
   const [status, setStatus] = useState('')
   const params = useParams()
 
-
   const { user } = useContext(AuthContext)
   const userId = user._id
 
@@ -27,8 +26,6 @@ export const MarkPaper = () => {
       setNote(res.data)
     })
   }
-  
-
 
   useEffect(() => {
     loadData()
@@ -47,10 +44,7 @@ export const MarkPaper = () => {
       status: event.target.value,
     }
 
-    axios.put(`/StudentAnswers/${params.id}`, data).then(() => {
-
-    })
-
+    axios.put(`/StudentAnswers/${params.id}`, data).then(() => {})
   }
 
   const data = {
@@ -64,31 +58,27 @@ export const MarkPaper = () => {
   }
   console.log(status)
 
-  const addMarks = async() => {
-    if (status !== 'Marked'  ) {
-     Swal.fire({
-       icon: 'error',
-       title: 'Oops...',
-       text: 'Something went wrong!',
-     })
-    }
-    else if (mark>100 || mark<0 ) {
-     
+  const addMarks = async () => {
+    if (status !== 'Marked') {
       Swal.fire({
         icon: 'error',
-        title: 'please enter number between 0 and 100'
+        title: 'Oops...',
+        text: 'Something went wrong!',
       })
-      } else {
-       await axios.post('/mark/add/', data)
-        // alert('succesfully marked')
-            Swal.fire({
-              icon: 'success',
-              title: 'Marks added',
-              timer: 1500,
-            })
-      }
-  
-   
+    } else if (mark > 100 || mark < 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'please enter number between 0 and 100',
+      })
+    } else {
+      await axios.post('/mark/add/', data)
+      // alert('succesfully marked')
+      Swal.fire({
+        icon: 'success',
+        title: 'Marks added',
+        timer: 1500,
+      })
+    }
   }
 
   return (
