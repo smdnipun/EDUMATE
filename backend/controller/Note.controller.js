@@ -21,6 +21,7 @@ export const CreateNote = async (req, res, next) => {
       subject: req.body.subject,
       grade: req.body.grade,
       note: req.file.originalname,
+      teacher_id: req.body.teacher_id,
     })
     await newTeacherNote.save()
     res.status(200).json('Student Answers has been created.....')
@@ -75,4 +76,34 @@ export const GetTeacherNotes = async (req, res, next) => {
   } catch (err) {
     next(err)
   }
+}
+
+//Get all Industry
+export const GetTeacherNotessubject = async (req, res, next) => {
+  try {
+    const getTeacherNotes = await TeacherNotesModel.find(
+      { subject: req.body.subject } && { grade: req.body.grade },
+      function (result) {
+        res.json(result)
+      }
+    )
+
+    res.status(200).json(getTeacherNotes)
+  } catch (err) {
+    next(err)
+  }
+}
+
+export const getNoteByTeacherId = async (req, res, next) => {
+  let myquery = { teacher_id: Object(req.params.teacher_id) }
+  await TeacherNotesModel.find(myquery, function (err, result) {
+    if (err) throw err
+    res.json(result)
+  })
+}
+
+export const getSubject = async (req, res, next) => {
+  const marks = await TeacherNotesModel.find().select({ subject: 1, _id: 0 })
+
+  res.status(200).json(marks)
 }

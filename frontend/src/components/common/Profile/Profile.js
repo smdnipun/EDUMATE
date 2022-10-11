@@ -1,67 +1,97 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Navbar } from '../Navbar'
+import React, { useContext, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { AuthContext } from '../../../context/AuthContext'
 import './profile.css'
 import { ProfileCard } from './ProfileCard'
+import Navigation from '../Navigation/Navigation'
 
 function Profile() {
+  const { user } = useContext(AuthContext)
+  const userId = user._id
+  const navigate = useNavigate()
+
+  const deleteProfile = async (id) => {
+    await axios.delete(`/api/users/${id}`).then((res) => {
+      navigate('/login')
+    })
+  }
   return (
-    <div className='container'>
-      <div className='mb-3 '>
-        <Navbar />
-      </div>
+    <div>
+      <Navigation />
+      <div className='container'>
+        <div className='main-body my-5'>
+          <div className='row gutters-sm mt-5'>
+            <div className='col-md-4 mb-3'>
+              <ProfileCard params={user} />
+            </div>
 
-      <div className='main-body my-5'>
-        <div className='row gutters-sm mt-5'>
-          <div className='col-md-4 mb-3'>
-            <ProfileCard />
-          </div>
-
-          <div className='col-md-8'>
-            <div className='card mb-3'>
-              <div className='card-body'>
-                <div className='row'>
-                  <div className='col-sm-3'>
-                    <h6 className='mb-0'>Full Name</h6>
+            <div className='col-md-8'>
+              <div className='card mb-3'>
+                <div className='card-body'>
+                  {/* <h1>username:{data.firstName}</h1> */}
+                  <div className='row'>
+                    <div className='col-sm-3'>
+                      <h6 className='mb-0'>Full Name</h6>
+                    </div>
+                    <div className='col-sm-9 text-secondary'>
+                      {user.firstName} {user.lastName}
+                    </div>
                   </div>
-                  <div className='col-sm-9 text-secondary'>Kenneth Valdez</div>
-                </div>
-                <hr />
-                <div className='row'>
-                  <div className='col-sm-3'>
-                    <h6 className='mb-0'>Email</h6>
+                  <hr />
+                  <div className='row'>
+                    <div className='col-sm-3'>
+                      <h6 className='mb-0'>Date Of Birth</h6>
+                    </div>
+                    <div className='col-sm-9 text-secondary'>
+                      {user.dateOfBirth}
+                    </div>
                   </div>
-                  <div className='col-sm-9 text-secondary'>fip@jukmuh.al</div>
-                </div>
-                <hr />
-                <div className='row'>
-                  <div className='col-sm-3'>
-                    <h6 className='mb-0'>Phone</h6>
+                  <hr />
+                  <div className='row'>
+                    <div className='col-sm-3'>
+                      <h6 className='mb-0'>Role</h6>
+                    </div>
+                    <div className='col-sm-9 text-secondary'>{user.type}</div>
                   </div>
-                  <div className='col-sm-9 text-secondary'>(239) 816-9029</div>
-                </div>
-                <hr />
-                <div className='row'>
-                  <div className='col-sm-3'>
-                    <h6 className='mb-0'>Mobile</h6>
+                  <hr />
+                  <div className='row'>
+                    <div className='col-sm-3'>
+                      <h6 className='mb-0'>Stream</h6>
+                    </div>
+                    <div className='col-sm-9 text-secondary'>{user.stream}</div>
                   </div>
-                  <div className='col-sm-9 text-secondary'>(320) 380-4539</div>
-                </div>
-                <hr />
-                <div className='row'>
-                  <div className='col-sm-3'>
-                    <h6 className='mb-0'>Address</h6>
+                  <hr />
+                  <div className='row'>
+                    <div className='col-sm-3'>
+                      <h6 className='mb-0'>Email</h6>
+                    </div>
+                    <div className='col-sm-9 text-secondary'>{user.email}</div>
                   </div>
-                  <div className='col-sm-9 text-secondary'>
-                    Bay Area, San Francisco, CA
-                  </div>
-                </div>
-                <hr />
-                <div className='row'>
-                  <div className='col-sm-12'>
-                    <Link to='/updateProfile' className='btn btn-primary'>
-                      Update
-                    </Link>
+                  <hr />
+                  <div className='d-flex justify-content-end'>
+                    <div className='col-sm-12'>
+                      <Link
+                        to={`/updateProfile/${userId}`}
+                        className='btn btn-primary px-3'
+                      >
+                        Update
+                      </Link>
+                      <Link
+                        to={`/forgetPwd/${userId}`}
+                        className='btn btn-primary px-3 mx-5'
+                      >
+                        Update Password
+                      </Link>
+                      <button
+                        className='btn px-3 btn-danger'
+                        onClick={() => {
+                          deleteProfile(userId)
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

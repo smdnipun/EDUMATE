@@ -10,13 +10,17 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    dateOfBirth: {
+      type: String,
+      required: false,
+      default: '-',
+    },
     type: {
       type: String,
       required: true,
     },
     stream: {
       type: String,
-      required: true,
     },
     email: {
       type: String,

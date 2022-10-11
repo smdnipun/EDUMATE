@@ -1,14 +1,9 @@
-
-
-
-
-
 /* form */
-.formdiv{
+.formdiv {
   display: grid;
   align-items: center;
 }
-.formin{
+.formin {
   max-width: 400px;
   width: 90vw;
   max-width: var(--fixed-width);
@@ -18,4 +13,11 @@
   padding: 2rem 2.5rem;
   margin: 3rem auto;
   transition: var(--transition);
+}
+body {
+  overflow-y: hidden;
+}
+.report-box {
+  width: 60vh;
+  height: 65vh;
 }

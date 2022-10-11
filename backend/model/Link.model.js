@@ -13,7 +13,7 @@ const LinkSchema = new mongoose.Schema({
     required: true,
   },
   date: {
-    type: Date,
+    type: String,
     required: true,
   },
   time: {
@@ -23,7 +23,11 @@ const LinkSchema = new mongoose.Schema({
   link: {
     type: String,
     required: true,
-  }
+  },
+  teacher_id: {
+    type: String,
+    required: true,
+  },
 })
 
 export default mongoose.model('link', LinkSchema)

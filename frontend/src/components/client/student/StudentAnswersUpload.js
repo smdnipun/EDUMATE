@@ -1,22 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthContext'
 
 export const StudentAnswersUpload = () => {
     const hr ={
         borderLeft: '6px solid ',
         height:'300px'
         
-     }  
-     const [name,setName] = useState('');
-     const [subject,setSubject] = useState('');
+  }  
+   const { user } = useContext(AuthContext)
+   const userId = user._id
+
+     const [stream,setStream] = useState('');
      const [grade,setGrade] = useState('');
+     const [lname,setLname] = useState('');
+     const [date,setDate] = useState('');
+     const [time,setTime] = useState('');
      const [file,setFile] = useState([]);
    
      const ImageAdd = (e) => {
        setFile(e.target.files[0]);
      }
-   
+    //  document.getElementById("create-course-form").reset();
      const navi = new useNavigate();
    
      const Submit = (e) => {
@@ -25,21 +31,40 @@ export const StudentAnswersUpload = () => {
        
        const formData = new FormData();
    
-       formData.append("name",name);
-       formData.append("file",file);
+       formData.append("stream",stream);
+       formData.append("lname",lname);
+       formData.append("grade",grade);
+       formData.append("date",date);
+       formData.append("time",time);
+       formData.append("file", file);
+       formData.append("student_id",userId)
    
-       setName("");
+       setStream("");
+       setLname("");
+       setGrade("");
+       setDate("");
+       setTime("");
+       setTime("");
    
         axios.post("/studentanswers/add",formData).then((res)=>{
          alert('Succsessfully Added');
          navi('/studentanswersheetUpload');
        })
+
      }
+     const current = new Date();
+     const dates = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+
+     const today = new Date();
+      const times = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+ 
+    
+
      return (
        <div className='container mt-5'>
          <div className='mt-5 pt-4'>
           <h1 className='text-center mt-5'>AnswerSheet Upload </h1>
-          <form onSubmit={Submit}>
+          <form onSubmit={Submit} >
           <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2'>
             <div className='mx- mt-5'>
               <h3 className='mb-5'>Upload file</h3>
@@ -58,11 +83,11 @@ export const StudentAnswersUpload = () => {
         
                    {/* name */}
                   <div className='form-row'>
-                    <label className='form-label'>Subject</label><br/>
+                    <label className='form-label'>Stream</label><br/>
                     <input
                       type='text'
-                      name={name}
-                      onChange={(e)=>setName(e.target.value)}
+                      name={stream}
+                      onChange={(e)=>setStream(e.target.value)}
                       className='form-input'
                     />
                   </div>
@@ -71,8 +96,8 @@ export const StudentAnswersUpload = () => {
                     <label className='form-label'>Lesson Name</label><br/>
                     <input
                       type='text'
-                      name={name}
-                      onChange={(e)=>setName(e.target.value)}
+                      name={lname}
+                      onChange={(e)=>setLname(e.target.value)}
                       className='form-input'
                     />
                   </div>
@@ -81,8 +106,8 @@ export const StudentAnswersUpload = () => {
                     <label className='form-label'>Grade</label><br/>
                     <input
                       type='text'
-                      name={name}
-                      onChange={(e)=>setName(e.target.value)}
+                      name={grade}
+                      onChange={(e)=>setGrade(e.target.value)}
                       className='form-input'
                     />
                   </div>
@@ -90,16 +115,18 @@ export const StudentAnswersUpload = () => {
                     <div className=''>
                       <input
                         type='text'
-                        name={name}
-                        onChange={(e)=>setName(e.target.value)}
+                        name={date}
+                        value={dates}
+                        onChange={(e)=>setDate(e.target.value)}
                         className='form-input'
                       />
                     </div>
                     <div className='ml-3'> 
                       <input
                         type='text'
-                        name={name}
-                        onChange={(e)=>setName(e.target.value)}
+                        name={time}
+                        value={times}
+                        onChange={(e)=>setTime(e.target.value)}
                         className='form-input'
                       />
                     </div>

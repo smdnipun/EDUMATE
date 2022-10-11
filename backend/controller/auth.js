@@ -5,20 +5,20 @@ import jwt from 'jsonwebtoken'
 
 export const register = async (req, res, next) => {
   try {
-    const salt = bcrypt.genSaltSync(10)
-    const hash = bcrypt.hashSync(req.body.password, salt)
+    const user = await User.findOne({ email: req.body.email })
+    if (user != null) {
+      return res.status(200).json('Exists')
+    } else {
+      const salt = bcrypt.genSaltSync(10)
+      const hash = bcrypt.hashSync(req.body.password, salt)
+      const newUser = new User({
+        ...req.body,
+        password: hash,
+      })
 
-    const newUser = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      type: req.body.type,
-      stream: req.body.stream,
-      email: req.body.email,
-      password: hash,
-    })
-
-    await newUser.save()
-    res.status(200).json('User has been created')
+      await newUser.save()
+      res.status(200).json('Created')
+    }
   } catch (err) {
     next(err)
   }
@@ -47,7 +47,78 @@ export const login = async (req, res, next) => {
         httpOnly: true,
       })
       .status(200)
-      .json({details: { ...otherDetails }, isAdmin})
+      .json({ details: { ...otherDetails }, isAdmin })
+  } catch (err) {
+    next(err)
+  }
+}
+
+export const updatePassword = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ id: req.params.id })
+    if (!user) return next(createError(200, 'User not found!'))
+
+    const isPasswordCorrect = await bcrypt.compare(
+      req.body.oldPassword,
+      user.password
+    )
+    if (!isPasswordCorrect) return next(createError(200, 'Wrong Password'))
+
+    const salt = bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(req.body.newPassword, salt)
+    const obj = {
+      password: hash,
+    }
+    await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: obj,
+      },
+      {
+        new: true,
+      }
+    )
+    res.status(200).json('Password Reset')
+  } catch (err) {
+    next(err)
+  }
+}
+
+export const verifyEmail = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ email: req.body.email })
+    if (user != null) {
+      let obj = {
+        message: 'Exist',
+        id: user._id,
+        name: user.firstName,
+      }
+      return res.status(200).json(obj)
+    } else {
+      return res.status(200).json({ message: 'failed' })
+    }
+  } catch (err) {
+    next(err)
+  }
+}
+
+export const forgetPassword = async (req, res, next) => {
+  try {
+    const salt = bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(req.body.newPassword, salt)
+    const obj = {
+      password: hash,
+    }
+    await User.findByIdAndUpdate(
+      req.body.id,
+      {
+        $set: obj,
+      },
+      {
+        new: true,
+      }
+    )
+    res.status(200).json('Password Updated')
   } catch (err) {
     next(err)
   }
