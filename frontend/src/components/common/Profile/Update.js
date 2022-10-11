@@ -62,6 +62,13 @@ function Update() {
           dateOfBirth: dob,
         })
         .then((res) => {
+          // Swal.fire({
+          //   position: 'top-end',
+          //   icon: 'success',
+          //   title: 'Successfully Updated',
+          //   showConfirmButton: false,
+          //   timer: 1500,
+          // })
           Swal.fire('Done!', 'Successfully Updated', 'success')
           navigate('/logout')
         })

@@ -1,7 +1,5 @@
 import React, { useContext } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { Navbar } from './components/common/Navbar'
-import { Footer } from './components/common/footer'
 import { UploadNote } from './components/client/teacher/uploadNote.js'
 import { StudentAnswersUpload } from './components/client/student/StudentAnswersUpload'
 import { ExamTimeTable } from './components/client/student/examtimetable/ExamTimeTable'
@@ -104,11 +102,51 @@ function App() {
           />
 
           {/* user admin */}
-          <Route exact path={'/viewuser'} element={<UserManagement />} />
-          <Route exact path={'/updateuser/:id'} element={<UpdateUser />} />
-          <Route exact path={'/adduser'} element={<AddUser />} />
-          <Route exact path={'/addadmin'} element={<AddAdmin />} />
-          <Route exact path={'/admin/home'} element={<UserReport />} />
+          <Route
+            exact
+            path={'/viewuser'}
+            element={
+              <ProtectedRoute>
+                <UserManagement />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path={'/updateuser/:id'}
+            element={
+              <ProtectedRoute>
+                <UpdateUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path={'/adduser'}
+            element={
+              <ProtectedRoute>
+                <AddUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path={'/addadmin'}
+            element={
+              <ProtectedRoute>
+                <AddAdmin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path={'/admin/home'}
+            element={
+              <ProtectedRoute>
+                <UserReport />
+              </ProtectedRoute>
+            }
+          />
 
           {/* admin */}
           <Route
