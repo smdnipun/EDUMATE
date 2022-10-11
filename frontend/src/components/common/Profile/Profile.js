@@ -5,6 +5,7 @@ import { AuthContext } from '../../../context/AuthContext'
 import './profile.css'
 import { ProfileCard } from './ProfileCard'
 import Navigation from '../Navigation/Navigation'
+import Swal from 'sweetalert2'
 
 function Profile() {
   const { user } = useContext(AuthContext)
@@ -13,6 +14,11 @@ function Profile() {
 
   const deleteProfile = async (id) => {
     await axios.delete(`/api/users/${id}`).then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Account Deleted',
+        timer: 1500,
+      })
       navigate('/login')
     })
   }

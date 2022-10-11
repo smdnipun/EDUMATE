@@ -26,7 +26,7 @@ function ForgetPwd() {
       })
     } else {
       await axios
-        .put(`http://localhost:5000/api/auth/updatePwd/${params.id}`, data)
+        .put(`/api/auth/updatePwd/${params.id}`, data)
         .then((res) => {
           console.log(res)
           if (res.data === 'Password Reset') {

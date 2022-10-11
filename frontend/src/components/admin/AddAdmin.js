@@ -55,7 +55,7 @@ function AddAdmin() {
       <AdminNav />
       <div className='container'>
         <div className='row d-flex justify-content-center align-items-center h-100'>
-          <div className='col-12 '>
+          <div className='col-12 my-3'>
             <h3 className='text-center p-3 mt-4'>Add Admin</h3>
             <div className='form-outline mb-1'>
               <label className='form-label' for='form3Example3'>
@@ -153,7 +153,7 @@ function AddAdmin() {
                   className='btn btn-primary btn-lg'
                   onClick={handleSubmit}
                 >
-                  Add User
+                  Add Admin
                 </button>
               </div>
             </div>
