@@ -15,8 +15,10 @@ function Profile() {
   const deleteProfile = async (id) => {
     await axios.delete(`/api/users/${id}`).then((res) => {
       Swal.fire({
+        position: 'top-end',
         icon: 'success',
-        title: 'Account Deleted',
+        title: 'Your account has been deleted',
+        showConfirmButton: false,
         timer: 1500,
       })
       navigate('/login')

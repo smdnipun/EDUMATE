@@ -30,6 +30,13 @@ function ForgetPwd() {
         .then((res) => {
           console.log(res)
           if (res.data === 'Password Reset') {
+            // Swal.fire({
+            //   position: 'top-end',
+            //   icon: 'success',
+            //   title: 'Password Successfully Updated',
+            //   showConfirmButton: false,
+            //   timer: 1500,
+            // })
             Swal.fire('Success', 'Password Successfully Updated', 'success')
             navigate('/login')
           } else if (res.data.message === 'Wrong Password') {
