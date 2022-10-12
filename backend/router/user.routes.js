@@ -24,8 +24,4 @@ router.get('/', getUsers)
 
 router.get('/get/type', getType)
 
-//get user by type
-// router.get('/', getUserByType)
-// router.get('/search/:firstName', getUserByName)
-
 export default router

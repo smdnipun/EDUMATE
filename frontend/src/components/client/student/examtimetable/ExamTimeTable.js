@@ -1,7 +1,10 @@
 import React from 'react'
+import { Navbar } from '../Navbar'
 
 export const ExamTimeTable = () => {
   return (
+    <div>
+        <Navbar/>
     <div style={{width:"50%",marginLeft:"25%",marginRight:"25%",marginTop:"10%"}}>
         <h1 className='text-center'>Exam Time Table</h1>
         <table class="table table-bordered shadow rounded-4 text-center mt-5 mb-5 bg-light">
@@ -42,6 +45,7 @@ export const ExamTimeTable = () => {
                 </tr>
             </tbody>
         </table>
+    </div>
     </div>
   )
 }

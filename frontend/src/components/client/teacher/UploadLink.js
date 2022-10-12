@@ -47,7 +47,8 @@ export const UploadLink = () => {
 
   console.log(add)
 
-  const upload = () => {
+  const upload = (e) => {
+    e.preventDefault();
     axios.post('link/add', add)
      Swal.fire({
        icon: 'success',

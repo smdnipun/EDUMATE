@@ -12,6 +12,7 @@ import { NavLink } from 'react-router-dom'
 import Navigation from '../../common/Navigation/Navigation'
 import { AuthContext } from '../../../context/AuthContext'
 import { TablePagination } from '@mui/material'
+import Swal from 'sweetalert2'
 
 export const ViewNote = () => {
   const [data, setData] = useState([])
@@ -38,6 +39,11 @@ export const ViewNote = () => {
 
   const deleteNote = (id) => {
     axios.delete(`/teacherNote/${id}`)
+      Swal.fire({
+        icon: 'success',
+        title: 'Deleted',
+      })
+      
     window.location.reload()
   }
 
