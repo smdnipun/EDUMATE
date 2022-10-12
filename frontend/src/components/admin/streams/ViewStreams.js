@@ -17,7 +17,9 @@ export default function ViewStreams  () {
     },[])
 
     return (
-    <div style={{height:"100%",maxWidth:"100%", width:"100%", marginTop:"15%"}}>
+      <div>
+ 
+    <div style={{height:"100%",maxWidth:"100%", width:"100%"}}>
               <div style={{width:"10%",float:"left",paddingLeft:"10%"}}>
                   <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
                     <div class="position-sticky">
@@ -57,7 +59,8 @@ export default function ViewStreams  () {
                         })}
                         </tbody>
                       </table>
-                  </div>
+                 </div>
+         </div>
     </div>
     )
 }

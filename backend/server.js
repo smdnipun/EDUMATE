@@ -11,6 +11,8 @@ import subjectrouter from './router/Subject.routes.js'
 import cors from 'cors'
 import subjectfeedback from './router/subjectfeedback.routes.js'
 import teacherRouter from './router/TeacherNote.routes.js'
+import subtimerouter from './router/Subjecttimetable.route.js'
+import examrouter from './router/ExamTimeTable.routes.js'
 
 
 const app = exprees()
@@ -58,6 +60,9 @@ app.use('/stream', streamrouter)
 app.use('/subject', subjectrouter)
 app.use('/subjectfeedback', subjectfeedback)
 app.use('/teacherNote',teacherRouter)
+app.use('/subtime',subtimerouter)
+app.use('/examtime',examrouter)
+
 
 app.use('/StudentAnswers', exprees.static('StudentAnswers'));
 app.use('/TeacherNotes', exprees.static('TeacherNotes'));

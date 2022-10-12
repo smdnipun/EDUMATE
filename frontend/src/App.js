@@ -24,6 +24,13 @@ import SignIn from './components/common/userReg/SignIn.js'
 import SignUp from './components/common/userReg/SignUp.js'
 import Profile from './components/common/Profile/Profile.js'
 import Update from './components/common/Profile/Update'
+import AddSubjectTimeTable from './components/admin/Time Tables/AddSubjectTimeTable'
+import ViewSubjectTimeTable from './components/admin/Time Tables/ViewSubjectTimeTable'
+import AddExamTimeTable from './components/admin/Time Tables/AddExamTimeTable'
+import ViewExamTimeTable from './components/admin/Time Tables/ViewExamTimeTable'
+import UpdateExamTimeTable  from './components/admin/Time Tables/UpdateExamTimeTable'
+import UpdateSubjectTable  from './components/admin/Time Tables/UpdateSubjectTable'
+import SearchedExam from './components/admin/Time Tables/SearchedExam'
 
 function App() {
   return (
@@ -38,6 +45,7 @@ function App() {
           <Route exact path={'/register'} element={<SignUp />} />
           <Route exact path={'/profile'} element={<Profile />} />
           <Route exact path={'/updateProfile'} element={<Update />} />
+          <Route exact path={'/navbar'} element={<Navbar />} />
 
           {/* admin */}
           <Route exact path={'/adminhome'} element={<AdminHome />} />
@@ -46,6 +54,14 @@ function App() {
           <Route exact path={'/getstream'} element={<ViewStreams />} />
           <Route exact path={'/getsubject'} element={<ViewSubjects />} />
           <Route exact path={'/editstrm/:_id'} element={<UpdateStreams />} />
+          <Route exact path={'/addsubtime'} element={<AddSubjectTimeTable />} />
+          <Route exact path={'/getsubtime'} element={<ViewSubjectTimeTable />} />
+          <Route exact path={'/addexam'} element={<AddExamTimeTable />} />
+          <Route exact path={'/getexam'} element={<ViewExamTimeTable />} />
+          <Route exact path={'/editexam/:_id'} element={<UpdateExamTimeTable />} />
+          <Route exact path={'/editsubtbl/:_id'} element={<UpdateSubjectTable />} />
+          <Route exact path={'/searchexam'} element={<SearchedExam />} />
+
           <Route
             exact
             path={'editsubj/:_id'}
