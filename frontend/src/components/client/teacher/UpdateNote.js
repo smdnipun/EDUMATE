@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Alert from '@mui/material/Alert'
-import { useParams,useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import Navigation from '../../common/Navigation/Navigation'
 export const UpdateNote = () => {
   
@@ -21,12 +22,16 @@ export const UpdateNote = () => {
   const [file, setFile] = useState([])
 
   const getLink = () => {
+   
     axios.get(`/teacherNote/${params.id}`).then((res) => {
       setSubject(res.data.subject)
       setLesson(res.data.lesson_name)
       setGrade(res.data.grade)
       setNote(res.data.note)
+      
     })
+     
+      
   }
     const noteAdd = (e) => {
       setFile(e.target.files[0])
@@ -49,7 +54,10 @@ export const UpdateNote = () => {
   const updateNote = (e) => {
         e.preventDefault()
     axios.put(`http://localhost:5000/teacherNote/${params.id}`, add)
-    alert('Succsessfully Updated')
+     Swal.fire({
+       icon: 'success',
+       title: 'Note updated',
+     })
     navigate('/viewNote')
   }
 
