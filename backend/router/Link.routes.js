@@ -13,7 +13,6 @@ const router = express.Router()
 router.post('/add', createLink)
 
 //UPDATE
-// router.put('/availability/:id',updateItemAvailability)
 router.put('/:id', updateLink)
 //DELETE
 router.delete('/:id', deleteLink)

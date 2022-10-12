@@ -6,8 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import { AuthContext } from '../../../context/AuthContext'
 
 function Navigation() {
-
-   const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
       {/* teacher container */}

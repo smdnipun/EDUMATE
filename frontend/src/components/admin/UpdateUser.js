@@ -14,7 +14,6 @@ function UpdateUser() {
   const [type, setType] = useState()
   const [stream, setStream] = useState()
   const [email, setEmail] = useState()
-  const [dob, setDob] = useState()
   const navigate = useNavigate()
 
   useEffect(() => {

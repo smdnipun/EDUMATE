@@ -31,12 +31,6 @@ function UserManagement() {
     fetchData()
   }, [searchItem])
 
-  // const fetchData = async () => {
-  //   axios.get('http://localhost:5000/api/users/').then((res) => {
-  //     setData(res.data)
-  //   })
-  // }
-
   const deleteProfile = async (id) => {
     await axios.delete(`http://localhost:5000/api/users/${id}`).then((res) => {
       window.location.reload()

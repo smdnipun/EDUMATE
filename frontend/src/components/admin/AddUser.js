@@ -12,7 +12,6 @@ function AddUser() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rpassword, setRpassword] = useState('')
-  const navigate = useNavigate()
   const [data, setData] = useState([])
 
   const loadData = async () => {
@@ -31,7 +30,7 @@ function AddUser() {
   }, [])
 
   const handleSubmit = async () => {
-    const data = {
+    const obj = {
       firstName: firstName,
       lastName: lastName,
       type: type,
@@ -48,7 +47,7 @@ function AddUser() {
       })
     } else {
       await axios
-        .post('http://localhost:5000/api/auth/register', data)
+        .post('http://localhost:5000/api/auth/register', obj)
         .then((res) => {
           if (res.data === 'Created') {
             Swal.fire('Congrats!', 'Successfully Added', 'success')
