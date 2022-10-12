@@ -44,7 +44,7 @@ export const MarkPaper = () => {
       status: event.target.value,
     }
 
-    axios.put(`/StudentAnswers/${params.id}`, data).then(() => {})
+    axios.put(`/StudentAnswers/${params.id}`, data)
   }
 
   const data = {

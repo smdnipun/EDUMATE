@@ -8,7 +8,6 @@ function AddAdmin() {
   const [firstName, setFname] = useState('')
   const [lastName, setLname] = useState('')
   const [type, setType] = useState('')
-  const [stream, setStream] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rpassword, setRpassword] = useState('')
