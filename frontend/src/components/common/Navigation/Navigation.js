@@ -11,7 +11,7 @@ function Navigation() {
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
       {/* teacher container */}
-      {(user.type = 'Teacher') ? (
+      {(user.type == 'Teacher') ? (
         <Container>
           <Navbar.Brand href='#home'>Edumate</Navbar.Brand>
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
@@ -47,7 +47,7 @@ function Navigation() {
           </Navbar.Collapse>
         </Container>
       ) : (
-        (user.type = 'Student' ? (
+        (user.type == 'Student' ? (
           // student container
           <Container>
             <Navbar.Brand href='#home'>Edumate</Navbar.Brand>
