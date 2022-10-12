@@ -21,6 +21,13 @@ import SignIn from './components/common/userReg/SignIn.js'
 import SignUp from './components/common/userReg/SignUp.js'
 import Profile from './components/common/Profile/Profile.js'
 import Update from './components/common/Profile/Update'
+import AddSubjectTimeTable from './components/admin/Time Tables/AddSubjectTimeTable'
+import ViewSubjectTimeTable from './components/admin/Time Tables/ViewSubjectTimeTable'
+import AddExamTimeTable from './components/admin/Time Tables/AddExamTimeTable'
+import ViewExamTimeTable from './components/admin/Time Tables/ViewExamTimeTable'
+import UpdateExamTimeTable  from './components/admin/Time Tables/UpdateExamTimeTable'
+import UpdateSubjectTable  from './components/admin/Time Tables/UpdateSubjectTable'
+import SearchedExam from './components/admin/Time Tables/SearchedExam'
 import { ViewStudentPaper } from './components/client/teacher/ViewStudentPaper'
 import { AuthContext } from './context/AuthContext'
 import UserManagement from './components/admin/UserManagement'
@@ -36,6 +43,7 @@ import { UpdateMark } from './components/client/teacher/UpdateMark.js'
 import { ViewComments } from './components/client/teacher/ViewComments.js'
 import { NotesReport } from './components/client/teacher/NotesReport'
 import UserReport from './components/admin/UserReport'
+import { Navbar } from './components/common/Navbar.js'
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -71,6 +79,9 @@ function App() {
           <Route exact path={'/login'} element={<SignIn />} />
           <Route exact path={'/logout'} element={<SignIn logout={true} />} />
           <Route exact path={'/register'} element={<SignUp />} />
+          <Route exact path={'/profile'} element={<Profile />} />
+          <Route exact path={'/updateProfile'} element={<Update />} />
+          <Route exact path={'/navbar'} element={<Navbar />} />
           <Route exact path={'/forgotPassword'} element={<OTPverification />} />
           <Route exact path={'/resetPassword'} element={<ForgetPassword />} />
           <Route
@@ -163,6 +174,14 @@ function App() {
           <Route exact path={'/getstream'} element={<ViewStreams />} />
           <Route exact path={'/getsubject'} element={<ViewSubjects />} />
           <Route exact path={'/editstrm/:_id'} element={<UpdateStreams />} />
+          <Route exact path={'/addsubtime'} element={<AddSubjectTimeTable />} />
+          <Route exact path={'/getsubtime'} element={<ViewSubjectTimeTable />} />
+          <Route exact path={'/addexam'} element={<AddExamTimeTable />} />
+          <Route exact path={'/getexam'} element={<ViewExamTimeTable />} />
+          <Route exact path={'/editexam/:_id'} element={<UpdateExamTimeTable />} />
+          <Route exact path={'/editsubtbl/:_id'} element={<UpdateSubjectTable />} />
+          <Route exact path={'/searchexam'} element={<SearchedExam />} />
+
           <Route
             exact
             path={'editsubj/:_id'}

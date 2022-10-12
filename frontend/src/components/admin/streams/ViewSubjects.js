@@ -36,8 +36,10 @@ export default function ViewStreams  () {
     },[])
 
     return (
-    <div style={{height:"100%",maxWidth:"100%", width:"100%", marginTop:"15%"}}>
-        <div style={{width:"10%",float:"left",paddingLeft:"10%"}}>
+      <div>
+  
+    <div style={{height:"100%",maxWidth:"100%", width:"100%"}}>
+           <div style={{width:"10%",float:"left",paddingLeft:"10%"}}>
                   <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
                     <div class="position-sticky">
                       <div style={{width:"50%", marginTop:"15%"}}>
@@ -54,7 +56,7 @@ export default function ViewStreams  () {
                       </div>
                     </div>
                   </nav>
-               </div>
+           </div>
               <div className='container' style={{float:"right",paddingRight:"30%", width:"70%"}}>
                   <h3 className='navi'>Subjects</h3> 
                     <table class="table">
@@ -80,6 +82,7 @@ export default function ViewStreams  () {
                         </tbody>
                       </table>
               </div>
+    </div>
     </div>
     )
 }
