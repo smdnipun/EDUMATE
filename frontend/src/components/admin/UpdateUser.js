@@ -64,7 +64,7 @@ function UpdateUser() {
         email: email,
       })
       .then((res) => {
-        Swal.fire('Congrats!', 'Successfully Added', 'success')
+        Swal.fire('Congrats!', 'Successfully Updated', 'success')
         navigate('/viewuser')
       })
   }

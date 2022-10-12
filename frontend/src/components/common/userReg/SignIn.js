@@ -30,8 +30,10 @@ function SignIn(props) {
   })
 
   if (props.logout) {
-    localStorage.removeItem('user')
-    
+    // localStorage.removeItem('user')
+    alert('test')
+    localStorage.clear()
+    navigate('/login')
     window.location = '/login'
   }
 
