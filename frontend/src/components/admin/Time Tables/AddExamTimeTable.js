@@ -2,6 +2,7 @@ import {React, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import AdminNav from '../../common/Navigation/AdminNav';
 
 export default function AddExamTimeTable(){
 
@@ -58,6 +59,7 @@ export default function AddExamTimeTable(){
 
     return (
     <div>
+      <AdminNav/>
            <div style={{height:"100%",maxWidth:"100%", width:"100%"}}>
                 <div style={{width:"10%",float:"left"}}>
                       <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
