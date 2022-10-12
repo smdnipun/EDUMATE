@@ -14,9 +14,6 @@
   margin: 3rem auto;
   transition: var(--transition);
 }
-body {
-  overflow-y: hidden;
-}
 .report-box {
   width: 60vh;
   height: 65vh;

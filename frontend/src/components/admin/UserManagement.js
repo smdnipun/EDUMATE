@@ -11,6 +11,7 @@ import Button from '@mui/material/Button'
 import TablePagination from '@mui/material/TablePagination'
 import { NavLink } from 'react-router-dom'
 import AdminNav from '../common/Navigation/AdminNav.js'
+import Swal from 'sweetalert2'
 
 function UserManagement() {
   const [data, setData] = useState([])
@@ -33,6 +34,7 @@ function UserManagement() {
 
   const deleteProfile = async (id) => {
     await axios.delete(`http://localhost:5000/api/users/${id}`).then((res) => {
+      Swal.fire('Congrats!', 'Successfully Updated', 'error')
       window.location.reload()
     })
   }
