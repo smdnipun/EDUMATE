@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import Alert from '@mui/material/Alert'
+import Swal from 'sweetalert2'
 import { useParams,useNavigate } from 'react-router-dom';
 import Navigation from '../../common/Navigation/Navigation'
 
@@ -42,10 +42,14 @@ export const Updatelink = () => {
       }
 
 
-    const updateLink = () => {
-        
+    const updateLink = (e) => {
+        e.preventDefault()
       axios.put(`/link/${params.id}`, add)
-      alert('Succsessfully Updated')
+        Swal.fire({
+          icon: 'success',
+          title: 'Link updated',
+        })
+      
       navigate('/viewlink')
     }
 
