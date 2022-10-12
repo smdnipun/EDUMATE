@@ -53,7 +53,7 @@ function SignIn(props) {
             })
           } else if (res.data.details.type === 'Admin') {
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
-            navigate('/profile')
+            navigate('/adminhome')
             Toast.fire({
               icon: 'success',
               title: 'Signed in successfully',

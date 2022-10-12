@@ -174,6 +174,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          
           <Route exact path={'/addstream'} element={<AddStreams />} />
           <Route exact path={'/addsubject'} element={<AddSubjects />} />
           <Route exact path={'/getstream'} element={<ViewStreams />} />

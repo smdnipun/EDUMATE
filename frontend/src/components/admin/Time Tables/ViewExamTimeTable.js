@@ -3,16 +3,18 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
-
 export default function ViewExamTimeTable  () {
     const [data, setData] = useState([])
-
+    const [query, setQuery] = useState('')
+    
     const loadData = () => {
         
         axios.get('/examtime/').then((res) => {
              setData(res.data);
         })
     }
+
+    console.log(query)
 
     async function SweatAlert(text, item) {
       // await sleep(1000)
@@ -27,20 +29,7 @@ export default function ViewExamTimeTable  () {
       SweatAlert('Successfully deleted', 'success')
       window.location.reload(true);
     }
-
-    const [subject, setSubject] = useState('')
   
-    const search = (e) => {
-      e.preventDefault();
-      axios
-        .post('http://localhost:5000/examtime/search', {
-          subject: subject,
-        })
-        .then((res) => {
-          localStorage.setItem('sub', res.data)
-          window.location = '/searchexam'
-        })
-    }
     
     let sub = localStorage.getItem('sub')
     console.log(sub);
@@ -70,10 +59,14 @@ export default function ViewExamTimeTable  () {
                         </nav>
           </div>
                <div style={{ marginTop:"3%", paddingLeft:"30%"}}>
-               <form onSubmit={search}>
-               <label><h6 className='navi'>Search here</h6></label><input onChange={(e)=>{setSubject(e.target.value)}}></input>
-               <button  class="btn btn-primary">search</button>
-              </form>
+               <div>
+                    <input
+                      type='text'
+                      style={{ marginRight: '50%' }}
+                      placeholder='Search Exam by Subject name....'
+                      onChange={(e) => setQuery(e.target.value)}
+                    />
+                  </div>
                </div>
                 <div className='container' style={{float:"right",paddingRight:"30%", width:"80%", marginTop:"5%"}}>
                   <h3 className='navi'>Exam Time Tables</h3>
@@ -91,7 +84,11 @@ export default function ViewExamTimeTable  () {
                           </tr>
                         </thead>
                         <tbody>
-                        {data.map((row)=>{
+                        {data
+                        .filter((row) =>
+                        row.subject.includes(query)
+                        )
+                        .map((row)=>{
                           return(
                             <tr>
                             <td>{row.stream}</td>
