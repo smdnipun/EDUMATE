@@ -31,6 +31,7 @@ function SignIn(props) {
 
   if (props.logout) {
     localStorage.removeItem('user')
+    
     window.location = '/login'
   }
 
