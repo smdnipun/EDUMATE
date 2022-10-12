@@ -11,6 +11,10 @@ import streamrouter from './router/Streams.routes.js'
 import subjectrouter from './router/Subject.routes.js'
 import subjectfeedback from './router/subjectfeedback.routes.js'
 import teacherRouter from './router/TeacherNote.routes.js'
+import subtimerouter from './router/Subjecttimetable.route.js'
+import examrouter from './router/ExamTimeTable.routes.js'
+import markRouter from './router/Mark.routes.js'
+import commentRouter from './router/Comment.routes.js'
 
 const app = exprees()
 dotenv.config()
@@ -44,14 +48,18 @@ app.use('/link', linkRoutes)
 app.use('/stream', streamrouter)
 app.use('/subject', subjectrouter)
 app.use('/subjectfeedback', subjectfeedback)
+app.use('/subtime',subtimerouter)
+app.use('/examtime',examrouter)
 app.use('/teacherNote', teacherRouter)
-
 app.use('/StudentAnswers', exprees.static('StudentAnswers'))
 app.use('/TeacherNotes', exprees.static('TeacherNotes'))
+app.use('/mark', markRouter)
+app.use('/comment', commentRouter)
+
 
 //error handling
 app.use((err, req, res, next) => {
-  const errorStatus = err.status || 5000
+  const errorStatus = err.status || 500
   const errorMessage = err.message || 'Something went wrong!!!'
   return res.status(errorStatus).json({
     success: false,

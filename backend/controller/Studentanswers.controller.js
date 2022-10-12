@@ -15,12 +15,14 @@ export const Upload = multer({storage : multer.diskStorage({
 export const CreateStudentAnswers = async (req, res, next) => {
     try {
         const newStudentAnswers = new studentanswers({ 
-            subject : req.body.subject,
+            stream : req.body.stream,
             lname : req.body.lname,
             grade : req.body.grade,
             date : req.body.date,
             time : req.body.time,
             image: req.file.originalname,
+            student_id: req.body.student_id,
+            status:"None"
          });
         await newStudentAnswers.save()
         res.status(200).json("Student Answers has been created.....");
@@ -34,7 +36,7 @@ export const CreateStudentAnswers = async (req, res, next) => {
 export const UpdateStudentAnswers = async(req, res, next) => {
     try {
             const updaStudentAnswers = await studentanswers.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
-             res.status(200).json(updateIndustry);
+             res.status(200).json(updaStudentAnswers);
     } catch (err) {
         next(err);
     }
@@ -72,4 +74,14 @@ export const GetAllStudentAnswers = async (req, res, next) => {
         next(err);
     }
 };
+
+
+export const getStudentAnswersByStream = async (req, res, next) => {
+ let myquery = { stream: req.params.stream }
+ studentanswers.find(myquery, function (err, result) {
+   if (err) throw err
+   res.json(result)
+ })
+}
+
 

@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../Navbar';
+import { AuthContext } from '../../../../context/AuthContext';
 
 export const StudentAnswersUpload = () => {
     const hr ={
         borderLeft: '6px solid ',
         height:'300px'
         
-     }  
-     const [subject,setSubject] = useState('');
+  }  
+   const { user } = useContext(AuthContext)
+   const userId = user._id
+
+     const [stream,setStream] = useState('');
      const [grade,setGrade] = useState('');
      const [lname,setLname] = useState('');
      const [date,setDate] = useState('');
@@ -28,14 +32,15 @@ export const StudentAnswersUpload = () => {
        
        const formData = new FormData();
    
-       formData.append("subject",subject);
+       formData.append("stream",stream);
        formData.append("lname",lname);
        formData.append("grade",grade);
        formData.append("date",date);
        formData.append("time",time);
-       formData.append("file",file);
+       formData.append("file", file);
+       formData.append("student_id",userId)
    
-       setSubject("");
+       setStream("");
        setLname("");
        setGrade("");
        setDate("");
@@ -81,11 +86,11 @@ export const StudentAnswersUpload = () => {
         
                    {/* name */}
                   <div className='form-row'>
-                    <label className='form-label'>Subject</label><br/>
+                    <label className='form-label'>Stream</label><br/>
                     <input
                       type='text'
-                      name={subject}
-                      onChange={(e)=>setSubject(e.target.value)}
+                      name={stream}
+                      onChange={(e)=>setStream(e.target.value)}
                       className='form-input'
                     />
                   </div>

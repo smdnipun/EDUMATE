@@ -46,9 +46,11 @@ function SignUp() {
         text: 'Password Mismatch!!!',
       })
     } else {
+      console.log(data)
       await axios
         .post('http://localhost:5000/api/auth/register', data)
         .then((res) => {
+          console.log(res)
           if (res.data === 'Created') {
             Swal.fire('Congrats!', 'Successfully Registered', 'success')
             navigate('/login')

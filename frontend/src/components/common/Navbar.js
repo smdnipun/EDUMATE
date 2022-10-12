@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../../context/AuthContext'
 
 export const Navbar = () => {
+  const { user } = useContext(AuthContext)
+  // const type = user.type
+
   return (
     <div>
-      <nav class='navbar navbar-expand-lg navbar-light fixed-top' id='mainNav'>
-        <div class='container px-4 px-lg-5'>
-          <a class='navbar-brand' href=''>
+      <nav
+        className='navbar navbar-expand-lg navbar-light fixed-top'
+        id='mainNav'
+      >
+        <div className='container px-4 px-lg-5'>
+          <a className='navbar-brand' href=''>
             EDUMATE
           </a>
           <button
-            class='navbar-toggler'
+            className='navbar-toggler'
             type='button'
             data-bs-toggle='collapse'
             data-bs-target='#navbarResponsive'
@@ -19,21 +26,21 @@ export const Navbar = () => {
             aria-label='Toggle navigation'
           >
             Menu
-            <i class='fas fa-bars'></i>
+            <i className='fas fa-bars'></i>
           </button>
-          <div class='collapse navbar-collapse' id='navbarResponsive'>
-            <ul class='navbar-nav ms-auto py-4 py-lg-0'>
-              <li class='nav-item'>
-                <a class='nav-link px-lg-3 py-3 py-lg-4' href='index.html'>
+          <div className='collapse navbar-collapse' id='navbarResponsive'>
+            <ul className='navbar-nav ms-auto py-4 py-lg-0'>
+              <li className='nav-item'>
+                <a className='nav-link px-lg-3 py-3 py-lg-4' href='index.html'>
                   Home
                 </a>
               </li>
-              <li class='nav-item'>
-                <a class='nav-link px-lg-3 py-3 py-lg-4' href='about.html'>
+              <li className='nav-item'>
+                <a className='nav-link px-lg-3 py-3 py-lg-4' href='about.html'>
                   About
                 </a>
               </li>
-              <li class='nav-item'>
+              <li className='nav-item'>
                 <NavLink to='/logout' className='px-lg-3 py-3 py-lg-4 mt-4'>
                   <button className='btn btn-danger'>Logout</button>
                 </NavLink>

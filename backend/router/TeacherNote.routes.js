@@ -4,9 +4,11 @@ import {
   DeleteNote,
   GetNote,
   GetTeacherNotes,
-    GetTeacherNotessubject,
-    UpdateNote,
-  Upload
+  GetTeacherNotessubject,
+  UpdateNote,
+  Upload,
+  getNoteByTeacherId,
+  getSubject,
 } from '../controller/Note.controller.js'
 
 const router = express.Router()
@@ -23,7 +25,11 @@ router.delete('/:id', DeleteNote)
 router.put('/:id', UpdateNote)
 
 //get all answers
-router.get('/get', 
-//get all answers
-router.post('/subject', GetTeacherNotessubject));
-export default router;
+router.get(
+  '/get',
+  //get all answers
+  router.post('/subject', GetTeacherNotessubject)
+)
+router.get(`/get/:teacher_id`, getNoteByTeacherId)
+router.get('/getSub/subject', getSubject)
+export default router

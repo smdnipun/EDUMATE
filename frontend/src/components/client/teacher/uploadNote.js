@@ -1,25 +1,38 @@
-import { useState } from "react"
-import axios from "axios"
-import { Navbar } from '../../common/Navbar'
+import { useState, useContext, useEffect } from 'react'
+import axios from 'axios'
+import Navigation from '../../common/Navigation/Navigation'
+import { AuthContext } from '../../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 export const UploadNote = () => {
   const [subject, setSubject] = useState()
   const [lesson_name, setLesson] = useState()
   const [grade, setGrade] = useState()
   const [file, setFile] = useState([])
+  const [stream, setStream] = useState([])
 
-      const navigate = useNavigate()
+  const { user } = useContext(AuthContext)
+  const userId = user._id
+
+  const navigate = useNavigate()
 
   const hr = {
     borderLeft: '6px solid green',
     height: '300px',
   }
 
+  const loadStream = () => {
+    axios.get('stream/').then((res) => {
+      setStream(res.data)
+    })
+  }
+
+  useEffect(() => {
+    loadStream()
+  }, [])
   const noteAdd = (e) => {
-
-     setFile(e.target.files[0])
-
+    setFile(e.target.files[0])
   }
 
   const Submit = (e) => {
@@ -31,28 +44,35 @@ export const UploadNote = () => {
     formData.append('file', file)
     formData.append('subject', subject)
     formData.append('grade', grade)
-    
-
-   
+    formData.append('teacher_id', userId)
 
     axios.post('/teacherNote/add', formData).then((res) => {
-      alert('Succsessfully Added')
+      Swal.fire({
+        icon: 'success',
+        title: 'Note added',
+        timer: 1500,
+      })
       navigate('/viewNote')
     })
   }
 
   return (
     <div>
-      <Navbar />
+      <Navigation />
 
       <div className='container mt-5'>
         <div className='mt-5 pt-4'>
           <form onSubmit={Submit}>
             <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2'>
               <div className='mx-5 mt-5'>
+                &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+                &nbsp; &nbsp;&nbsp;
                 <h1 className='mr-5'>Upload file</h1>
+                <br />
+                <br />
                 <input
                   type='file'
+                  style={{ width: '385px' }}
                   multiple
                   filename='file'
                   onChange={noteAdd}
@@ -64,6 +84,7 @@ export const UploadNote = () => {
                 <br />
                 <button
                   type='submit'
+                  style={{ width: '300px', height: '50px' }}
                   id='upload'
                   class='btn btn-secondary btn-lg'
                 >
@@ -74,17 +95,21 @@ export const UploadNote = () => {
               <div className='mx-5 mt-5'>
                 <form>
                   <select
+                    id='stream'
+                    name='stream'
                     className='form-control'
-                    required
                     value={subject}
-                    onChange={(e) => {
-                      setSubject(e.target.value)
-                    }}
+                    onChange={(e) => setSubject(e.target.value)}
+                    required
                   >
-                    <option>Select a subject</option>
-                    <option>Combined maths</option>
-                    <option>Biology</option>
-                    <option>Physics</option>
+                    <option>Stream</option>
+                    {stream.map((stream) => {
+                      return (
+                        <option key={stream._id} value={stream.streamname}>
+                          {stream.streamname}
+                        </option>
+                      )
+                    })}
                   </select>
                   <br />
                   <br />
@@ -104,17 +129,21 @@ export const UploadNote = () => {
                   <br />
                   <br />
                   <div className='form-group'>
-                    <input
+                    <select
                       type='number'
                       class='form-control'
-                      id='formGroupExampleInput2'
                       required
+                      id='formGroupExampleInput2'
                       placeholder='Grade'
                       value={grade}
                       onChange={(e) => {
                         setGrade(e.target.value)
                       }}
-                    />
+                    >
+                      <option>Grade</option>
+                      <option value={12}>12</option>
+                      <option value={13}>13</option>
+                    </select>
                   </div>
                 </form>
               </div>
