@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { createContext, useReducer } from 'react'
 
 const INITIAL_STATE = {
-  user: JSON.parse(localStorage.getItem('user')) || null,
+  user: JSON.toString(localStorage.getItem('user')) || null,
   loading: false,
   error: null,
 }
@@ -26,7 +26,7 @@ const AuthReducer = (state, action) => {
     case 'LOGIN_FAILURE':
       return {
         user: null,
-        loading: true,
+        loading: null,
         error: action.payload,
       }
     case 'LOGOUT':

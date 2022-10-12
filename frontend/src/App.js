@@ -1,10 +1,7 @@
-import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Navbar } from './components/common/Navbar'
-import { Footer } from './components/common/footer'
+import React, { useContext } from 'react'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { UploadNote } from './components/client/teacher/uploadNote.js'
 import { StudentAnswersUpload } from './components/client/student/StudentAnswersUpload'
-import Home from './components/client/Home'
 import { ExamTimeTable } from './components/client/student/examtimetable/ExamTimeTable'
 import { FeedBack } from './components/client/student/feedback/FeedBack'
 import { UploadLink } from './components/client/teacher/UploadLink.js'
@@ -14,9 +11,9 @@ import AddStreams from './components/admin/streams/AddStreams'
 import AddSubjects from './components/admin/streams/AddSubjects'
 import ViewStreams from './components/admin/streams/ViewStreams'
 import ViewSubjects from './components/admin/streams/ViewSubjects'
-import UpdateStreams from './components/admin/streams/UpdateStreams';
-import UpdateSubjects from './components/admin/streams/UpdateSubjects';
-import AdminHome from './components/admin/AdminHome';
+import UpdateStreams from './components/admin/streams/UpdateStreams'
+import UpdateSubjects from './components/admin/streams/UpdateSubjects'
+import AdminHome from './components/admin/AdminHome'
 import { ViewNote } from './components/client/teacher/ViewNote'
 import { UpdateNote } from './components/client/teacher/UpdateNote'
 import Main from './components/common/userReg/Main.js'
@@ -31,8 +28,46 @@ import ViewExamTimeTable from './components/admin/Time Tables/ViewExamTimeTable'
 import UpdateExamTimeTable  from './components/admin/Time Tables/UpdateExamTimeTable'
 import UpdateSubjectTable  from './components/admin/Time Tables/UpdateSubjectTable'
 import SearchedExam from './components/admin/Time Tables/SearchedExam'
+import { ViewStudentPaper } from './components/client/teacher/ViewStudentPaper'
+import { AuthContext } from './context/AuthContext'
+import UserManagement from './components/admin/UserManagement'
+import ForgetPwd from './components/common/Profile/ForgetPwd'
+import UpdateUser from './components/admin/UpdateUser'
+import AddUser from './components/admin/AddUser'
+import AddAdmin from './components/admin/AddAdmin'
+import OTPverification from './components/common/userReg/OTPverification'
+import ForgetPassword from './components/common/userReg/ForgetPassword'
+import './components/common/userReg/main.css'
+import { MarkPaper } from './components/client/teacher/MarkPaper.js'
+import { UpdateMark } from './components/client/teacher/UpdateMark.js'
+import { ViewComments } from './components/client/teacher/ViewComments.js'
+import { NotesReport } from './components/client/teacher/NotesReport'
+import UserReport from './components/admin/UserReport'
+import { Navbar } from './components/common/Navbar.js'
 
 function App() {
+  const ProtectedRoute = ({ children }) => {
+    const { user } = useContext(AuthContext)
+    if (!user) {
+      return <Navigate to='/login' />
+    }
+    return children
+  }
+  const StudentProtectedRoutes = ({ children }) => {
+    const { user } = useContext(AuthContext)
+    if (user.type != 'Student') {
+      return <Navigate to='/login' />
+    }
+    return children
+  }
+  const TeacherProtectedRoutes = ({ children }) => {
+    const { user } = useContext(AuthContext)
+    if (user.type != 'Teacher') {
+      return <Navigate to='/login' />
+    }
+    return children
+  }
+
   return (
     <div className='App'>
       {/* <Navbar /> */}
@@ -40,15 +75,100 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/*common*/}
-          <Route exact path={'/main'} element={<Main />} />
+          <Route exact path={'/'} element={<Main />} />
           <Route exact path={'/login'} element={<SignIn />} />
+          <Route exact path={'/logout'} element={<SignIn logout={true} />} />
           <Route exact path={'/register'} element={<SignUp />} />
           <Route exact path={'/profile'} element={<Profile />} />
           <Route exact path={'/updateProfile'} element={<Update />} />
           <Route exact path={'/navbar'} element={<Navbar />} />
+          <Route exact path={'/forgotPassword'} element={<OTPverification />} />
+          <Route exact path={'/resetPassword'} element={<ForgetPassword />} />
+          <Route
+            exact
+            path={'/profile'}
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path={'/updateProfile/:id'}
+            element={
+              <ProtectedRoute>
+                <Update />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path={'/forgetPwd/:id'}
+            element={
+              <ProtectedRoute>
+                <ForgetPwd />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* user admin */}
+          <Route
+            exact
+            path={'/viewuser'}
+            element={
+              <ProtectedRoute>
+                <UserManagement />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path={'/updateuser/:id'}
+            element={
+              <ProtectedRoute>
+                <UpdateUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path={'/adduser'}
+            element={
+              <ProtectedRoute>
+                <AddUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path={'/addadmin'}
+            element={
+              <ProtectedRoute>
+                <AddAdmin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path={'/admin/home'}
+            element={
+              <ProtectedRoute>
+                <UserReport />
+              </ProtectedRoute>
+            }
+          />
 
           {/* admin */}
-          <Route exact path={'/adminhome'} element={<AdminHome />} />
+          <Route
+            exact
+            path={'/adminhome'}
+            element={
+              <ProtectedRoute>
+                <AdminHome />
+              </ProtectedRoute>
+            }
+          />
           <Route exact path={'/addstream'} element={<AddStreams />} />
           <Route exact path={'/addsubject'} element={<AddSubjects />} />
           <Route exact path={'/getstream'} element={<ViewStreams />} />
@@ -84,6 +204,11 @@ function App() {
           <Route exact path='/addNote' element={<UploadNote />} />
           <Route exact path='/viewNote' element={<ViewNote />} />
           <Route exact path='/updatenote/:id' element={<UpdateNote />} />
+          <Route exact path='/papers' element={<ViewStudentPaper />} />
+          <Route exact path='/markpapers/:id' element={<MarkPaper />} />
+          <Route exact path='/viewmark' element={<UpdateMark />} />
+          <Route exact path='/viewComments/:id' element={<ViewComments />} />
+          <Route exact path='/notereport' element={<NotesReport />} />
         </Routes>
       </BrowserRouter>
     </div>

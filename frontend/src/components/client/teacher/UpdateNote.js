@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Alert from '@mui/material/Alert'
-import { useParams } from 'react-router-dom'
-
+import { useParams,useNavigate } from 'react-router-dom'
+import Navigation from '../../common/Navigation/Navigation'
 export const UpdateNote = () => {
+  
+  const navigate = useNavigate()
+
   const hr = {
     borderLeft: '6px solid green',
     height: '300px',
@@ -14,7 +17,8 @@ export const UpdateNote = () => {
   const [subject, setSubject] = useState()
   const [lesson_name, setLesson] = useState()
   const [grade, setGrade] = useState()
-  const [note, setNote] = useState()
+  const [note,setNote]=useState()
+  const [file, setFile] = useState([])
 
   const getLink = () => {
     axios.get(`/teacherNote/${params.id}`).then((res) => {
@@ -24,16 +28,29 @@ export const UpdateNote = () => {
       setNote(res.data.note)
     })
   }
+    const noteAdd = (e) => {
+      setFile(e.target.files[0])
+    }
 
+    const formData = new FormData()
+//  formData.append('lesson_name', lesson_name)
+ formData.append('file', file)
+//  formData.append('subject', subject)
+//  formData.append('grade', grade)
+
+  
   const add = {
     subject,
     lesson_name,
     grade,
-     note,
+    note,
   }
-
-  const updateLink = () => {
-    axios.put(`/link/${params.id}`, add)
+  // console.log(formData)
+  const updateNote = (e) => {
+        e.preventDefault()
+    axios.put(`http://localhost:5000/teacherNote/${params.id}`, add)
+    alert('Succsessfully Updated')
+    navigate('/viewNote')
   }
 
   useEffect(() => {
@@ -41,82 +58,114 @@ export const UpdateNote = () => {
   }, [])
 
   return (
-    <div className='container mt-5'>
-      <div className='mt-5 pt-4'>
-        <form onSubmit={updateLink}>
-        
-        
+    <div>
+      <Navigation />
+      <div className='container mt-5'>
+        <div className='mt-5 pt-4'>
+          <form onSubmit={updateNote}>
+            <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2'>
+              <div className='mx-5 mt-5'>
+                <h1 className='mr-5'>Upload Note</h1>
+                <br />
+                <br/>
+                <input
+                  type='text'
+                  class='form-control'
+                  id='link'
+                  name='link'
+                  disabled
+                  placeholder='place the link'
+                  value={note}
+                  
+                />
 
-          <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2'>
-            <div className='mx-5 mt-5'>
-              <h1 className='mr-5'>Upload Note</h1>
-              <input
-                type='text'
-                class='form-control'
-                id='link'
-                name='link'
-                placeholder='place the link'
-                value={note}
-                onChange={(e) => {
-                  setNote(e.target.value)
-                }}
-              />
-              <br />
-              <br />
-              <button
-                type='submit'
-                id='upload'
-                class='btn btn-secondary btn-lg'
-              >
-                Update
-              </button>
-            </div>
-            <div className='mx-5 my-4' style={hr} />
-            <div className='mx-5 mt-5'>
-              <form>
-                <select
-                  className='form-control'
-                  value={subject}
-                  onChange={(e) => {
-                    setSubject(e.target.value)
-                  }}
+                {/* <input
+                  type='file'
+                  style={{ width: '385px' }}
+                  multiple
+                  filename='file'
+                  onChange={noteAdd}
+                  className='form-input'
+                  
+                /> */}
+                <br />
+                <br />
+                <br />
+                <button
+                  type='submit'
+                  id='update'
+                  class='btn btn-secondary btn-lg'
                 >
-                  <option>Select a subject</option>
-                  <option>test</option>
-                </select>
-                <br />
-                <br />
-
-                <div className='form-group'>
+                  Update
+                </button>
+              </div>
+              <div className='mx-5 my-4' style={hr} />
+              <div className='mx-5 mt-5'>
+                <form>
                   <input
                     type='text'
-                    class='form-control'
-                    id='formGroupExampleInput'
-                    placeholder='Lesson name'
-                    value={lesson_name}
+                    className='form-control'
+                    disabled
+                    value={subject}
                     onChange={(e) => {
-                      setLesson(e.target.value)
+                      setSubject(e.target.value)
                     }}
                   />
-                </div>
-                <br />
-                <br />
-                <div className='form-group'>
-                  <input
-                    type='number'
-                    class='form-control'
-                    id='formGroupExampleInput2'
-                    placeholder='Grade'
-                    value={grade}
+                  <select
+                    className='form-control'
+                    value={subject}
                     onChange={(e) => {
-                      setGrade(e.target.value)
+                      setSubject(e.target.value)
+                      
                     }}
-                  />
-                </div>
-              </form>
+                    hidden
+                  >
+                    <option>Select a subject</option>
+                    <option>Select a subject</option>
+                    <option>Combined maths</option>
+                    <option>Biology</option>
+                    <option>Physics</option>
+                  </select>
+
+                  <br />
+                  <br />
+
+                  <div className='form-group'>
+                    <input
+                      type='text'
+                      class='form-control'
+                      id='formGroupExampleInput'
+                      placeholder='Lesson name'
+                      value={lesson_name}
+                      onChange={(e) => {
+                        setLesson(e.target.value)
+                      }}
+                    />
+                  </div>
+                  <br />
+                  <br />
+                  <div className='form-group'>
+                    <select
+                      type='number'
+                      class='form-control'
+                      required
+                      id='formGroupExampleInput2'
+                      placeholder='Grade'
+                      value={grade}
+                      onChange={(e) => {
+                        setGrade(e.target.value)
+                      }}
+                    >
+                      <option>Grade</option>
+                      <option value={12}>12</option>
+                      <option value={13}>13</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   )
