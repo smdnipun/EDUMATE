@@ -71,7 +71,7 @@ export const MarkPaper = () => {
        text: 'Something went wrong!',
      })
     }
-    } else if (mark > 100 || mark < 0) {
+     else if (mark > 100 || mark < 0) {
       Swal.fire({
         icon: 'error',
         title: 'please enter number between 0 and 100',
