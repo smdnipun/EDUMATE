@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Navbar } from '../Navbar';
 
 export const StudentAnswersUpload = () => {
     const hr ={
@@ -56,6 +57,8 @@ export const StudentAnswersUpload = () => {
     
 
      return (
+      <div>
+        <Navbar/>
        <div className='container mt-5'>
          <div className='mt-5 pt-4'>
           <h1 className='text-center mt-5'>AnswerSheet Upload </h1>
@@ -116,7 +119,7 @@ export const StudentAnswersUpload = () => {
                         className='form-input'
                       />
                     </div>
-                    <div className='ml-3'> 
+                    <div className=''> 
                       <input
                         type='text'
                         name={time}
@@ -135,5 +138,6 @@ export const StudentAnswersUpload = () => {
           </form>
          </div>
        </div>
+      </div>
      )
    }

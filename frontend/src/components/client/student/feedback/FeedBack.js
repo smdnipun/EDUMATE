@@ -1,6 +1,7 @@
 import React, {useState, useEffect } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { Navbar } from '../Navbar';
 
 export const FeedBack = () => {
  
@@ -51,6 +52,8 @@ export const FeedBack = () => {
 
 
   return (
+    <div>
+      <Navbar/>
     <div className='' style={{marginLeft:'30%',marginRight:'30%', marginTop:'10%'}}>
       <div className='border shadow rounded-3 bg-light'>
       <form className='mx-5 mt-5 mb-5' onSubmit={AddFeedback}>
@@ -74,6 +77,7 @@ export const FeedBack = () => {
         </div>
       </form>
       </div>
+    </div>
     </div>
   )
 }

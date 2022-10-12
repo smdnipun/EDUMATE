@@ -1,5 +1,5 @@
 import express from 'express';
-import { createSubject, updateSubject, deleteSubject, getSubjects, getSubjectById } from '../controller/Subject.controler.js';
+import { createSubject, updateSubject, deleteSubject, getSubjects, getSubjectById, getSubjectbyStream } from '../controller/Subject.controler.js';
 
 const subjectrouter = express.Router();
 
@@ -17,5 +17,8 @@ subjectrouter.get('/', getSubjects)
 
 //get by id
 subjectrouter.get('/get/:id', getSubjectById)
+
+//filter
+subjectrouter.post('/stream', getSubjectbyStream);
 
 export default subjectrouter;
