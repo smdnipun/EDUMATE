@@ -5,6 +5,7 @@ import {
   deleteSubject,
   getSubjects,
   getSubjectById,
+  getSubjectbyStream,
 } from '../controller/Subject.controler.js'
 
 const subjectrouter = express.Router()
@@ -24,4 +25,7 @@ subjectrouter.get('/', getSubjects)
 //get by id
 subjectrouter.get('/get/:id', getSubjectById)
 
-export default subjectrouter
+//filter
+subjectrouter.post('/stream', getSubjectbyStream);
+
+export default subjectrouter;

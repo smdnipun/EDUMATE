@@ -1,9 +1,8 @@
 import React, { useContext } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { UploadNote } from './components/client/teacher/uploadNote.js'
-import { StudentAnswersUpload } from './components/client/student/StudentAnswersUpload'
-import { ExamTimeTable } from './components/client/student/examtimetable/ExamTimeTable'
-import { FeedBack } from './components/client/student/feedback/FeedBack'
+import { ExamTimeTable } from './components/client/student/examtimetable/ExamTimeTable.js'
+import { FeedBack } from './components/client/student/feedback/FeedBack.js'
 import { UploadLink } from './components/client/teacher/UploadLink.js'
 import { ViewLinks } from './components/client/teacher/viewLinks'
 import { Updatelink } from './components/client/teacher/Updatelink'
@@ -44,32 +43,38 @@ import { ViewComments } from './components/client/teacher/ViewComments.js'
 import { NotesReport } from './components/client/teacher/NotesReport'
 import UserReport from './components/admin/UserReport'
 import { Navbar } from './components/common/Navbar.js'
+import { SubjectNote } from './components/client/student/subjectnote/SubjectNote.js'
+
+import { CommentForSubject_Notes } from './components/client/student/comment_for_subject_notes/CommentForSubject_Notes.js'
+import { DisplayAnswersheets } from './components/client/student/studentanwersheet/DisplayAnswersheets.js'
+import { StudentAnswersUpload } from './components/client/student/studentanwersheet/StudentAnswersUpload.js'
+import { SubjectTimetableDisplay } from './components/client/student/subjecttimetable/SubjectTimetableDisplay.js'
 
 function App() {
   const ProtectedRoute = ({ children }) => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
     if (!user) {
-      return <Navigate to='/login' />
+      return <Navigate to="/login" />;
     }
-    return children
-  }
+    return children;
+  };
   const StudentProtectedRoutes = ({ children }) => {
-    const { user } = useContext(AuthContext)
-    if (user.type != 'Student') {
-      return <Navigate to='/login' />
+    const { user } = useContext(AuthContext);
+    if (user.type != "Student") {
+      return <Navigate to="/login" />;
     }
-    return children
-  }
+    return children;
+  };
   const TeacherProtectedRoutes = ({ children }) => {
-    const { user } = useContext(AuthContext)
-    if (user.type != 'Teacher') {
-      return <Navigate to='/login' />
+    const { user } = useContext(AuthContext);
+    if (user.type != "Teacher") {
+      return <Navigate to="/login" />;
     }
-    return children
-  }
+    return children;
+  };
 
   return (
-    <div className='App'>
+    <div className="App">
       {/* <Navbar /> */}
       {/* <UploadNote/> */}
       <BrowserRouter>
@@ -86,7 +91,7 @@ function App() {
           <Route exact path={'/resetPassword'} element={<ForgetPassword />} />
           <Route
             exact
-            path={'/profile'}
+            path={"/profile"}
             element={
               <ProtectedRoute>
                 <Profile />
@@ -95,7 +100,7 @@ function App() {
           />
           <Route
             exact
-            path={'/updateProfile/:id'}
+            path={"/updateProfile/:id"}
             element={
               <ProtectedRoute>
                 <Update />
@@ -162,7 +167,7 @@ function App() {
           {/* admin */}
           <Route
             exact
-            path={'/adminhome'}
+            path={"/adminhome"}
             element={
               <ProtectedRoute>
                 <AdminHome />
@@ -184,18 +189,22 @@ function App() {
 
           <Route
             exact
-            path={'editsubj/:_id'}
+            path={"editsubj/:_id"}
             element={<UpdateSubjects />}
           ></Route>
 
           {/* student  */}
           <Route
             exact
-            path={'/studentanswersheetUpload'}
+            path={"/studentanswersheetUpload"}
             element={<StudentAnswersUpload />}
           />
-          <Route exact path={'/examtimetable'} element={<ExamTimeTable />} />
-          <Route exact path={'/feedback'} element={<FeedBack />} />
+          <Route exact path={"/examtimetable"} element={<ExamTimeTable />} />
+          <Route exact path={"/subjectnote"} element={<SubjectNote />} />
+          <Route exact path={"/feedback"} element={<FeedBack />} />
+          <Route exact path={"/subjecttimetable"} element={<SubjectTimetableDisplay />} />
+          <Route exact path={"/commentforsubjectnote"} element={<CommentForSubject_Notes />} />
+          <Route exact path={"/displayanswers"} element={<DisplayAnswersheets />} />
 
           {/* teacher */}
           <Route exact path='/addlink' element={<UploadLink />} />
@@ -212,7 +221,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-  )
+  );
 }
 
 export default App
