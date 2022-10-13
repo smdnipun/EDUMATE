@@ -1,5 +1,6 @@
 import CommentModel from '../model/Comment.model.js'
 
+
 export const createComment = async (req, res, next) => {
   const newComment = new CommentModel(req.body)
 
@@ -73,7 +74,7 @@ export const getComments = async (req, res, next) => {
 
 export const getCommentByNoteId = async (req, res, next) => {
   let myquery = { note_id: Object(req.params.note_id) }
-  await CommentModel.find(myquery, function (err, result) {
+  CommentModel.find(myquery, function (err, result) {
     if (err) throw err
     res.json(result)
   })

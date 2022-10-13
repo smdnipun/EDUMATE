@@ -30,7 +30,9 @@ function SignIn(props) {
   })
 
   if (props.logout) {
-    localStorage.removeItem('user')
+    // localStorage.removeItem('user')
+    localStorage.clear()
+    navigate('/login')
     window.location = '/login'
   }
 
@@ -50,7 +52,7 @@ function SignIn(props) {
             })
           } else if (res.data.details.type === 'Admin') {
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
-            navigate('/profile')
+            navigate('/adminhome')
             Toast.fire({
               icon: 'success',
               title: 'Signed in successfully',

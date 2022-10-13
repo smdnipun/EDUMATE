@@ -14,7 +14,6 @@ function UpdateUser() {
   const [type, setType] = useState()
   const [stream, setStream] = useState()
   const [email, setEmail] = useState()
-  const [dob, setDob] = useState()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -65,7 +64,7 @@ function UpdateUser() {
         email: email,
       })
       .then((res) => {
-        Swal.fire('Congrats!', 'Successfully Added', 'success')
+        Swal.fire('Congrats!', 'Successfully Updated', 'success')
         navigate('/viewuser')
       })
   }
