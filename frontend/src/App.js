@@ -1,9 +1,8 @@
 import React, { useContext } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { UploadNote } from './components/client/teacher/uploadNote.js'
-import { StudentAnswersUpload } from './components/client/student/StudentAnswersUpload'
-import { ExamTimeTable } from './components/client/student/examtimetable/ExamTimeTable'
-import { FeedBack } from './components/client/student/feedback/FeedBack'
+import { ExamTimeTable } from './components/client/student/examtimetable/ExamTimeTable.js'
+import { FeedBack } from './components/client/student/feedback/FeedBack.js'
 import { UploadLink } from './components/client/teacher/UploadLink.js'
 import { ViewLinks } from './components/client/teacher/viewLinks'
 import { Updatelink } from './components/client/teacher/Updatelink'
@@ -25,8 +24,8 @@ import AddSubjectTimeTable from './components/admin/Time Tables/AddSubjectTimeTa
 import ViewSubjectTimeTable from './components/admin/Time Tables/ViewSubjectTimeTable'
 import AddExamTimeTable from './components/admin/Time Tables/AddExamTimeTable'
 import ViewExamTimeTable from './components/admin/Time Tables/ViewExamTimeTable'
-import UpdateExamTimeTable  from './components/admin/Time Tables/UpdateExamTimeTable'
-import UpdateSubjectTable  from './components/admin/Time Tables/UpdateSubjectTable'
+import UpdateExamTimeTable from './components/admin/Time Tables/UpdateExamTimeTable'
+import UpdateSubjectTable from './components/admin/Time Tables/UpdateSubjectTable'
 import SearchedExam from './components/admin/Time Tables/SearchedExam'
 import { ViewStudentPaper } from './components/client/teacher/ViewStudentPaper'
 import { AuthContext } from './context/AuthContext'
@@ -44,6 +43,12 @@ import { ViewComments } from './components/client/teacher/ViewComments.js'
 import { NotesReport } from './components/client/teacher/NotesReport'
 import UserReport from './components/admin/UserReport'
 import { Navbar } from './components/common/Navbar.js'
+import { SubjectNote } from './components/client/student/subjectnote/SubjectNote.js'
+
+import { CommentForSubject_Notes } from './components/client/student/comment_for_subject_notes/CommentForSubject_Notes.js'
+import { DisplayAnswersheets } from './components/client/student/studentanwersheet/DisplayAnswersheets.js'
+import { StudentAnswersUpload } from './components/client/student/studentanwersheet/StudentAnswersUpload.js'
+import { SubjectTimetableDisplay } from './components/client/student/subjecttimetable/SubjectTimetableDisplay.js'
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -176,11 +181,23 @@ function App() {
           <Route exact path={'/getsubject'} element={<ViewSubjects />} />
           <Route exact path={'/editstrm/:_id'} element={<UpdateStreams />} />
           <Route exact path={'/addsubtime'} element={<AddSubjectTimeTable />} />
-          <Route exact path={'/getsubtime'} element={<ViewSubjectTimeTable />} />
+          <Route
+            exact
+            path={'/getsubtime'}
+            element={<ViewSubjectTimeTable />}
+          />
           <Route exact path={'/addexam'} element={<AddExamTimeTable />} />
           <Route exact path={'/getexam'} element={<ViewExamTimeTable />} />
-          <Route exact path={'/editexam/:_id'} element={<UpdateExamTimeTable />} />
-          <Route exact path={'/editsubtbl/:_id'} element={<UpdateSubjectTable />} />
+          <Route
+            exact
+            path={'/editexam/:_id'}
+            element={<UpdateExamTimeTable />}
+          />
+          <Route
+            exact
+            path={'/editsubtbl/:_id'}
+            element={<UpdateSubjectTable />}
+          />
           <Route exact path={'/searchexam'} element={<SearchedExam />} />
 
           <Route
@@ -196,7 +213,23 @@ function App() {
             element={<StudentAnswersUpload />}
           />
           <Route exact path={'/examtimetable'} element={<ExamTimeTable />} />
+          <Route exact path={'/subjectnote'} element={<SubjectNote />} />
           <Route exact path={'/feedback'} element={<FeedBack />} />
+          <Route
+            exact
+            path={'/subjecttimetable'}
+            element={<SubjectTimetableDisplay />}
+          />
+          <Route
+            exact
+            path={'/commentforsubjectnote'}
+            element={<CommentForSubject_Notes />}
+          />
+          <Route
+            exact
+            path={'/displayanswers'}
+            element={<DisplayAnswersheets />}
+          />
 
           {/* teacher */}
           <Route exact path='/addlink' element={<UploadLink />} />

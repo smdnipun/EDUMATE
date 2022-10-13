@@ -1,26 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload'
 import { Button } from '@mui/material'
+import { Navbar } from '../Navbar';
+import { AuthContext } from '../../../../context/AuthContext';
 export const SubjectNote = () => {
   const [item,setItem] = useState([])
 
+  const { user } = useContext(AuthContext)
+  const userstream = user.stream
+
+  console.log(user);
+  console.log(userstream);
+
   useEffect(()=>{
-    axios.get('teacherNote/get').then((res)=>{
+    axios.post('/subject/stream',{streamname:userstream}).then((res)=>{
+      // streamname:subject
       setItem(res.data);
+      
     })
-  })
+  },[])
+
+  
+
   return (
     <div>
+      <Navbar/>
       <div className='text-center' style={{marginTop:"8%",marginLeft:"15%"}}>
-        <h1 className='mb-5'>Maths</h1>
+        <h1 className='mb-5'>{JSON.parse(localStorage.getItem('user')).stream}</h1>
       <div className='row gx-1 row-cols- row-cols-md-3'>
                     {item.map((datas) => {
                         return(
                     <div class="row gx-4">
                         <div class="col-lg- mb-5">
                             <div class="card h-100 shadow border-0">
-                            <>
+                            {/* <>
                               <form
                                 method='get'
                                 action={'http://localhost:5000/TeacherNotes/' + datas.note}
@@ -30,11 +44,8 @@ export const SubjectNote = () => {
                                   Download
                                 </button>
                               </form>
-                            </>
-                                <div class="card-body p-4">
-                                    <h5 class="card-title mb-3">{datas.lesson_name}</h5>
-                                    <p class="card-text mb-0">{datas.desc}</p>
-                                </div>
+                            </> */}
+                            <button>{datas.subjectname}</button>
                             </div>
                         </div>
                     </div>
@@ -46,3 +57,4 @@ export const SubjectNote = () => {
     </div>
   )
 }
+  

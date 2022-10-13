@@ -57,3 +57,13 @@ export const getSubjects = async (req, res, next) => {
     next(err)
   }
 }
+
+//get subject by stream
+export const getSubjectbyStream = async (req,res,next) => {
+  try{
+    const filter = await SubjectModel.find(
+      {streamname : req.body.streamname}
+    )
+    res.status(200).json(filter)
+  }catch(err){next(err)}
+}
