@@ -12,12 +12,19 @@ export const StudentAnswersUpload = () => {
   }  
    const { user } = useContext(AuthContext)
    const userId = user._id
+   console.log(user);
+
+   const current = new Date();
+   const dates = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+
+   const today = new Date();
+    const times = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
      const [stream,setStream] = useState('');
      const [grade,setGrade] = useState('');
      const [lname,setLname] = useState('');
-     const [date,setDate] = useState('');
-     const [time,setTime] = useState('');
+     const [date,setDate] = useState(dates);
+     const [time,setTime] = useState(times);
      const [file,setFile] = useState([]);
    
      const ImageAdd = (e) => {
@@ -49,23 +56,19 @@ export const StudentAnswersUpload = () => {
    
         axios.post("/studentanswers/add",formData).then((res)=>{
          alert('Succsessfully Added');
-         navi('/studentanswersheetUpload');
+         navi('/displayanswers');
        })
 
      }
-     const current = new Date();
-     const dates = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-
-     const today = new Date();
-      const times = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    
  
     
 
      return (
       <div>
         <Navbar/>
-       <div className='container mt-5'>
-         <div className='mt-5 pt-4'>
+       <div className='container mt- mb-5' style={{}}>
+         <div className='mt- pt-4'>
           <h1 className='text-center mt-5'>AnswerSheet Upload </h1>
           <form onSubmit={Submit} >
           <div className='d-flex justify-content-center mt-5 mx-5 border-0 bg-light shadow rounded-2'>
@@ -122,6 +125,7 @@ export const StudentAnswersUpload = () => {
                         value={dates}
                         onChange={(e)=>setDate(e.target.value)}
                         className='form-input'
+                        disabled
                       />
                     </div>
                     <div className=''> 
@@ -131,6 +135,7 @@ export const StudentAnswersUpload = () => {
                         value={times}
                         onChange={(e)=>setTime(e.target.value)}
                         className='form-input'
+                        disabled
                       />
                     </div>
                   </div>
