@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Navbar } from "../Navbar";
 import { AuthContext } from "../../../../context/AuthContext";
 import Navigation from "../../../common/Navigation/Navigation";
@@ -12,7 +12,12 @@ export const StudentAnswersUpload = () => {
   };
   const { user } = useContext(AuthContext);
   const userId = user._id;
-  console.log(user);
+  console.log(user.stream);
+
+  const params = useParams();
+  const subjectname = params.name;
+  // console.log(subjectname);
+
 
   const current = new Date();
   const dates = `${current.getDate()}/${
@@ -23,7 +28,7 @@ export const StudentAnswersUpload = () => {
   const times =
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
-  const [stream, setStream] = useState("");
+  const [stream, setStream] = useState(user.stream);
   const [grade, setGrade] = useState("");
   const [lname, setLname] = useState("");
   const [date, setDate] = useState(dates);
@@ -43,11 +48,14 @@ export const StudentAnswersUpload = () => {
 
     formData.append("stream", stream);
     formData.append("lname", lname);
+    formData.append("subject", subjectname);
     formData.append("grade", grade);
     formData.append("date", date);
     formData.append("time", time);
     formData.append("file", file);
     formData.append("student_id", userId);
+   
+    console.log(formData);
 
     setStream("");
     setLname("");
@@ -98,6 +106,19 @@ export const StudentAnswersUpload = () => {
                   <input
                     type="text"
                     name={stream}
+                    value={user.stream}
+                    onChange={(e) => setStream(e.target.value)}
+                    className="form-input"
+                  />
+                </div>
+                {/* Subject */}
+                <div className="form-row">
+                  <label className="form-label">Subject</label>
+                  <br />
+                  <input
+                    type="text"
+                    name={subjectname}
+                    value={subjectname}
                     onChange={(e) => setStream(e.target.value)}
                     className="form-input"
                   />

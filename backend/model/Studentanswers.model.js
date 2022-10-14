@@ -8,6 +8,9 @@ const studentanswersschema = new mongoose.Schema({
   stream: {
     type: String,
   },
+  subject: {
+    type: String,
+  },
   lname: {
     type: String,
   },
