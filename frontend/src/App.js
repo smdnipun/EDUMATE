@@ -210,7 +210,7 @@ function App() {
           {/* student  */}
           <Route
             exact
-            path={"/studentanswersheetUpload"}
+            path={"/studentanswersheetUpload/:name"}
             element={<StudentAnswersUpload />}
           />
           <Route exact path={"/examtimetable"} element={<ExamTimeTable />} />

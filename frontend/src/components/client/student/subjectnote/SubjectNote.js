@@ -64,7 +64,7 @@ export const SubjectNote = () => {
                     </div>
                     <div className="col-sm-3">
                       {/* <Link to */}
-                      <Link to={`/studentanswersheetUpload`}>
+                      <Link to={`/studentanswersheetUpload/${datas.subjectname}`}>
                         <button>Answers</button>
                       </Link>
                     </div>

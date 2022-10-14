@@ -1,15 +1,18 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Navbar } from "../Navbar";
 import { AiOutlineFileText } from "react-icons/ai";
 import Navigation from "../../../common/Navigation/Navigation";
+import { AuthContext } from "../../../../context/AuthContext";
 
 export const DisplayAnswersheets = () => {
   const [item, setItem] = useState([]);
+  const { user } = useContext(AuthContext);
+  const userId = user._id;
+  console.log(userId);
 
   useEffect(() => {
-    axios.get("/studentanswers/get").then((res) => {
-      // streamname:subject
+    axios.post("/StudentAnswers/idfilter",{student_id:userId}).then((res) => {
       setItem(res.data);
     });
   }, []);
@@ -47,6 +50,8 @@ export const DisplayAnswersheets = () => {
                 </div>
                 <div className="col">
                   <h7>{data.lname}</h7>
+                  <br />
+                  <h7>{data.subject}</h7>
                   <br />
                   <h7>{data.date}</h7>
                   <br />
