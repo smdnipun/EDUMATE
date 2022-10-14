@@ -58,3 +58,13 @@ export const getTableById = async (req, res, next) => {
       next(err)
     }
   }
+
+  //get subject by stream
+export const getSubjectTimetabelbyStream = async (req,res,next) => {
+  try{
+    const filter = await SubjectTimeTableModel.find(
+      {stream : req.body.stream}
+    )
+    res.status(200).json(filter)
+  }catch(err){next(err)}
+}

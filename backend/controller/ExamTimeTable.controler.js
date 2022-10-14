@@ -83,4 +83,14 @@ export const displaySearch = async (req, res) =>{
     next(err)
   }
 }
+
+//get exam time table by stream
+export const getTimetablebyStream = async (req,res,next) => {
+  try{
+    const filter = await ExamTimeTableModel.find(
+      {stream : req.body.stream}
+    )
+    res.status(200).json(filter)
+  }catch(err){next(err)}
+}
  
