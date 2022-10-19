@@ -54,7 +54,7 @@ function Navigation() {
             <Navbar.Collapse id='responsive-navbar-nav'>
               <Nav className='me-auto'>
                 <Nav.Link href='/subjectnote'>Subject</Nav.Link>
-                <Nav.Link href='/subjectnote'>Subject</Nav.Link>
+                <Nav.Link href='/message'>GroupChat</Nav.Link>
                 <NavDropdown title='Time Table' id='collasible-nav-dropdown'>
                   <NavDropdown.Item href='examtimetable'>Exam Time Table</NavDropdown.Item>
                   <NavDropdown.Item href='subjecttimetable'>Subject Time Table</NavDropdown.Item>

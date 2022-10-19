@@ -44,12 +44,12 @@ import { NotesReport } from "./components/client/teacher/NotesReport";
 import UserReport from "./components/admin/UserReport";
 import { Navbar } from "./components/common/Navbar.js";
 import { SubjectNote } from "./components/client/student/subjectnote/SubjectNote.js";
-
 import { CommentForSubject_Notes } from "./components/client/student/comment_for_subject_notes/CommentForSubject_Notes.js";
 import { DisplayAnswersheets } from "./components/client/student/studentanwersheet/DisplayAnswersheets.js";
 import { StudentAnswersUpload } from "./components/client/student/studentanwersheet/StudentAnswersUpload.js";
 import { SubjectTimetableDisplay } from "./components/client/student/subjecttimetable/SubjectTimetableDisplay.js";
 import { SubjectNoteforSubject } from "./components/client/student/subjectnote/SubjectNoteforSubject.js";
+import Message from "./components/client/student/chatbox/Message.js";
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -215,7 +215,7 @@ function App() {
           />
           <Route exact path={"/examtimetable"} element={<ExamTimeTable />} />
           <Route exact path={"/subjectnote"} element={<SubjectNote />} />
-          <Route exact path={"/feedback"} element={<FeedBack />} />
+          <Route exact path={"/feedback/:name"} element={<FeedBack />} />
           <Route
             exact
             path={"/subjecttimetable"}
@@ -235,6 +235,11 @@ function App() {
           exact
           path={"/subject/:name"}
           element={<SubjectNoteforSubject />}
+        />
+        <Route
+          exact
+          path={"/message/:name"}
+          element={<Message />}
         />
 
           {/* teacher */}
