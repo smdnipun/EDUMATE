@@ -109,3 +109,13 @@ export const getSubject = async (req, res, next) => {
 
   res.status(200).json(marks)
 }
+
+//get notes by subject
+export const getNotesbySubject = async (req,res,next) => {
+  try{
+    const filter = await TeacherNotesModel.find(
+      {subject : req.body.subject}
+    )
+    res.status(200).json(filter)
+  }catch(err){next(err)}
+}

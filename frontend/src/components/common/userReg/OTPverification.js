@@ -92,6 +92,13 @@ function OTPverification() {
   }
 
   const verifyOTP = () => {
+    if (inputOtp == '') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Warning',
+        text: 'Please fill all the details!!!',
+      })
+    }
     if (inputOtp !== otp) {
       Swal.fire({
         icon: 'error',

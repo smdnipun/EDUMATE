@@ -13,6 +13,12 @@ function Update() {
   const [dob, setDob] = useState()
   const [data, setData] = useState([])
   const navigate = useNavigate()
+  // get the current date
+  const date = new Date()
+  let day = date.getDate()
+  let month = date.getMonth() + 1
+  let year = date.getFullYear()
+  let currentDate = `${year}-${month}-${day}`
 
   const params = useParams()
 
@@ -47,31 +53,38 @@ function Update() {
   }
 
   const handlesubmit = () => {
-    if (firstName === '' && lastName === '' && stream === '' && dob === '') {
+    if (firstName === '' || lastName === '' || stream === '' || dob === '') {
       Swal.fire({
         icon: 'warning',
         title: 'Warning',
         text: 'Please fill all the details!!!',
       })
     } else {
-      axios
-        .put(`/api/users/${params.id}`, {
-          firstName: firstName,
-          lastName: lastName,
-          stream: stream,
-          dateOfBirth: dob,
+      if (dob >= currentDate) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Warning',
+          text: 'Please Enter a Valid date!!!',
         })
-        .then((res) => {
-          // Swal.fire({
-          //   position: 'top-end',
-          //   icon: 'success',
-          //   title: 'Successfully Updated',
-          //   showConfirmButton: false,
-          //   timer: 1500,
-          // })
-          Swal.fire('Done!', 'Successfully Updated', 'success')
-          navigate('/logout')
-        })
+      } else {
+        axios
+          .put(`/api/users/${params.id}`, {
+            firstName: firstName,
+            lastName: lastName,
+            stream: stream,
+            dateOfBirth: dob,
+          })
+          .then((res) => {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Successfully Updated',
+              showConfirmButton: false,
+              timer: 1500,
+            })
+            navigate('/logout')
+          })
+      }
     }
   }
 
