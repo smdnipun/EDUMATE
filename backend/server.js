@@ -14,6 +14,7 @@ import teacherRouter from './router/TeacherNote.routes.js'
 import subtimerouter from './router/Subjecttimetable.route.js'
 import examrouter from './router/ExamTimeTable.routes.js'
 import markRouter from './router/Mark.routes.js'
+import chatbox from './router/chatbox.routes.js'
 import commentRouter from './router/Comment.routes.js'
 
 const app = exprees()
@@ -51,6 +52,7 @@ app.use('/subjectfeedback', subjectfeedback)
 app.use('/subtime',subtimerouter)
 app.use('/examtime',examrouter)
 app.use('/teacherNote', teacherRouter)
+app.use('/chatbox', chatbox);
 app.use('/StudentAnswers', exprees.static('StudentAnswers'))
 app.use('/TeacherNotes', exprees.static('TeacherNotes'))
 app.use('/mark', markRouter)

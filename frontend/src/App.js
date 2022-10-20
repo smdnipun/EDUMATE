@@ -51,46 +51,46 @@ import { SubjectTimetableDisplay } from './components/client/student/subjecttime
 
 function App() {
   const ProtectedRoute = ({ children }) => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
     if (!user) {
-      return <Navigate to='/login' />
+      return <Navigate to="/login" />;
     }
-    return children
-  }
+    return children;
+  };
   const StudentProtectedRoutes = ({ children }) => {
-    const { user } = useContext(AuthContext)
-    if (user.type != 'Student') {
-      return <Navigate to='/login' />
+    const { user } = useContext(AuthContext);
+    if (user.type != "Student") {
+      return <Navigate to="/login" />;
     }
-    return children
-  }
+    return children;
+  };
   const TeacherProtectedRoutes = ({ children }) => {
-    const { user } = useContext(AuthContext)
-    if (user.type != 'Teacher') {
-      return <Navigate to='/login' />
+    const { user } = useContext(AuthContext);
+    if (user.type != "Teacher") {
+      return <Navigate to="/login" />;
     }
-    return children
-  }
+    return children;
+  };
 
   return (
-    <div className='App'>
+    <div className="App">
       {/* <Navbar /> */}
       {/* <UploadNote/> */}
       <BrowserRouter>
         <Routes>
           {/*common*/}
-          <Route exact path={'/'} element={<Main />} />
-          <Route exact path={'/login'} element={<SignIn />} />
-          <Route exact path={'/logout'} element={<SignIn logout={true} />} />
-          <Route exact path={'/register'} element={<SignUp />} />
-          <Route exact path={'/profile'} element={<Profile />} />
-          <Route exact path={'/updateProfile'} element={<Update />} />
-          <Route exact path={'/navbar'} element={<Navbar />} />
-          <Route exact path={'/forgotPassword'} element={<OTPverification />} />
-          <Route exact path={'/resetPassword'} element={<ForgetPassword />} />
+          <Route exact path={"/"} element={<Main />} />
+          <Route exact path={"/login"} element={<SignIn />} />
+          <Route exact path={"/logout"} element={<SignIn logout={true} />} />
+          <Route exact path={"/register"} element={<SignUp />} />
+          <Route exact path={"/profile"} element={<Profile />} />
+          <Route exact path={"/updateProfile"} element={<Update />} />
+          <Route exact path={"/navbar"} element={<Navbar />} />
+          <Route exact path={"/forgotPassword"} element={<OTPverification />} />
+          <Route exact path={"/resetPassword"} element={<ForgetPassword />} />
           <Route
             exact
-            path={'/profile'}
+            path={"/profile"}
             element={
               <ProtectedRoute>
                 <Profile />
@@ -99,7 +99,7 @@ function App() {
           />
           <Route
             exact
-            path={'/updateProfile/:id'}
+            path={"/updateProfile/:id"}
             element={
               <ProtectedRoute>
                 <Update />
@@ -108,7 +108,7 @@ function App() {
           />
           <Route
             exact
-            path={'/forgetPwd/:id'}
+            path={"/forgetPwd/:id"}
             element={
               <ProtectedRoute>
                 <ForgetPwd />
@@ -119,7 +119,7 @@ function App() {
           {/* user admin */}
           <Route
             exact
-            path={'/viewuser'}
+            path={"/viewuser"}
             element={
               <ProtectedRoute>
                 <UserManagement />
@@ -128,7 +128,7 @@ function App() {
           />
           <Route
             exact
-            path={'/updateuser/:id'}
+            path={"/updateuser/:id"}
             element={
               <ProtectedRoute>
                 <UpdateUser />
@@ -137,7 +137,7 @@ function App() {
           />
           <Route
             exact
-            path={'/adduser'}
+            path={"/adduser"}
             element={
               <ProtectedRoute>
                 <AddUser />
@@ -146,7 +146,7 @@ function App() {
           />
           <Route
             exact
-            path={'/addadmin'}
+            path={"/addadmin"}
             element={
               <ProtectedRoute>
                 <AddAdmin />
@@ -155,7 +155,7 @@ function App() {
           />
           <Route
             exact
-            path={'/admin/home'}
+            path={"/admin/home"}
             element={
               <ProtectedRoute>
                 <UserReport />
@@ -166,85 +166,175 @@ function App() {
           {/* admin */}
           <Route
             exact
-            path={'/adminhome'}
+            path={"/adminhome"}
             element={
               <ProtectedRoute>
                 <AdminHome />
               </ProtectedRoute>
             }
           />
-          
-          <Route exact path={'/addstream'} element={<AddStreams />} />
-          <Route exact path={'/addsubject'} element={<AddSubjects />} />
-          <Route exact path={'/getstream'} element={<ViewStreams />} />
-          <Route exact path={'/getsubject'} element={<ViewSubjects />} />
-          <Route exact path={'/editstrm/:_id'} element={<UpdateStreams />} />
-          <Route exact path={'/addsubtime'} element={<AddSubjectTimeTable />} />
+
+          <Route exact path={"/addstream"} element={<AddStreams />} />
+          <Route exact path={"/addsubject"} element={<AddSubjects />} />
+          <Route exact path={"/getstream"} element={<ViewStreams />} />
+          <Route exact path={"/getsubject"} element={<ViewSubjects />} />
+          <Route exact path={"/editstrm/:_id"} element={<UpdateStreams />} />
+          <Route exact path={"/addsubtime"} element={<AddSubjectTimeTable />} />
           <Route
             exact
-            path={'/getsubtime'}
+            path={"/getsubtime"}
             element={<ViewSubjectTimeTable />}
           />
-          <Route exact path={'/addexam'} element={<AddExamTimeTable />} />
-          <Route exact path={'/getexam'} element={<ViewExamTimeTable />} />
+          <Route exact path={"/addexam"} element={<AddExamTimeTable />} />
+          <Route exact path={"/getexam"} element={<ViewExamTimeTable />} />
           <Route
             exact
-            path={'/editexam/:_id'}
+            path={"/editexam/:_id"}
             element={<UpdateExamTimeTable />}
           />
           <Route
             exact
-            path={'/editsubtbl/:_id'}
+            path={"/editsubtbl/:_id"}
             element={<UpdateSubjectTable />}
           />
 
           <Route
             exact
-            path={'editsubj/:_id'}
+            path={"editsubj/:_id"}
             element={<UpdateSubjects />}
           ></Route>
 
           {/* student  */}
           <Route
             exact
-            path={'/studentanswersheetUpload'}
+            path={"/studentanswersheetUpload/:name"}
             element={<StudentAnswersUpload />}
           />
-          <Route exact path={'/examtimetable'} element={<ExamTimeTable />} />
-          <Route exact path={'/subjectnote'} element={<SubjectNote />} />
-          <Route exact path={'/feedback'} element={<FeedBack />} />
+          <Route exact path={"/examtimetable"} element={<ExamTimeTable />} />
+          <Route exact path={"/subjectnote"} element={<SubjectNote />} />
+          <Route exact path={"/feedback/:name"} element={<FeedBack />} />
           <Route
             exact
-            path={'/subjecttimetable'}
+            path={"/subjecttimetable"}
             element={<SubjectTimetableDisplay />}
           />
           <Route
             exact
-            path={'/commentforsubjectnote'}
+            path={"/commentforsubjectnote"}
             element={<CommentForSubject_Notes />}
           />
           <Route
             exact
-            path={'/displayanswers'}
+            path={"/displayanswers"}
             element={<DisplayAnswersheets />}
           />
+          <Route
+          exact
+          path={"/subject/:name"}
+          element={<SubjectNoteforSubject />}
+        />
+        <Route
+          exact
+          path={"/message/:name"}
+          element={<Message />}
+        />
 
           {/* teacher */}
-          <Route exact path='/addlink' element={<UploadLink />} />
-          <Route exact path='/viewlink' element={<ViewLinks />} />
-          <Route exact path='/updatelink/:id' element={<Updatelink />} />
-          <Route exact path='/addNote' element={<UploadNote />} />
-          <Route exact path='/viewNote' element={<ViewNote />} />
-          <Route exact path='/updatenote/:id' element={<UpdateNote />} />
-          <Route exact path='/papers' element={<ViewStudentPaper />} />
-          <Route exact path='/markpapers/:id' element={<MarkPaper />} />
-          <Route exact path='/viewmark' element={<UpdateMark />} />
-          <Route exact path='/viewComments/:id' element={<ViewComments />} />
-          <Route exact path='/notereport' element={<NotesReport />} />
+          <Route
+            exact
+            path='/addlink'
+            element={
+              <TeacherProtectedRoutes>
+                <UploadLink />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/viewlink'
+            element={
+              <TeacherProtectedRoutes>
+                <ViewLinks />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/updatelink/:id'
+            element={
+              <TeacherProtectedRoutes>
+                <Updatelink />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/addNote'
+            element={
+              <TeacherProtectedRoutes>
+                <UploadNote />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/viewNote'
+            element={
+              <TeacherProtectedRoutes>
+                <ViewNote />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/updatenote/:id'
+            element={
+              <TeacherProtectedRoutes>
+                <UpdateNote />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/papers'
+            element={
+              <TeacherProtectedRoutes>
+                <ViewStudentPaper />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/markpapers/:id'
+            element={
+              <TeacherProtectedRoutes>
+                <MarkPaper />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/viewmark'
+            element={
+              <TeacherProtectedRoutes>
+                <UpdateMark />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/viewComments/:id'
+            element={
+              <TeacherProtectedRoutes>
+                <ViewComments />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route exact path='/notereport' element={<TeacherProtectedRoutes><NotesReport /></TeacherProtectedRoutes>} />
         </Routes>
       </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

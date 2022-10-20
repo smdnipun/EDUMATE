@@ -22,31 +22,44 @@ function AddAdmin() {
       password: password,
       isAdmin: true,
     }
-
-    if (password !== rpassword) {
+    if (
+      data.firstName == '' ||
+      data.lastName == '' ||
+      data.type == '' ||
+      data.email == '' ||
+      data.password == ''
+    ) {
       Swal.fire({
         icon: 'warning',
-        title: 'oops...',
-        text: 'Password Mismatch!!!',
+        title: 'Warning',
+        text: 'Please fill all the details!!!',
       })
     } else {
-      await axios
-        .post('http://localhost:5000/api/auth/register', data)
-        .then((res) => {
-          if (res.data === 'Created') {
-            Swal.fire('Congrats!', 'Successfully Added', 'success')
-            window.location.reload()
-          } else if (res.data === 'Exists') {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'The Email already Registered !!!',
-            })
-          }
+      if (password !== rpassword) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'oops...',
+          text: 'Password Mismatch!!!',
         })
-        .catch((err) => {
-          console.log(err)
-        })
+      } else {
+        await axios
+          .post('http://localhost:5000/api/auth/register', data)
+          .then((res) => {
+            if (res.data === 'Created') {
+              Swal.fire('Congrats!', 'Successfully Added', 'success')
+              window.location.reload()
+            } else if (res.data === 'Exists') {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'The Email already Registered !!!',
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
     }
   }
   return (
