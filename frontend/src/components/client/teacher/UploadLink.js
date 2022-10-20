@@ -1,4 +1,4 @@
-import React, { useState,useContext,useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 import Navigation from '../../common/Navigation/Navigation'
 import { useNavigate } from 'react-router-dom'
@@ -6,8 +6,7 @@ import { AuthContext } from '../../../context/AuthContext'
 import Swal from 'sweetalert2'
 
 export const UploadLink = () => {
-
-    const navigate = useNavigate()
+  const navigate = useNavigate()
   const hr = {
     borderLeft: '6px solid green',
     height: '400px',
@@ -19,18 +18,27 @@ export const UploadLink = () => {
   const [date, setDate] = useState()
   const [time, setTime] = useState()
   const [link, setLink] = useState()
-    const [stream, setStream] = useState([])
+  const [stream, setStream] = useState([])
+
+  const validateDate = new Date()
+  let day = validateDate.getDate()
+  let month = validateDate.getMonth() + 1
+  let year = validateDate.getFullYear()
+
+  let currentDate = `${year}-${month}-${day}`
 
   const { user } = useContext(AuthContext)
   const userId = user._id
 
   const loadStream = () => {
-    axios.get('stream/').then((res) => {
-      setStream(res.data)
-    })
+
+    
+      axios.get('stream/').then((res) => {
+        setStream(res.data)
+      })
+    
   }
 
-  
   useEffect(() => {
     loadStream()
   }, [])
@@ -42,26 +50,35 @@ export const UploadLink = () => {
     date,
     time,
     link,
-    teacher_id:userId
+    teacher_id: userId,
   }
 
   console.log(add)
 
   const upload = (e) => {
-    e.preventDefault();
-    axios.post('link/add', add)
-     Swal.fire({
-       icon: 'success',
-       title: 'Link added',
-     
-     })
-    navigate('/viewlink')
+    e.preventDefault()
+    if (date < currentDate) {
+      Swal.fire({
+        icon: 'warning',
 
-    //  $(document).ready(function() {
-    //    $('#upload').click(function() {
-    //      $('#succ').fadeIn()
-    //    })
-    //  })
+        title: 'Warning',
+
+        text: 'Please Enter a Valid date!!!',
+      })
+    } else {
+      axios.post('link/add', add)
+      Swal.fire({
+        icon: 'success',
+        title: 'Link added',
+      })
+      navigate('/viewlink')
+
+      //  $(document).ready(function() {
+      //    $('#upload').click(function() {
+      //      $('#succ').fadeIn()
+      //    })
+      //  })
+    }
   }
 
   return (
