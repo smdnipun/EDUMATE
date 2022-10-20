@@ -23,13 +23,13 @@ function UserManagement() {
     // fetchData()
     const fetchData = async () => {
       await axios
-        .get(`http://localhost:5000/api/users?q=${searchItem}`)
+        .get(`http://localhost:5000/api/users?q=${searchItem.toLowerCase()}`)
         .then((res) => {
           setData(res.data)
+          console.log('test')
         })
     }
-    // if (searchItem.length === 0 || searchItem.length > 1)
-    fetchData()
+    if (searchItem.length === 0 || searchItem.length > 1) fetchData()
   }, [searchItem])
 
   const deleteProfile = async (id) => {
@@ -64,7 +64,7 @@ function UserManagement() {
             placeholder='Search...'
             value={searchItem}
             onChange={(e) => {
-              setSearchItem(e.target.value.toLowerCase())
+              setSearchItem(e.target.value)
             }}
           />
         </div>

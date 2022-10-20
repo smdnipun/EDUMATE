@@ -26,7 +26,6 @@ import AddExamTimeTable from './components/admin/Time Tables/AddExamTimeTable'
 import ViewExamTimeTable from './components/admin/Time Tables/ViewExamTimeTable'
 import UpdateExamTimeTable from './components/admin/Time Tables/UpdateExamTimeTable'
 import UpdateSubjectTable from './components/admin/Time Tables/UpdateSubjectTable'
-import SearchedExam from './components/admin/Time Tables/SearchedExam'
 import { ViewStudentPaper } from './components/client/teacher/ViewStudentPaper'
 import { AuthContext } from './context/AuthContext'
 import UserManagement from './components/admin/UserManagement'
@@ -198,7 +197,6 @@ function App() {
             path={'/editsubtbl/:_id'}
             element={<UpdateSubjectTable />}
           />
-          <Route exact path={'/searchexam'} element={<SearchedExam />} />
 
           <Route
             exact

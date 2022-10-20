@@ -60,7 +60,7 @@ export default function AddExamTimeTable(){
     return (
     <div>
       <AdminNav/>
-           <div style={{height:"100%",maxWidth:"100%", width:"100%"}}>
+           <div style={{height:"100%",maxWidth:"100%", width:"100%", marginTop:"5%"}}>
                 <div style={{width:"10%",float:"left"}}>
                       <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
                             <div style={{width:"100%", marginTop:"15%"}}>

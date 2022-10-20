@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { useNavigate, useParams } from 'react-router-dom';
+import AdminNav from '../../common/Navigation/AdminNav';
 
 export default function UpdateSubjectTable(){
 
@@ -104,9 +105,9 @@ export default function UpdateSubjectTable(){
     
 
     return(
-
     <div>
-        <div style={{height:"100%",maxWidth:"100%", width:"100%"}}>
+      <AdminNav/>
+        <div style={{height:"100%",maxWidth:"100%", width:"100%", marginTop:"5%"}}>
             <div style={{width:"10%",float:"left"}}>
                       <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
                             <div style={{width:"100%", marginTop:"15%"}}>
