@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import AdminNav from '../../common/Navigation/AdminNav';
 
 
 export default function ViewSubjectTimeTable(){
@@ -34,9 +35,9 @@ export default function ViewSubjectTimeTable(){
 
 
     return(
-
     <div>
-          <div style={{height:"100%",maxWidth:"100%", width:"100%"}}>
+      <AdminNav/>
+          <div style={{height:"100%",maxWidth:"100%", width:"100%", marginTop:"5%"}}>
             <div style={{width:"10%",float:"left"}}>
                       <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
                             <div style={{width:"100%", marginTop:"15%"}}>
