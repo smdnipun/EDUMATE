@@ -174,7 +174,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          
+
           <Route exact path={'/addstream'} element={<AddStreams />} />
           <Route exact path={'/addsubject'} element={<AddSubjects />} />
           <Route exact path={'/getstream'} element={<ViewStreams />} />
@@ -232,17 +232,97 @@ function App() {
           />
 
           {/* teacher */}
-          <Route exact path='/addlink' element={<UploadLink />} />
-          <Route exact path='/viewlink' element={<ViewLinks />} />
-          <Route exact path='/updatelink/:id' element={<Updatelink />} />
-          <Route exact path='/addNote' element={<UploadNote />} />
-          <Route exact path='/viewNote' element={<ViewNote />} />
-          <Route exact path='/updatenote/:id' element={<UpdateNote />} />
-          <Route exact path='/papers' element={<ViewStudentPaper />} />
-          <Route exact path='/markpapers/:id' element={<MarkPaper />} />
-          <Route exact path='/viewmark' element={<UpdateMark />} />
-          <Route exact path='/viewComments/:id' element={<ViewComments />} />
-          <Route exact path='/notereport' element={<NotesReport />} />
+          <Route
+            exact
+            path='/addlink'
+            element={
+              <TeacherProtectedRoutes>
+                <UploadLink />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/viewlink'
+            element={
+              <TeacherProtectedRoutes>
+                <ViewLinks />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/updatelink/:id'
+            element={
+              <TeacherProtectedRoutes>
+                <Updatelink />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/addNote'
+            element={
+              <TeacherProtectedRoutes>
+                <UploadNote />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/viewNote'
+            element={
+              <TeacherProtectedRoutes>
+                <ViewNote />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/updatenote/:id'
+            element={
+              <TeacherProtectedRoutes>
+                <UpdateNote />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/papers'
+            element={
+              <TeacherProtectedRoutes>
+                <ViewStudentPaper />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/markpapers/:id'
+            element={
+              <TeacherProtectedRoutes>
+                <MarkPaper />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/viewmark'
+            element={
+              <TeacherProtectedRoutes>
+                <UpdateMark />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route
+            exact
+            path='/viewComments/:id'
+            element={
+              <TeacherProtectedRoutes>
+                <ViewComments />
+              </TeacherProtectedRoutes>
+            }
+          />
+          <Route exact path='/notereport' element={<TeacherProtectedRoutes><NotesReport /></TeacherProtectedRoutes>} />
         </Routes>
       </BrowserRouter>
     </div>
