@@ -39,32 +39,47 @@ function SignUp() {
       password: password,
     }
 
-    if (password !== rpassword) {
+    if (
+      data.firstName == '' ||
+      data.lastName == '' ||
+      data.stream == '' ||
+      data.type == '' ||
+      data.email == '' ||
+      data.password == ''
+    ) {
       Swal.fire({
         icon: 'warning',
-        title: 'oops...',
-        text: 'Password Mismatch!!!',
+        title: 'Warning',
+        text: 'Please fill all the details!!!',
       })
     } else {
-      console.log(data)
-      await axios
-        .post('http://localhost:5000/api/auth/register', data)
-        .then((res) => {
-          console.log(res)
-          if (res.data === 'Created') {
-            Swal.fire('Congrats!', 'Successfully Registered', 'success')
-            navigate('/login')
-          } else if (res.data === 'Exists') {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'The User Already Exists !!!',
-            })
-          }
+      if (password !== rpassword) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'oops...',
+          text: 'Password Mismatch!!!',
         })
-        .catch((err) => {
-          console.log(err)
-        })
+      } else {
+        console.log(data)
+        await axios
+          .post('http://localhost:5000/api/auth/register', data)
+          .then((res) => {
+            console.log(res)
+            if (res.data === 'Created') {
+              Swal.fire('Congrats!', 'Successfully Registered', 'success')
+              navigate('/login')
+            } else if (res.data === 'Exists') {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'The User Already Exists !!!',
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
     }
   }
 
@@ -171,6 +186,8 @@ function SignUp() {
                 <input
                   type='password'
                   id='password'
+                  pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
+                  title='Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters'
                   className='form-control form-control-lg'
                   placeholder='Enter password'
                   value={password}
