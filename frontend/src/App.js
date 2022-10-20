@@ -50,6 +50,7 @@ import { StudentAnswersUpload } from "./components/client/student/studentanwersh
 import { SubjectTimetableDisplay } from "./components/client/student/subjecttimetable/SubjectTimetableDisplay.js";
 import { SubjectNoteforSubject } from "./components/client/student/subjectnote/SubjectNoteforSubject.js";
 import Message from "./components/client/student/chatbox/Message.js";
+import { SubjectNoteDetails } from "./components/client/student/subjectnote/SubjectNoteDetails.js";
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -232,15 +233,12 @@ function App() {
             element={<DisplayAnswersheets />}
           />
           <Route
-          exact
-          path={"/subject/:name"}
-          element={<SubjectNoteforSubject />}
-        />
-        <Route
-          exact
-          path={"/message/:name"}
-          element={<Message />}
-        />
+            exact
+            path={"/subject/:name"}
+            element={<SubjectNoteforSubject />}
+          />
+          <Route exact path={"/message/:name"} element={<Message />} />
+          <Route exact path={"/commentsub/:id"} element={<SubjectNoteDetails />} />
 
           {/* teacher */}
           <Route exact path="/addlink" element={<UploadLink />} />

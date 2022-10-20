@@ -24,24 +24,30 @@ export const SubjectNoteforSubject = () => {
     <div>
       <Navigation />
       <div className="container" style={{ width: "70%", marginTop: "5%" }}>
-        
         <h1 className="text-center my-3">{lname}</h1>
         <div className="row">
           {item.map((datas) => {
             return (
               <div className="col-sm-3 shadow border-1 rounded bg-white h-100">
                 <div>
-                  <form
+                  {/* <form
                     method="get"
                     action={"http://localhost:5000/TeacherNotes/" + datas.note}
                   >
                     <button type="submit" className="border-0 bg-transparent">
-                      <AiOutlineDownload
-                        style={{ width: "30px", height: "30px" }}
-                      />
-                      <h7 className="ml-3">{datas.lesson_name}</h7>
+                      
                     </button>
-                  </form>
+                  </form> */}
+                  <div>
+                    <Link to={`/commentsub/${datas._id}`}>
+                      <button className="shadow border-0 rounded">
+                        <AiOutlineDownload
+                          style={{ width: "30px", height: "30px" }}
+                        />
+                        <h7 className="ml-3">{datas.lesson_name}</h7>
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             );
