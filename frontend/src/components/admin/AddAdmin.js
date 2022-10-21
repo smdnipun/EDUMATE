@@ -8,7 +8,6 @@ function AddAdmin() {
   const [firstName, setFname] = useState('')
   const [lastName, setLname] = useState('')
   const [type, setType] = useState('')
-  const [stream, setStream] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rpassword, setRpassword] = useState('')
@@ -23,31 +22,44 @@ function AddAdmin() {
       password: password,
       isAdmin: true,
     }
-
-    if (password !== rpassword) {
+    if (
+      data.firstName == '' ||
+      data.lastName == '' ||
+      data.type == '' ||
+      data.email == '' ||
+      data.password == ''
+    ) {
       Swal.fire({
         icon: 'warning',
-        title: 'oops...',
-        text: 'Password Mismatch!!!',
+        title: 'Warning',
+        text: 'Please fill all the details!!!',
       })
     } else {
-      await axios
-        .post('http://localhost:5000/api/auth/register', data)
-        .then((res) => {
-          if (res.data === 'Created') {
-            Swal.fire('Congrats!', 'Successfully Added', 'success')
-            window.location.reload()
-          } else if (res.data === 'Exists') {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'The Email already Registered !!!',
-            })
-          }
+      if (password !== rpassword) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'oops...',
+          text: 'Password Mismatch!!!',
         })
-        .catch((err) => {
-          console.log(err)
-        })
+      } else {
+        await axios
+          .post('http://localhost:5000/api/auth/register', data)
+          .then((res) => {
+            if (res.data === 'Created') {
+              Swal.fire('Congrats!', 'Successfully Added', 'success')
+              window.location.reload()
+            } else if (res.data === 'Exists') {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'The Email already Registered !!!',
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
     }
   }
   return (
@@ -55,7 +67,7 @@ function AddAdmin() {
       <AdminNav />
       <div className='container'>
         <div className='row d-flex justify-content-center align-items-center h-100'>
-          <div className='col-12 '>
+          <div className='col-12 my-3'>
             <h3 className='text-center p-3 mt-4'>Add Admin</h3>
             <div className='form-outline mb-1'>
               <label className='form-label' for='form3Example3'>
@@ -153,7 +165,7 @@ function AddAdmin() {
                   className='btn btn-primary btn-lg'
                   onClick={handleSubmit}
                 >
-                  Add User
+                  Add Admin
                 </button>
               </div>
             </div>

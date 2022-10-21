@@ -1,47 +1,55 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react'
+import { AuthContext } from '../../../../context/AuthContext';
+import Navigation from '../../../common/Navigation/Navigation'
+import { Navbar } from '../Navbar'
 
 export const ExamTimeTable = () => {
+
+    const [item,setItem] = useState([]);
+
+    const { user } = useContext(AuthContext);
+    const userstream = user.stream;
+    console.log(userstream);
+
+    useEffect(()=>{
+        axios.post('/examtime/time',{stream : userstream}).then((res)=>{
+            setItem(res.data);
+        })
+    })
+  
   return (
-    <div style={{width:"50%",marginLeft:"25%",marginRight:"25%",marginTop:"10%"}}>
+    <div>
+        <Navigation/>
+    <div className='container' style={{width:"60%",marginTop:"10%"}}>
         <h1 className='text-center'>Exam Time Table</h1>
-        <table class="table table-bordered shadow rounded-4 text-center mt-5 mb-5 bg-light">
+        {item.map((t) => {
+            return(
+
+        <table class="table table-bordered shadow rounded-4 mt-5 mb-5 text-center bg-light">
             <thead>
+                <tr className='d-flex justify-content-between'><h5>{t.stream}</h5><h5>{t.grade}</h5></tr>
                 <tr>
                     <th scope="col">Date</th>
                     <th scope="col">Start Time</th>
                     <th scope="col">End Time</th>
                     <th scope="col">Exam Name</th>
-                    <th scope="col">Stream</th>
                     <th scope="col">Grade</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td >09-09-22</td>
-                    <td>09.00 am</td>
-                    <td>11.00 am</td>
-                    <td>Chemistry</td>
-                    <td>Biological Science</td>
-                    <td>12</td>
-                </tr>
-                <tr>
-                    <td >10-09-22</td>
-                    <td>10.00 am</td>
-                    <td>12.00 am</td>
-                    <td>Biology</td>
-                    <td>Biological Science</td>
-                    <td>12</td>
-                </tr>
-                <tr>
-                    <td >12-09-22</td>
-                    <td>09.00 am</td>
-                    <td>11.00 am</td>
-                    <td>Physics</td>
-                    <td>Biological Science</td>
-                    <td>12</td>
+                    <td >{t.day}</td>
+                    <td>{t.start}</td>
+                    <td>{t.end}</td>
+                    <td>{t.subject}</td>
+                    <td>{t.grade}</td>
                 </tr>
             </tbody>
         </table>
+            )
+        })}
+    </div>
     </div>
   )
 }

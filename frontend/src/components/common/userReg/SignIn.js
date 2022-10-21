@@ -29,55 +29,70 @@ function SignIn(props) {
     },
   })
 
+  //loging out of the system
   if (props.logout) {
-    localStorage.removeItem('user')
-    window.location = '/login'
+    dispatch({ type: 'LOGOUT' })
+    navigate('/login')
+    // window.location = '/login'
   }
 
   const handleClick = async (e) => {
     e.preventDefault()
-    dispatch({ type: 'LOGIN_START' })
-    try {
-      await axios
-        .post('http://localhost:5000/api/auth/login', credentials)
-        .then((res) => {
-          if (res.data.details.type === 'sAdmin') {
-            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
-            navigate('/viewuser')
-            Toast.fire({
-              icon: 'success',
-              title: 'Signed in successfully',
-            })
-          } else if (res.data.details.type === 'Admin') {
-            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
-            navigate('/profile')
-            Toast.fire({
-              icon: 'success',
-              title: 'Signed in successfully',
-            })
-          } else if (res.data.details.type === 'Student') {
-            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
-            navigate('/profile')
-            Toast.fire({
-              icon: 'success',
-              title: 'Signed in successfully',
-            })
-          } else if (res.data.details.type === 'Teacher') {
-            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
-            navigate('/profile')
-            Toast.fire({
-              icon: 'success',
-              title: 'Signed in successfully',
-            })
-          } else {
-            dispatch({
-              type: 'LOGIN_FAILURE',
-              payload: { message: 'You are allowed!' },
-            })
-          }
-        })
-    } catch (err) {
-      dispatch({ type: 'LOGIN_FAILURE', payload: err.response.data })
+    if (
+      credentials.email === undefined ||
+      credentials.password === undefined ||
+      credentials.email === '' ||
+      credentials.password === ''
+    ) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Warning',
+        text: 'Please fill all the details!!!',
+      })
+    } else {
+      dispatch({ type: 'LOGIN_START' })
+      try {
+        await axios
+          .post('http://localhost:5000/api/auth/login', credentials)
+          .then((res) => {
+            if (res.data.details.type === 'sAdmin') {
+              dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
+              navigate('/admin/home')
+              Toast.fire({
+                icon: 'success',
+                title: 'Signed in successfully',
+              })
+            } else if (res.data.details.type === 'Admin') {
+              dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
+              navigate('/adminhome')
+              Toast.fire({
+                icon: 'success',
+                title: 'Signed in successfully',
+              })
+            } else if (res.data.details.type === 'Student') {
+              dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
+              navigate('/profile')
+              Toast.fire({
+                icon: 'success',
+                title: 'Signed in successfully',
+              })
+            } else if (res.data.details.type === 'Teacher') {
+              dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
+              navigate('/profile')
+              Toast.fire({
+                icon: 'success',
+                title: 'Signed in successfully',
+              })
+            } else {
+              dispatch({
+                type: 'LOGIN_FAILURE',
+                payload: { message: 'You are allowed!' },
+              })
+            }
+          })
+      } catch (err) {
+        dispatch({ type: 'LOGIN_FAILURE', payload: err.response.data })
+      }
     }
   }
 

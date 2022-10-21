@@ -50,7 +50,6 @@ export const UploadNote = () => {
       Swal.fire({
         icon: 'success',
         title: 'Note added',
-        timer: 1500,
       })
       navigate('/viewNote')
     })

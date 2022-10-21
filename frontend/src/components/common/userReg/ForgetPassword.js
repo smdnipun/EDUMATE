@@ -14,7 +14,7 @@ function ForgetPassword() {
       id: id,
       newPassword: password,
     }
-    if (password === '' && rpassword === '') {
+    if (password === '' || rpassword === '') {
       Swal.fire({
         icon: 'warning',
         title: 'Warning',

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router'
+import AdminNav from '../../common/Navigation/AdminNav';
 
 export default function UpdateSubjects() {
   const [subjectname, setSubjectname] = useState('')
@@ -36,6 +37,8 @@ useEffect(() => {
 }, [])
 
   return (
+    <div>
+      <AdminNav/>
     <div style={{height:"100%",maxWidth:"100%", width:"100%", marginTop:"15%"}}>
          <div style={{width:"10%",float:"left",paddingLeft:"10%"}}>
                   <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
@@ -80,5 +83,6 @@ useEffect(() => {
                   </div>
               </div>
       </div>
+    </div>
     )
 }

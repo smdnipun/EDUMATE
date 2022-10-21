@@ -1,8 +1,10 @@
 import React from 'react'
+import AdminNav from '../common/Navigation/AdminNav'
 
 export default function AdminHome ()  {
   return (
     <div>
+        <AdminNav/>
     <div class="row" style={{height:"100%",marginLeft:'30%',marginRight:'30%', marginTop:'15%'}}>
         <div class="col-sm-6">
             <div class="card">

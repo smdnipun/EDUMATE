@@ -103,8 +103,8 @@ export const ViewStudentPaper = () => {
                             <form
                               method='get'
                               action={
-                                `http://localhost:5000/StudentAnswers/get` +
-                                data.image
+                                `http://localhost:5000/StudentAnswers/` +
+                                data.note
                               }
                             >
                               <div></div>

@@ -26,11 +26,17 @@ function ForgetPwd() {
       })
     } else {
       await axios
-        .put(`http://localhost:5000/api/auth/updatePwd/${params.id}`, data)
+        .put(`/api/auth/updatePwd/${params.id}`, data)
         .then((res) => {
           console.log(res)
           if (res.data === 'Password Reset') {
-            Swal.fire('Success', 'Password Successfully Updated', 'success')
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Password Successfully Updated',
+              showConfirmButton: false,
+              timer: 1500,
+            })
             navigate('/login')
           } else if (res.data.message === 'Wrong Password') {
             Swal.fire({
