@@ -5,4 +5,4 @@ extra classes. We decided to develop a web application as a solution for this si
 continuously and we provide study materials in one place.
 
 
-technologies - ReacJS,NodeJS,ExpressJS,MongoDB,Bootstrap,React Bootstrap,EmailJS,MeterialUI
+technologies - ReacJS,NodeJS,ExpressJS,MongoDB,Bootstrap,React Bootstrap,EmailJS,MeterialUI,JWT
