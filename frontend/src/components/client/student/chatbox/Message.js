@@ -18,7 +18,7 @@ export default function Message() {
 
   const loadData = () => {
     axios
-      .post(`/chatbox/subject`, { subject: subject })
+      .post(`/chatbox/stream`, { stream: userstream })
       .then((response) => {
         setMessageList(response.data);
       })
@@ -34,7 +34,7 @@ export default function Message() {
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
-        subject: subject,
+        stream: userstream,
         author: username,
         email: email,
         message: currentMessage,
@@ -70,7 +70,7 @@ export default function Message() {
       <div data-testid="msg-1 my-5">
         <div className="container chat-window pt-4 my-5">
           <div className="chat-header">
-            <p>Subject :- {subject}</p>
+            <p>Stream :- {userstream}</p>
           </div>
           <div className="chat-body">
             <ScrollToBottom className="message-container">

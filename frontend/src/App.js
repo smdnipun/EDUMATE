@@ -50,6 +50,7 @@ import { SubjectTimetableDisplay } from "./components/client/student/subjecttime
 import { SubjectNoteforSubject } from "./components/client/student/subjectnote/SubjectNoteforSubject.js";
 import Message from "./components/client/student/chatbox/Message.js";
 import { SubjectNoteDetails } from "./components/client/student/subjectnote/SubjectNoteDetails.js";
+import { StudentAnswersReports } from "./components/client/student/report/StudentAnswerReport.js";
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -215,6 +216,7 @@ function App() {
           <Route exact path={"/examtimetable"} element={<ExamTimeTable />} />
           <Route exact path={"/subjectnote"} element={<SubjectNote />} />
           <Route exact path={"/feedback/:name"} element={<FeedBack />} />
+          <Route exact path={"/streport"} element={<StudentAnswersReports />} />
           <Route
             exact
             path={"/subjecttimetable"}
@@ -235,7 +237,7 @@ function App() {
             path={"/subject/:name"}
             element={<SubjectNoteforSubject />}
           />
-          <Route exact path={"/message/:name"} element={<Message />} />
+          <Route exact path={"/message"} element={<Message />} />
           <Route exact path={"/commentsub/:id"} element={<SubjectNoteDetails />} />
 
           {/* teacher */}

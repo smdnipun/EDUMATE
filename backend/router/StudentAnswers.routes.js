@@ -5,7 +5,8 @@ import {
   Upload,
   GetStudentAnswers,
     UpdateStudentAnswers,
-  getAnswersbyID
+  getAnswersbyID,
+  getSubject
 } from '../controller/Studentanswers.controller.js'
 
 const router = express.Router()
@@ -23,5 +24,7 @@ router.get('/get/:id', GetStudentAnswers)
 
 //filter
 router.post('/idfilter',getAnswersbyID)
+
+router.get('/subject',getSubject)
 
 export default router

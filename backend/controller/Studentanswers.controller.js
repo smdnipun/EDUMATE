@@ -86,4 +86,8 @@ export const getAnswersbyID = async (req,res,next) => {
     }catch(err){next(err)}
   }
 
+  export const getSubject = async (req, res, next) => {
+    const marks = await studentanswers.find().select({ subject: 1, _id: 0 })
+    res.status(200).json(marks)
+  }
 

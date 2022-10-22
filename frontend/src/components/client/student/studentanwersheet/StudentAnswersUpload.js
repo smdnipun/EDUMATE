@@ -94,6 +94,7 @@ export const StudentAnswersUpload = () => {
                     filename="file"
                     onChange={ImageAdd}
                     className="form-input"
+                    required
                   />
                 </div>
               </div>
@@ -109,6 +110,7 @@ export const StudentAnswersUpload = () => {
                     value={user.stream}
                     onChange={(e) => setStream(e.target.value)}
                     className="form-input"
+                    required
                   />
                 </div>
                 {/* Subject */}
@@ -121,6 +123,7 @@ export const StudentAnswersUpload = () => {
                     value={subjectname}
                     onChange={(e) => setStream(e.target.value)}
                     className="form-input"
+                    required
                   />
                 </div>
                 {/* lname */}
@@ -132,6 +135,7 @@ export const StudentAnswersUpload = () => {
                     name={lname}
                     onChange={(e) => setLname(e.target.value)}
                     className="form-input"
+                    required
                   />
                 </div>
                 {/* Grade */}
@@ -143,6 +147,7 @@ export const StudentAnswersUpload = () => {
                     name={grade}
                     onChange={(e) => setGrade(e.target.value)}
                     className="form-input"
+                    required
                   />
                 </div>
                 {/* Date */}
