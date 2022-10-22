@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import AdminNav from '../common/Navigation/AdminNav'
 
@@ -11,7 +10,6 @@ function AddAdmin() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rpassword, setRpassword] = useState('')
-  const navigate = useNavigate()
 
   const handleSubmit = async () => {
     const data = {

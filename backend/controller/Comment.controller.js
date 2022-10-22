@@ -24,21 +24,6 @@ export const updateComments = async (req, res, next) => {
     next(err)
   }
 }
-// export const updateItemAvailability = async (req, res, next) => {
-//   try {
-//     await Item.updateOne(
-//       { 'quantity._id': req.params.id },
-//       {
-//         $push: {
-//           'quantity.$.remain': req.body.dates,
-//         },
-//       }
-//     )
-//     res.status(200).json('Item status has been updated.')
-//   } catch (err) {
-//     next(err)
-//   }
-// }
 export const deleteComment = async (req, res, next) => {
   const CommentId = req.params._id
   try {
@@ -71,6 +56,7 @@ export const getComments = async (req, res, next) => {
     next(err)
   }
 }
+
 
 export const getCommentByNoteId = async (req, res, next) => {
   let myquery = { note_id: Object(req.params.note_id) }

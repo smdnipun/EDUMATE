@@ -76,15 +76,6 @@ export const GetAllStudentAnswers = async (req, res, next) => {
     }
 };
 
-
-// export const getStudentAnswersByStream = async (req, res, next) => {
-//  let myquery = { student_id: req.params.student_id }
-//  studentanswers.find(myquery, function (err, result) {
-//    if (err) throw err
-//    res.json(result)
-//  })
-// }
-
 //get subject by stream
 export const getAnswersbyID = async (req,res,next) => {
     try{

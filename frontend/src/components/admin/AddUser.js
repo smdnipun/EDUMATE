@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import AdminNav from '../common/Navigation/AdminNav'
 
@@ -152,10 +151,10 @@ function AddUser() {
                 required
               >
                 <option>--Choose--</option>
-                {data.map((stream) => {
+                {data.map((streams) => {
                   return (
-                    <option key={stream._id} value={stream.streamname}>
-                      {stream.streamname}
+                    <option key={streams._id} value={streams.streamname}>
+                      {streams.streamname}
                     </option>
                   )
                 })}
