@@ -7,7 +7,8 @@ import {
     getExams,
     getExamByName,
     displaySearch,
-    getTimetablebyStream
+    getTimetablebyStream,
+    getType
 } from '../controller/ExamTimeTable.controler.js'
 
 const examrouter = express.Router()
@@ -34,5 +35,8 @@ examrouter.get('/view/:sub', displaySearch)
 
 //display search
 examrouter.post('/time', getTimetablebyStream);
+
+//report
+examrouter.get('/get/type', getType);
 
 export default examrouter

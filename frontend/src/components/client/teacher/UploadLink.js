@@ -12,13 +12,15 @@ export const UploadLink = () => {
     height: '400px',
   }
 
-  const [subject, setSubject] = useState()
+  const [subject, setSubject] = useState([])
+  const [selectedSubject,setSelectedSubject]=useState()
   const [lesson_name, setLesson] = useState()
   const [grade, setGrade] = useState()
   const [date, setDate] = useState()
   const [time, setTime] = useState()
   const [link, setLink] = useState()
   const [stream, setStream] = useState([])
+  const [selectedStream, setSelectedStream] = useState()
 
   const validateDate = new Date()
   let day = validateDate.getDate()
@@ -29,6 +31,7 @@ export const UploadLink = () => {
 
   const { user } = useContext(AuthContext)
   const userId = user._id
+  const userStream=user.stream
 
   const loadStream = () => {
 
@@ -39,12 +42,21 @@ export const UploadLink = () => {
     
   }
 
+  const loadSubject = () => {
+    axios.post("/subject/stream", { streamname: userStream}).then((res) => {
+      setSubject(res.data);
+      console.log(res.data)
+    })
+  }
+
   useEffect(() => {
     loadStream()
+    loadSubject()
   }, [])
 
   const add = {
-    subject,
+    stream:selectedStream,
+    subject:selectedSubject,
     lesson_name,
     grade,
     date,
@@ -123,8 +135,8 @@ export const UploadLink = () => {
                     id='stream'
                     name='stream'
                     className='form-control'
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
+                    value={selectedStream}
+                    onChange={(e) => setSelectedStream(e.target.value)}
                     required
                   >
                     <option>Stream</option>
@@ -137,6 +149,25 @@ export const UploadLink = () => {
                     })}
                   </select>
                   <br />
+                  
+
+                  <select
+                    id='stream'
+                    name='stream'
+                    className='form-control'
+                    value={selectedSubject}
+                    onChange={(e) => setSelectedSubject(e.target.value)}
+                    required
+                  >
+                    <option>Subject</option>
+                    {subject.map((subject) => {
+                      return (
+                        <option key={subject._id} value={subject.subjectname}>
+                          {subject.subjectname}
+                        </option>
+                      )
+                    })}
+                  </select>
                   <br />
 
                   <div className='form-group'>
@@ -153,7 +184,7 @@ export const UploadLink = () => {
                     />
                   </div>
                   <br />
-                  <br />
+               
                   <div className='form-group'>
                     <select
                       type='number'
@@ -172,7 +203,7 @@ export const UploadLink = () => {
                     </select>
                   </div>
                   <br />
-                  <br />
+                  
                   <div className='form-group'>
                     <input
                       type='date'
@@ -186,7 +217,7 @@ export const UploadLink = () => {
                     />
                   </div>
                   <br />
-                  <br />
+                
                   <div className='form-group'>
                     <input
                       type='time'

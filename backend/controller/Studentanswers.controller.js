@@ -91,3 +91,13 @@ export const getAnswersbyID = async (req,res,next) => {
     res.status(200).json(marks)
   }
 
+  export const getStudentAnswersByStream = async (req, res, next) => {
+    let myquery = { stream: req.params.stream }
+    studentanswers.find(myquery, function (err, result) {
+      if (err) throw err
+      res.json(result)
+    })
+   }
+   
+
+
