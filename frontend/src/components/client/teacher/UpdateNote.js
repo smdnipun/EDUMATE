@@ -16,6 +16,7 @@ export const UpdateNote = () => {
   const params = useParams()
   console.log(params)
   const [subject, setSubject] = useState()
+  const [stream,setStream]=useState()
   const [lesson_name, setLesson] = useState()
   const [grade, setGrade] = useState()
   const [note,setNote]=useState()
@@ -25,6 +26,7 @@ export const UpdateNote = () => {
    
     axios.get(`/teacherNote/${params.id}`).then((res) => {
       setSubject(res.data.subject)
+      setSubject()
       setLesson(res.data.lesson_name)
       setGrade(res.data.grade)
       setNote(res.data.note)

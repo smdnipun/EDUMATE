@@ -1,5 +1,8 @@
 import mongoose from 'mongoose'
 const LinkSchema = new mongoose.Schema({
+  stream:{
+      type:String
+  },
   subject: {
     type: String,
     required: true,
