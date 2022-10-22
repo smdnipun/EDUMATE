@@ -1,14 +1,20 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Navigation from "../../../common/Navigation/Navigation";
 import { AiOutlineDownload } from "react-icons/ai";
 import { AiOutlineFileDone } from "react-icons/ai";
+import { AuthContext } from "../../../../context/AuthContext";
 
 export const SubjectNoteDetails = () => {
+
+	const navi = useNavigate();
   const params = useParams();
   const id = params.id;
+  const { user } = useContext(AuthContext);
+  const username = user.firstName;
   console.log(id);
+  console.log(user.firstName);
 
   const [item, setItem] = useState([]);
   const [note, setNote] = useState();
@@ -18,30 +24,38 @@ export const SubjectNoteDetails = () => {
   const [grade, setGrade] = useState();
   const [comment, setComment] = useState();
 
+
+  //get teacher note
   useEffect(() => {
     axios.get(`/teacherNote/${id}`).then((res) => {
       setNote(res.data.note);
       setSubject(res.data.subject);
       setLesson_name(res.data.lesson_name);
       setGrade(res.data.grade);
+
+	  //get comment
+	  axios.get(`/comment/get/${id}`).then((res) => {
+		setItem(res.data);
+	  });
+	  console.log(item);
     });
   }, []);
-  axios.get(`/comment/get/${id}`).then((res) => {
-    setItem(res.data);
-  });
-  console.log(item);
 
+
+  //add comment
   const MessageData = (e) => {
 		e.preventDefault();
 
 		const messagedata = {
 			note_id : id,
 			note : lesson_name,
-		comment
+			studentName : username,
+			comment
 		};
 
 		axios.post("/comment/add", messagedata).then((res) => {
 			alert("Posted Comment");
+			window.location.reload();
 		});
 
 		console.log(messagedata);
@@ -51,7 +65,7 @@ export const SubjectNoteDetails = () => {
     <div>
       <Navigation />
       <div
-        className="row border-1 shadow p-2"
+        className="row border-1 shadow rounded container p-2 bg-white"
         style={{ width: "60%", marginTop: "5%", marginLeft: "15%" }}
       >
         <div className="col">
@@ -90,7 +104,7 @@ export const SubjectNoteDetails = () => {
         	{/* comment  */}
 					<div>
 						<div
-							className="border shadow container rounded px-1 py-1 my-5"
+							className="border shadow container bg-white rounded px-1 py-1 my-5"
 							style={{ width: "80%" }}
 						>
 							<h3 className="text-center">Leave a Reply</h3>
@@ -127,7 +141,7 @@ export const SubjectNoteDetails = () => {
 										required
 									/>
 								</div>
-								<div className=" text-center mb-2">
+								<div className=" text-center my-3">
 									<button type="submit" class="btn btn-primary">
 										POST COMMMENT
 									</button>
@@ -138,19 +152,18 @@ export const SubjectNoteDetails = () => {
 
           	{/* show comments */}
 					<div
-						className="border container rounded shadow"
+						className="border container rounded shadow bg-white"
 						style={{ width: "80%" }}
 					>
 						{item.map((datas) => {
 							return (
 								<div
-									className="container my-4 border-bottom"
+									className="container my-4 border-bottom shadow"
 									style={{ width: "75%" }}
 								>
-									{/* <div className="row ">
-										<h7 className="col-lg-3">{datas.mname}</h7>
-										<h7 className="col-lg-3">date</h7>
-									</div> */}
+									<div className="row ">
+										<h7 className="col-lg-3">{datas.studentName}</h7>
+									</div>
 									<hr />
 									<div className="row">
 										<textarea

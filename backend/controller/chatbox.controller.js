@@ -7,6 +7,7 @@ export const CreateChatbox = async (req, res, next) => {
         const newChatbox= new chatbox({ 
             subject : req.body.subject,
             author : req.body.author,
+            stream : req.body.stream,
             email : req.body.email,
             message : req.body.message,
             time : req.body.time,
@@ -34,6 +35,18 @@ export const Getchatboxsubject = async (req, res, next) => {
     try {
         const getchatboxsubject = await chatbox.find(
             {subject : req.body.subject}
+        );
+        res.status(200).json(getchatboxsubject);
+    } catch (err) {
+        next(err);
+    }
+};
+
+//Get all subjectsfeedback
+export const Getstreamchat = async (req, res, next) => {
+    try {
+        const getchatboxsubject = await chatbox.find(
+            {stream : req.body.stream}
         );
         res.status(200).json(getchatboxsubject);
     } catch (err) {
