@@ -104,7 +104,7 @@ export const ViewStudentPaper = () => {
                               method='get'
                               action={
                                 `http://localhost:5000/StudentAnswers/` +
-                                data.note
+                                data.image
                               }
                             >
                               <div></div>

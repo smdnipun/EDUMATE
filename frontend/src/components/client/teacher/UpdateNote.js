@@ -26,7 +26,6 @@ export const UpdateNote = () => {
    
     axios.get(`/teacherNote/${params.id}`).then((res) => {
       setSubject(res.data.subject)
-      setSubject()
       setLesson(res.data.lesson_name)
       setGrade(res.data.grade)
       setNote(res.data.note)
