@@ -20,14 +20,6 @@ function AdminNav() {
                   <Nav.Link href='/addadmin'>Add Admin</Nav.Link>
                   <NavDropdown title='Details' id='collasible-nav-dropdown'>
                     <NavDropdown.Item href='/viewuser'>User Details</NavDropdown.Item>
-                    {/* <NavDropdown.Item href='#action/3.2'>
-                      Admin Details
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href='#action/3.3'>Something</NavDropdown.Item> */}
-                    {/* <NavDropdown.Divider />
-                    <NavDropdown.Item href='#action/3.4'>
-                      Separated link
-                    </NavDropdown.Item> */}
                   </NavDropdown>
                 </Nav>
                 <Nav>
@@ -44,21 +36,13 @@ function AdminNav() {
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Nav className='me-auto'>
-              <Nav.Link href='/admin/home'>Home</Nav.Link>
+              <Nav.Link href='/adminhome'>Home</Nav.Link>
               <Nav.Link href='/getsubtime'>Manage Time Tables</Nav.Link>
               <Nav.Link href='/getexam'>Manage Exams</Nav.Link>
               <Nav.Link href='/getsubject'>Manage Subjects</Nav.Link>
               <Nav.Link href='/notereport'>Notes</Nav.Link>
               <NavDropdown title='Details' id='collasible-nav-dropdown'>
                 <NavDropdown.Item href='/viewuser'>User Details</NavDropdown.Item>
-                {/* <NavDropdown.Item href='#action/3.2'>
-                  Admin Details
-                </NavDropdown.Item>
-                <NavDropdown.Item href='#action/3.3'>Something</NavDropdown.Item> */}
-                {/* <NavDropdown.Divider />
-                <NavDropdown.Item href='#action/3.4'>
-                  Separated link
-                </NavDropdown.Item> */}
               </NavDropdown>
             </Nav>
             <Nav>

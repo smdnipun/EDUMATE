@@ -94,3 +94,7 @@ export const getTimetablebyStream = async (req,res,next) => {
   }catch(err){next(err)}
 }
  
+export const getType = async (req, res, next) => {
+  const users = await ExamTimeTableModel.find().select({ subject: 1, _id: 0 })
+  res.status(200).json(users)
+}
