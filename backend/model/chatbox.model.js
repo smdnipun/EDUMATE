@@ -3,6 +3,9 @@ const chatbox = new mongoose.Schema({
      subject: {
         type: String,
       },
+      stream: {
+        type: String,
+      },
       author: {
         type: String,
       },

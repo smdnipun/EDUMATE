@@ -107,12 +107,6 @@ function Profile() {
           </div>
         </div>
       </div>
-      <div>
-        <Link to='/studentanswersheetUpload'>
-
-            <button>Student</button>
-        </Link>
-      </div>
     </div>
   )
 }

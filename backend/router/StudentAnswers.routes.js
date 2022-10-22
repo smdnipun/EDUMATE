@@ -6,7 +6,8 @@ import {
   GetStudentAnswers,
     UpdateStudentAnswers,
   getAnswersbyID,
-  getStudentAnswersByStream
+  getSubject
+  // getStudentAnswersByStream
 } from '../controller/Studentanswers.controller.js'
 
 const router = express.Router()
@@ -24,5 +25,7 @@ router.get('/getBySubject/:stream',getStudentAnswersByStream)
 
 //filter
 router.post('/idfilter',getAnswersbyID)
+
+router.get('/subject',getSubject)
 
 export default router

@@ -61,14 +61,18 @@ export const SubjectNote = () => {
                         </Link>
                       </div>
                     </div>
-                    <div className="text-center my-3">
-                      {/* <Link to */}
+                    {/* <div className="text-center my-3">
                       <Link to={`/message/${datas.subjectname}`}>
                         <button className="shadow border-0 rounded">
                           Group Chat
                         </button>
                       </Link>
-                    </div>
+                      <Link to={`/message/${datas.subjectname}`}>
+                        <button className="shadow border-0 ml-3 rounded">
+                         Links
+                        </button>
+                      </Link>
+                    </div> */}
                   </div>
                 </div>
               </div>
