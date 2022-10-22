@@ -32,7 +32,7 @@ export const UploadNote = () => {
   }
 
   const loadSubject = () => {
-    axios.post("/subject/stream", { streamname:'Biological Science'}).then((res) => {
+    axios.post("/subject/stream", { streamname:userstream}).then((res) => {
       setSubject(res.data);
       console.log(res.data)
     })
