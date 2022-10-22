@@ -18,6 +18,7 @@ export const CreateNote = async (req, res, next) => {
   try {
     const newTeacherNote = new TeacherNotesModel({
       lesson_name: req.body.lesson_name,
+      stream: req.body.stream,
       subject: req.body.subject,
       grade: req.body.grade,
       note: req.file.originalname,

@@ -4,6 +4,9 @@ const teacherNotesSchema = new mongoose.Schema({
   note: {
     type: String,
   },
+  stream:{
+    type:String 
+  },
   subject: {
     type: String,
     required: true,
