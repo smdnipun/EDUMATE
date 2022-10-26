@@ -59,7 +59,7 @@ export const getMarks = async (req, res, next) => {
 
 export const getMarkByStudentId = async (req, res, next) => {
   let myquery = { student_id: Object(req.params.student_id) }
-  await Marks.find(myquery, function (err, result) {
+  Marks.find(myquery, function (err, result) {
     if (err) throw err
     res.json(result)
   })
@@ -67,7 +67,7 @@ export const getMarkByStudentId = async (req, res, next) => {
 
 export const getMarkByTeacherId = async (req, res, next) => {
   let myquery = { markedBy: Object(req.params.markedBy) }
-  await Marks.find(myquery, function (err, result) {
+  Marks.find(myquery, function (err, result) {
     if (err) throw err
     res.json(result)
   })

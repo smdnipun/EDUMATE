@@ -1,4 +1,4 @@
-import React, { useState,useContext,useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 import Navigation from '../../common/Navigation/Navigation'
 import { useNavigate } from 'react-router-dom'
@@ -6,61 +6,91 @@ import { AuthContext } from '../../../context/AuthContext'
 import Swal from 'sweetalert2'
 
 export const UploadLink = () => {
-
-    const navigate = useNavigate()
+  const navigate = useNavigate()
   const hr = {
     borderLeft: '6px solid green',
     height: '400px',
   }
 
-  const [subject, setSubject] = useState()
+  const [subject, setSubject] = useState([])
+  const [selectedSubject,setSelectedSubject]=useState()
   const [lesson_name, setLesson] = useState()
   const [grade, setGrade] = useState()
   const [date, setDate] = useState()
   const [time, setTime] = useState()
   const [link, setLink] = useState()
-    const [stream, setStream] = useState([])
+  const [stream, setStream] = useState([])
+  const [selectedStream, setSelectedStream] = useState()
+
+  const validateDate = new Date()
+  let day = validateDate.getDate()
+  let month = validateDate.getMonth() + 1
+  let year = validateDate.getFullYear()
+
+  let currentDate = `${year}-${month}-${day}`
 
   const { user } = useContext(AuthContext)
   const userId = user._id
+  const userStream=user.stream
 
   const loadStream = () => {
-    axios.get('stream/').then((res) => {
-      setStream(res.data)
+
+    
+      axios.get('stream/').then((res) => {
+        setStream(res.data)
+      })
+    
+  }
+
+  const loadSubject = () => {
+    axios.post("/subject/stream", { streamname: userStream}).then((res) => {
+      setSubject(res.data);
+      console.log(res.data)
     })
   }
 
-  
   useEffect(() => {
     loadStream()
+    loadSubject()
   }, [])
 
   const add = {
-    subject,
+    stream:selectedStream,
+    subject:selectedSubject,
     lesson_name,
     grade,
     date,
     time,
     link,
-    teacher_id:userId
+    teacher_id: userId,
   }
 
   console.log(add)
 
-  const upload = () => {
-    axios.post('link/add', add)
-     Swal.fire({
-       icon: 'success',
-       title: 'Link added',
-     
-     })
-    navigate('/viewlink')
+  const upload = (e) => {
+    e.preventDefault()
+    if (date < currentDate) {
+      Swal.fire({
+        icon: 'warning',
 
-    //  $(document).ready(function() {
-    //    $('#upload').click(function() {
-    //      $('#succ').fadeIn()
-    //    })
-    //  })
+        title: 'Warning',
+
+        text: 'Please Enter a Valid date!!!',
+      })
+    } else {
+      axios.post('link/add', add)
+      Swal.fire({
+        icon: 'success',
+        title: 'Link added',
+      })
+      navigate('/viewlink')
+
+      //  $(document).ready(function() {
+      //    $('#upload').click(function() {
+      //      $('#succ').fadeIn()
+      //    })
+      //  })
+    }
   }
 
   return (
@@ -101,12 +131,12 @@ export const UploadLink = () => {
               <div className='mx-5 my-4' style={hr} />
               <div className='mx-5 mt-5 pb-4'>
                 <form>
-                  <select
+                  {/* <select
                     id='stream'
                     name='stream'
                     className='form-control'
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
+                    value={selectedStream}
+                    onChange={(e) => setSelectedStream(e.target.value)}
                     required
                   >
                     <option>Stream</option>
@@ -117,8 +147,37 @@ export const UploadLink = () => {
                         </option>
                       )
                     })}
-                  </select>
+                  </select> */}
+                  <input
+                    type='text'
+                    class='form-control'
+                    required
+                    id='formGroupExampleInput'
+                    disabled
+                    value={userStream}
+                    onChange={(e) => {
+                      setSelectedStream(e.target.value)
+                    }}
+                  />
                   <br />
+
+                  <select
+                    id='stream'
+                    name='stream'
+                    className='form-control'
+                    value={selectedSubject}
+                    onChange={(e) => setSelectedSubject(e.target.value)}
+                    required
+                  >
+                    <option>Subject</option>
+                    {subject.map((subject) => {
+                      return (
+                        <option key={subject._id} value={subject.subjectname}>
+                          {subject.subjectname}
+                        </option>
+                      )
+                    })}
+                  </select>
                   <br />
 
                   <div className='form-group'>
@@ -135,7 +194,7 @@ export const UploadLink = () => {
                     />
                   </div>
                   <br />
-                  <br />
+
                   <div className='form-group'>
                     <select
                       type='number'
@@ -154,7 +213,7 @@ export const UploadLink = () => {
                     </select>
                   </div>
                   <br />
-                  <br />
+
                   <div className='form-group'>
                     <input
                       type='date'
@@ -168,7 +227,7 @@ export const UploadLink = () => {
                     />
                   </div>
                   <br />
-                  <br />
+
                   <div className='form-group'>
                     <input
                       type='time'

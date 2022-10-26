@@ -1,48 +1,85 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload'
-import { Button } from '@mui/material'
-export const SubjectNote = () => {
-  const [item,setItem] = useState([])
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../../context/AuthContext";
+import Navigation from "../../../common/Navigation/Navigation";
 
-  useEffect(()=>{
-    axios.get('teacherNote/get').then((res)=>{
+export const SubjectNote = () => {
+  const [item, setItem] = useState([]);
+  const { user } = useContext(AuthContext);
+  const userstream = user.stream;
+
+  console.log(item);
+
+  useEffect(() => {
+    axios.post("/subject/stream", { streamname: userstream }).then((res) => {
       setItem(res.data);
-    })
-  })
+    });
+  }, []);
+
   return (
     <div>
-      <div className='text-center' style={{marginTop:"8%",marginLeft:"15%"}}>
-        <h1 className='mb-5'>Maths</h1>
-      <div className='row gx-1 row-cols- row-cols-md-3'>
-                    {item.map((datas) => {
-                        return(
-                    <div class="row gx-4">
-                        <div class="col-lg- mb-5">
-                            <div class="card h-100 shadow border-0">
-                            <>
-                              <form
-                                method='get'
-                                action={'http://localhost:5000/TeacherNotes/' + datas.note}
-                              >
-                                <div><SimCardDownloadIcon style={{width:"100px"}}/></div>
-                                <button className='btn btn-primary'>
-                                  Download
-                                </button>
-                              </form>
-                            </>
-                                <div class="card-body p-4">
-                                    <h5 class="card-title mb-3">{datas.lesson_name}</h5>
-                                    <p class="card-text mb-0">{datas.desc}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      {/* <Navbar/> */}
+      <Navigation />
+      <div className="text-center container" style={{ marginTop: "5%" }}>
+        <h1 className="mb-5">
+          {JSON.parse(localStorage.getItem("user")).stream}
+        </h1>
 
-                    )
-                    })}
+        <div className="row gx-1 row-cols- row-cols-md-3">
+          {item.map((datas) => {
+            return (
+              <div class="row gx-4">
+                <div class="col-md mb-5 ml-5 border-1 ">
+                  <div className="shadow bg-light m-3 border rounded">
+                    <h3>{datas.subjectname}</h3>
+                    <div className="row my-2 ml-2">
+                      <div className="col-sm-4">
+                        {/* <Link to */}
+                        <Link to={`/subject/${datas.subjectname}`}>
+                          <button className="shadow border-0 rounded">
+                            Meterial
+                          </button>
+                        </Link>
+                      </div>
+                      <div className="col-sm-4">
+                        {/* <Link to */}
+                        <Link to={`/feedback/${datas.subjectname}`}>
+                          <button className="shadow border-0 rounded">
+                            FeedBack
+                          </button>
+                        </Link>
+                      </div>
+                      <div className="col-sm-3">
+                        {/* <Link to */}
+                        <Link
+                          to={`/studentanswersheetUpload/${datas.subjectname}`}
+                        >
+                          <button className="shadow border-0 rounded">
+                            Answers
+                          </button>
+                        </Link>
+                      </div>
                     </div>
+                    {/* <div className="text-center my-3">
+                      <Link to={`/message/${datas.subjectname}`}>
+                        <button className="shadow border-0 rounded">
+                          Group Chat
+                        </button>
+                      </Link>
+                      <Link to={`/message/${datas.subjectname}`}>
+                        <button className="shadow border-0 ml-3 rounded">
+                         Links
+                        </button>
+                      </Link>
+                    </div> */}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};

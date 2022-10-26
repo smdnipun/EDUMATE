@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import AdminNav from '../common/Navigation/AdminNav'
 
@@ -38,31 +37,47 @@ function AddUser() {
       email: email,
       password: password,
     }
-
-    if (password !== rpassword) {
+    //checking the fields are empty
+    if (
+      obj.firstName == '' ||
+      obj.lastName == '' ||
+      obj.stream == '' ||
+      obj.type == '' ||
+      obj.email == '' ||
+      obj.password == ''
+    ) {
       Swal.fire({
         icon: 'warning',
-        title: 'oops...',
-        text: 'Password Mismatch!!!',
+        title: 'Warning',
+        text: 'Please fill all the details!!!',
       })
     } else {
-      await axios
-        .post('http://localhost:5000/api/auth/register', obj)
-        .then((res) => {
-          if (res.data === 'Created') {
-            Swal.fire('Congrats!', 'Successfully Added', 'success')
-            window.location.reload()
-          } else if (res.data === 'Exists') {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'The User Already Exists !!!',
-            })
-          }
+      //validating the password
+      if (password !== rpassword) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'oops...',
+          text: 'Password Mismatch!!!',
         })
-        .catch((err) => {
-          console.log(err)
-        })
+      } else {
+        await axios
+          .post('http://localhost:5000/api/auth/register', obj)
+          .then((res) => {
+            if (res.data === 'Created') {
+              Swal.fire('Successful!!!', 'Successfully Added', 'success')
+              window.location.reload()
+            } else if (res.data === 'Exists') {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'The User Already Exists !!!',
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
     }
   }
   return (
@@ -136,10 +151,10 @@ function AddUser() {
                 required
               >
                 <option>--Choose--</option>
-                {data.map((stream) => {
+                {data.map((streams) => {
                   return (
-                    <option key={stream._id} value={stream.streamname}>
-                      {stream.streamname}
+                    <option key={streams._id} value={streams.streamname}>
+                      {streams.streamname}
                     </option>
                   )
                 })}

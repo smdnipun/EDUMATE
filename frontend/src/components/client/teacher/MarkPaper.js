@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState, useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../../context/AuthContext'
 import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
@@ -11,6 +11,9 @@ export const MarkPaper = () => {
     borderLeft: '6px solid green',
     height: '500px',
   }
+
+  
+    const navigate = useNavigate()
 
   const [note, setNote] = useState([])
   const [mark, setMark] = useState()
@@ -58,14 +61,17 @@ export const MarkPaper = () => {
   }
   console.log(status)
 
-  const addMarks = async () => {
-    if (status !== 'Marked') {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-      })
-    } else if (mark > 100 || mark < 0) {
+
+  const addMarks = async (e) => {
+    e.preventDefault();
+    if (status !== 'Marked'  ) {
+     Swal.fire({
+       icon: 'error',
+       title: 'Oops...',
+       text: 'Something went wrong!',
+     })
+    }
+     else if (mark > 100 || mark < 0) {
       Swal.fire({
         icon: 'error',
         title: 'please enter number between 0 and 100',
@@ -78,7 +84,9 @@ export const MarkPaper = () => {
         title: 'Marks added',
         timer: 1500,
       })
+        navigate('/viewMark')
     }
+
   }
 
   return (

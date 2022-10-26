@@ -16,6 +16,7 @@ export const CreateStudentAnswers = async (req, res, next) => {
     try {
         const newStudentAnswers = new studentanswers({ 
             stream : req.body.stream,
+            subject : req.body.subject,
             lname : req.body.lname,
             grade : req.body.grade,
             date : req.body.date,
@@ -75,13 +76,28 @@ export const GetAllStudentAnswers = async (req, res, next) => {
     }
 };
 
+//get subject by stream
+export const getAnswersbyID = async (req,res,next) => {
+    try{
+      const filter = await studentanswers.find(
+        {student_id : req.body.student_id}
+      )
+      res.status(200).json(filter)
+    }catch(err){next(err)}
+  }
 
-export const getStudentAnswersByStream = async (req, res, next) => {
- let myquery = { stream: req.params.stream }
- studentanswers.find(myquery, function (err, result) {
-   if (err) throw err
-   res.json(result)
- })
-}
+  export const getSubject = async (req, res, next) => {
+    const marks = await studentanswers.find().select({ subject: 1, _id: 0 })
+    res.status(200).json(marks)
+  }
+
+  export const getStudentAnswersByStream = async (req, res, next) => {
+    let myquery = { stream: req.params.stream }
+    studentanswers.find(myquery, function (err, result) {
+      if (err) throw err
+      res.json(result)
+    })
+   }
+   
 
 

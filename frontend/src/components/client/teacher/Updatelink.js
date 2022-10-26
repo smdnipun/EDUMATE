@@ -1,58 +1,76 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import Alert from '@mui/material/Alert'
-import { useParams,useNavigate } from 'react-router-dom';
+import axios from 'axios'
+import Swal from 'sweetalert2'
+import { useParams, useNavigate } from 'react-router-dom'
 import Navigation from '../../common/Navigation/Navigation'
 
 export const Updatelink = () => {
+  const navigate = useNavigate()
+  const hr = {
+    borderLeft: '6px solid green',
+    height: '400px',
+  }
 
-    const navigate = useNavigate()
-    const hr = {
-      borderLeft: '6px solid green',
-      height: '400px',
-    }
+  const params = useParams()
+  console.log(params)
+  const [subject, setSubject] = useState()
+  const [lesson_name, setLesson] = useState()
+  const [grade, setGrade] = useState()
+  const [date, setDate] = useState()
+  const [time, setTime] = useState()
+  const [link, setLink] = useState()
 
-    const params = useParams();
-    console.log(params)
-     const [subject, setSubject] = useState()
-     const [lesson_name, setLesson] = useState()
-     const [grade, setGrade] = useState()
-     const [date, setDate] = useState()
-     const [time, setTime] = useState()
-     const [link, setLink] = useState()
+   const validateDate = new Date()
+   let day = validateDate.getDate()
+   let month = validateDate.getMonth() + 1
+   let year = validateDate.getFullYear()
 
-    const getLink = () => {
-        axios.get(`/link/${params.id}`).then((res) => {
-            setSubject(res.data.subject);
-            setLesson(res.data.lesson_name);
-            setGrade(res.data.grade);
-            setDate(res.data.date);
-            setTime(res.data.time);
-            setLink(res.data.link);
-        })
-    }
+   let currentDate = `${year}-${month}-${day}`
+  
+  const getLink = () => {
+    axios.get(`/link/${params.id}`).then((res) => {
+      setSubject(res.data.subject)
+      setLesson(res.data.lesson_name)
+      setGrade(res.data.grade)
+      setDate(res.data.date)
+      setTime(res.data.time)
+      setLink(res.data.link)
+    })
+  }
 
-      const add = {
-        subject,
-        lesson_name,
-        grade,
-        date,
-        time,
-        link,
-      }
+  const add = {
+    subject,
+    lesson_name,
+    grade,
+    date,
+    time,
+    link,
+  }
 
+  const updateLink = (e) => {
+    e.preventDefault()
+    if (date <= currentDate) {
+      Swal.fire({
+        icon: 'warning',
 
-    const updateLink = () => {
-        
+        title: 'Warning',
+
+        text: 'Please Enter a Valid date!!!',
+      })
+    } else {
       axios.put(`/link/${params.id}`, add)
-      alert('Succsessfully Updated')
+      Swal.fire({
+        icon: 'success',
+        title: 'Link updated',
+      })
+
       navigate('/viewlink')
     }
+  }
 
-    useEffect(() => {
-        getLink();
-    },[])
-
+  useEffect(() => {
+    getLink()
+  }, [])
 
   return (
     <div>

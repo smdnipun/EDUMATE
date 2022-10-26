@@ -6,14 +6,17 @@ import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 export const UploadNote = () => {
-  const [subject, setSubject] = useState()
+  const [subject, setSubject] = useState([])
+  const [selectedSubject,setSelectedSubject]=useState()
   const [lesson_name, setLesson] = useState()
   const [grade, setGrade] = useState()
   const [file, setFile] = useState([])
   const [stream, setStream] = useState([])
+  const [selectedStream, setSelectedStream] = useState()
 
   const { user } = useContext(AuthContext)
   const userId = user._id
+  const userstream = user.stream;
 
   const navigate = useNavigate()
 
@@ -24,12 +27,19 @@ export const UploadNote = () => {
 
   const loadStream = () => {
     axios.get('stream/').then((res) => {
-      setStream(res.data)
+      setStream(res.data) 
     })
   }
 
+  const loadSubject = () => {
+    axios.post("/subject/stream", { streamname:userstream}).then((res) => {
+      setSubject(res.data);
+      console.log(res.data)
+    })
+  }
   useEffect(() => {
     loadStream()
+    loadSubject()
   }, [])
   const noteAdd = (e) => {
     setFile(e.target.files[0])
@@ -42,7 +52,8 @@ export const UploadNote = () => {
 
     formData.append('lesson_name', lesson_name)
     formData.append('file', file)
-    formData.append('subject', subject)
+    formData.append('stream',selectedStream)
+    formData.append('subject', selectedSubject)
     formData.append('grade', grade)
     formData.append('teacher_id', userId)
 
@@ -50,7 +61,6 @@ export const UploadNote = () => {
       Swal.fire({
         icon: 'success',
         title: 'Note added',
-        timer: 1500,
       })
       navigate('/viewNote')
     })
@@ -94,12 +104,12 @@ export const UploadNote = () => {
               <div className='mx-5 my-4' style={hr} />
               <div className='mx-5 mt-5'>
                 <form>
-                  <select
+                  {/* <select
                     id='stream'
                     name='stream'
                     className='form-control'
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
+                    value={selectedStream}
+                    onChange={(e) => setSelectedStream(e.target.value)}
                     required
                   >
                     <option>Stream</option>
@@ -110,9 +120,39 @@ export const UploadNote = () => {
                         </option>
                       )
                     })}
+                  </select> */}
+                  <input
+                    type='text'
+                    class='form-control'
+                    required
+                    id='formGroupExampleInput'
+                    disabled
+                    value={userstream}
+                    onChange={(e) => {
+                      setSelectedStream(e.target.value)
+                    }}
+                  />
+                  <br />
+
+                  <select
+                    id='subject'
+                    name='subject'
+                    className='form-control'
+                    value={selectedSubject}
+                    onChange={(e) => setSelectedSubject(e.target.value)}
+                    required
+                  >
+                    <option>Subject</option>
+                    {subject.map((subject) => {
+                      return (
+                        <option key={subject._id} value={subject.subjectname}>
+                          {subject.subjectname}
+                        </option>
+                      )
+                    })}
                   </select>
                   <br />
-                  <br />
+
                   <div className='form-group'>
                     <input
                       type='text'
@@ -127,7 +167,7 @@ export const UploadNote = () => {
                     />
                   </div>
                   <br />
-                  <br />
+
                   <div className='form-group'>
                     <select
                       type='number'

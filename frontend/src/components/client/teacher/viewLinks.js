@@ -12,6 +12,7 @@ import { AuthContext } from '../../../context/AuthContext'
 import { NavLink } from 'react-router-dom'
 import { TablePagination } from '@mui/material'
 import Navigation from '../../common/Navigation/Navigation'
+import Swal from 'sweetalert2'
 
 export const ViewLinks = () => {
   const [data, setData] = useState([])
@@ -31,6 +32,11 @@ export const ViewLinks = () => {
 
   const deleteLink = (id) => {
     axios.delete(`link/${id}`)
+      Swal.fire({
+        icon: 'success',
+        title: 'Deleted',
+      })
+      
     window.location.reload()
   }
 

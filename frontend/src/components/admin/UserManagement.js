@@ -11,6 +11,7 @@ import Button from '@mui/material/Button'
 import TablePagination from '@mui/material/TablePagination'
 import { NavLink } from 'react-router-dom'
 import AdminNav from '../common/Navigation/AdminNav.js'
+import Swal from 'sweetalert2'
 
 function UserManagement() {
   const [data, setData] = useState([])
@@ -22,17 +23,18 @@ function UserManagement() {
     // fetchData()
     const fetchData = async () => {
       await axios
-        .get(`http://localhost:5000/api/users?q=${searchItem}`)
+        .get(`http://localhost:5000/api/users?q=${searchItem.toLowerCase()}`)
         .then((res) => {
           setData(res.data)
+          console.log('test')
         })
     }
-    // if (searchItem.length === 0 || searchItem.length > 1)
-    fetchData()
+    if (searchItem.length === 0 || searchItem.length > 1) fetchData()
   }, [searchItem])
 
   const deleteProfile = async (id) => {
     await axios.delete(`http://localhost:5000/api/users/${id}`).then((res) => {
+      Swal.fire('Congrats!', 'Successfully Updated', 'error')
       window.location.reload()
     })
   }
@@ -62,7 +64,7 @@ function UserManagement() {
             placeholder='Search...'
             value={searchItem}
             onChange={(e) => {
-              setSearchItem(e.target.value.toLowerCase())
+              setSearchItem(e.target.value)
             }}
           />
         </div>
@@ -102,9 +104,9 @@ function UserManagement() {
                 <TableBody>
                   {data
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    // .filter((fname) =>
-                    //   fname.firstName.toLowerCase().includes(searchItem)
-                    // )
+                    .filter((fname) =>
+                      fname.firstName.toLowerCase().includes(searchItem)
+                    )
                     .map((row) => (
                       <TableRow>
                         <TableCell>{row.firstName}</TableCell>

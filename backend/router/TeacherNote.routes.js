@@ -9,6 +9,7 @@ import {
   Upload,
   getNoteByTeacherId,
   getSubject,
+  getNotesbySubject,
 } from '../controller/Note.controller.js'
 
 const router = express.Router()
@@ -32,4 +33,7 @@ router.get(
 )
 router.get(`/get/:teacher_id`, getNoteByTeacherId)
 router.get('/getSub/subject', getSubject)
+
+//filter
+router.post('/notes', getNotesbySubject);
 export default router
